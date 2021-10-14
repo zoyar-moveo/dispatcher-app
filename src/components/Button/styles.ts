@@ -1,38 +1,46 @@
 import styled from "styled-components";
 
-export const StyledButton = styled.button`
-  /* Primary / Default */
+export const StyledButton = styled.button<{
+  primary: boolean;
+  btnType: "primary" | "secondary" | "text-btn" | "welcome-btn";
+}>`
+  /* Button */
 
-  background: #0058b9;
-  border-radius: 20px;
+  cursor: pointer;
+  padding: 0px 10px;
+  height: 36px;
+
+  width: ${(props) => (props.btnType === "welcome-btn" ? 800 : 200)}px;
+  background: ${(props) =>
+    props.btnType === "secondary"
+      ? "#D9DBE9"
+      : props.btnType === "text-btn"
+      ? "none"
+      : "#0058B9"};
+  color: #${(props) => (props.btnType === "primary" || props.btnType === "welcome-btn" ? "FFFFFF" : "5A5A89")};
+  border-radius: 10px;
   border: none;
+  font-size: 0.875rem;
 
-  /* Inside Auto Layout */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  margin: 0px 10px;
-
-  position: static;
-  width: 70px;
-  left: calc(50% - 70px / 2 - 12px);
-  top: 13.89%;
-  bottom: 13.89%;
-
-  font-family: Roboto;
-  font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 26px;
-  /* identical to box height, or 186% */
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.25px;
 
   display: flex;
+  justify-content: center;
   align-items: center;
   letter-spacing: 0.25px;
   text-transform: uppercase;
 
-  /* Grayscale / White */
-
-  color: #ffffff;
+  &:hover {
+    background-color: ${(props) => {
+      if (props.btnType === "text-btn") return "rgba(217, 219, 233, 0.3)";
+    }};
+  }
 `;

@@ -1,4 +1,3 @@
-import React from "react";
 import { Meta, Story } from "@storybook/react";
 import Button, { ButtonProps } from "./Button";
 
@@ -7,10 +6,43 @@ export default {
   title: "Components/Button",
 } as Meta;
 
-// args in TS way
 const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 
-export const V1 = Template.bind({});
-V1.args = {
-  text: "Button Title 1",
+export const WELCOME = Template.bind({});
+WELCOME.args = {
+  text: "text",
+  btnType: "welcome-btn",
+  isArrow: true,
+  onClickFunc: () => {
+    console.log("clicked");
+  },
+};
+
+export const PRIMARY = Template.bind({});
+PRIMARY.args = {
+  text: "text",
+  btnType: "primary",
+  isArrow: true,
+  onClickFunc: () => {
+    console.log("clicked");
+  },
+};
+
+export const SECONDARY = Template.bind({});
+SECONDARY.args = {
+  text: "htghghg",
+  btnType: "secondary",
+  isArrow: true,
+  onClickFunc: () => {
+    console.log("clicked");
+  },
+};
+export const TEXT = Template.bind({});
+TEXT.args = {
+  text: "text",
+  btnType: "text-btn",
+  isArrow: true,
+  onClickFunc: () => {
+    console.log("clicked");
+  },
 };

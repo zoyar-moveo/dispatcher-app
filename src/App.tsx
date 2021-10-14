@@ -1,5 +1,3 @@
-import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 import Button from "./components/Button/Button";
@@ -7,8 +5,13 @@ import Button from "./components/Button/Button";
 function App() {
   return (
     <div>
-      <Button text="test" />
-      <button></button>
+      <Button
+        text="test"
+        isArrow={true}
+        btnType="secondary"
+        primary={true}
+        onClickFunc={() => console.log("clicked")}
+      />
     </div>
   );
 }
