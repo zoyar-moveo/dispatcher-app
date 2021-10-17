@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-export const StyledButton = styled.button<{
-  primary: boolean;
+export const ButtonContainer = styled.button<{
   btnType: "primary" | "secondary" | "text-btn" | "welcome-btn";
 }>`
   /* Button */
@@ -41,6 +40,9 @@ export const StyledButton = styled.button<{
   &:hover {
     background-color: ${(props) => {
       if (props.btnType === "text-btn") return "rgba(217, 219, 233, 0.3)";
+    }};
+    opacity: ${(props) => {
+      if (props.btnType !== "text-btn") return 0.8;
     }};
   }
 `;

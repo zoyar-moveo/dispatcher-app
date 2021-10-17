@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "totalResults": 6717,
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "WJHG-TV"
+      },
+      "author": "Associated Press",
+      "title": "Backlog in federal safety rules amid US car crash ‘epidemic’",
+      "description": "An Associated Press review of the National Highway Traffic Safety Administration's rule-making activities under the last three presidents found at least 13 safety rules past due, including a rear seat belt reminder requirement that was to be implemented by 20…",
+      "url": "https://www.wjhg.com/2021/10/16/backlog-federal-safety-rules-amid-us-car-crash-epidemic/",
+      "urlToImage": "https://gray-wjhg-prod.cdn.arcpublishing.com/resizer/2AH_yqXWyfr_cOYuV92Pn8kRcOg=/980x0/smart/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/gray/OMRFMT6OSZH2HHA33QPDLDYIAY.jpg",
+      "publishedAt": "2021-10-17T04:06:42Z",
+      "content": "WASHINGTON (AP) After their 16-year-old daughter died in a car crash, David and Wendy Mills wondered whether she would be alive if federal rules on rear seat belt warnings had been issued on time. \r\n… [+9947 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Electrek"
+      },
+      "author": "Seth Weintraub",
+      "title": "Refreshed Tesla Model X with gorgeous interior delivered to customers [video]",
+      "description": "It looks like today’s the first day of deliveries for the refreshed Model X at a very small event where a handful of vehicles were delivered to new customers. Let’s take a peek inside! \n more…\nThe post Refreshed Tesla Model X with gorgeous interior delivered …",
+      "url": "https://electrek.co/2021/10/16/refreshed-tesla-model-x/",
+      "urlToImage": "https://i0.wp.com/electrek.co/wp-content/uploads/sites/3/2021/10/Tesla-Model-X-deliveries.jpeg?resize=1200%2C628&quality=82&strip=all&ssl=1",
+      "publishedAt": "2021-10-17T04:02:05Z",
+      "content": "It looks like today’s the first day of deliveries for the refreshed Model X at a very small event where a handful of vehicles were delivered to new customers. Let’s take a peek inside! \r\nTMC Forum us… [+1192 chars]"
+    }
+  ]
+}

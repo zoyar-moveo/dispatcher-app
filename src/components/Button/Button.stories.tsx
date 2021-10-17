@@ -32,7 +32,7 @@ export const SECONDARY = Template.bind({});
 SECONDARY.args = {
   text: "htghghg",
   btnType: "secondary",
-  isArrow: true,
+  isArrow: false,
   onClickFunc: () => {
     console.log("clicked");
   },
@@ -41,7 +41,7 @@ export const TEXT = Template.bind({});
 TEXT.args = {
   text: "text",
   btnType: "text-btn",
-  isArrow: true,
+  isArrow: false,
   onClickFunc: () => {
     console.log("clicked");
   },

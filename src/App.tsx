@@ -9,7 +9,6 @@ function App() {
         text="test"
         isArrow={true}
         btnType="secondary"
-        primary={true}
         onClickFunc={() => console.log("clicked")}
       />
     </div>
