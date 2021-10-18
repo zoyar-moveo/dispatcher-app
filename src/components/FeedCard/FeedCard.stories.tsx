@@ -1,6 +1,5 @@
 import { Meta, Story } from "@storybook/react";
 import FeedCard, { FeedCardProps } from "./FeedCard";
-// import { FeedCardProps } from "./FeedCardProps";
 import CardImg from "./assets/image.jpg";
 
 export default {

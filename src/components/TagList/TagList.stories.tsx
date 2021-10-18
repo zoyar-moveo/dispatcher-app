@@ -1,5 +1,4 @@
 import { Meta, Story } from "@storybook/react";
-// import { FeedCardProps } from "./FeedCardProps";
 import TagList, { TagListProps } from "./TagList";
 
 export default {

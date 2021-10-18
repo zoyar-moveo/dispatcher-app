@@ -1,5 +1,6 @@
 import { ButtonContainer } from "./styles";
 import Arrow from "./assets/arrow-right.svg";
+// import GlobalStyle from "./../../GlobalStyles";
 
 type primary = "primary";
 type secondary = "secondary";
@@ -28,10 +29,13 @@ const Button: React.FC<ButtonProps> = ({
   onClickFunc,
 }) => {
   return (
-    <ButtonContainer btnType={btnType} onClick={onClickFunc}>
-      {text + " "}
-      {isArrow && <img src={Arrow} />}
-    </ButtonContainer>
+    <>
+      {/* <GlobalStyle /> */}
+      <ButtonContainer btnType={btnType} onClick={onClickFunc}>
+        {text + " "}
+        {isArrow && <img src={Arrow} />}
+      </ButtonContainer>
+    </>
   );
 };
 

@@ -1,5 +1,4 @@
 import { TagItem, TagContainer } from "./styles";
-// import { FeedCardProps } from "./FeedCardProps";
 
 export interface TagListProps {
   text: string;
@@ -8,9 +7,9 @@ export interface TagListProps {
 const TagList: React.FC<TagListProps> = (props) => {
   return (
     <TagContainer>
-      <TagItem>China</TagItem>
-      <TagItem>China</TagItem>
-      <TagItem>China</TagItem>
+      <TagItem>China </TagItem>
+      <TagItem>China </TagItem>
+      <TagItem>+2 </TagItem>
     </TagContainer>
   );
 };

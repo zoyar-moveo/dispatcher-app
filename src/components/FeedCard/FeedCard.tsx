@@ -1,6 +1,13 @@
-import { CardBody, CardContainer, CardHeader, FlexContainer } from "./styles";
-// import { FeedCardProps } from "./FeedCardProps";
+import {
+  CardBody,
+  CardContainer,
+  CardHeader,
+  FlexContainer,
+  CardSecondaryTitle,
+} from "./styles";
 import Button from "../Button/Button";
+import TagList from "../TagList/TagList";
+import GlobalStyle from "./../../GlobalStyles";
 
 export interface FeedCardProps {
   author: string;
@@ -11,7 +18,6 @@ export interface FeedCardProps {
   publishedAt: string;
   content: string;
   cardImg: string;
-  //   onClickFuncy: () => void;
 }
 
 export interface DateFormat {
@@ -33,21 +39,31 @@ const FeedCard: React.FC<FeedCardProps> = (props) => {
   };
 
   return (
-    <CardContainer>
-      <img src={props.cardImg} />
-      <FlexContainer>
-        <div>{formattedDate(props.publishedAt)}</div>
-        <CardHeader>{props.title}</CardHeader>
-        <div>{props.author}</div>
-        <CardBody>{props.content}</CardBody>
-        <Button
-          btnType="primary"
-          onClickFunc={() => console.log("clicked")}
-          isArrow={true}
-          text="Navigate to dispatch"
-        ></Button>
-      </FlexContainer>
-    </CardContainer>
+    <>
+      <GlobalStyle />
+      <CardContainer>
+        <img alt="" src={props.cardImg} />
+        <FlexContainer>
+          <div className="flex row space-between">
+            <CardSecondaryTitle>
+              {formattedDate(props.publishedAt)}
+            </CardSecondaryTitle>
+            <TagList text="tag" />
+          </div>
+          <CardHeader>{props.title}</CardHeader>
+          <CardSecondaryTitle>{props.author}</CardSecondaryTitle>
+          <CardBody>{props.content}</CardBody>
+          <div className="flex end">
+            <Button
+              btnType="primary"
+              onClickFunc={() => console.log("clicked")}
+              isArrow={true}
+              text="Navigate to dispatch"
+            ></Button>
+          </div>
+        </FlexContainer>
+      </CardContainer>
+    </>
   );
 };
 

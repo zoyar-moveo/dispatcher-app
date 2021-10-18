@@ -7,9 +7,10 @@ export const ButtonContainer = styled.button<{
 
   cursor: pointer;
   padding: 0px 10px;
-  height: 36px;
+  height: 2.25rem;
 
-  width: ${(props) => (props.btnType === "welcome-btn" ? 800 : 200)}px;
+  width: ${(props) =>
+    props.btnType === "welcome-btn" ? "100%" : "fit-content"};
   background: ${(props) =>
     props.btnType === "secondary"
       ? "#D9DBE9"
@@ -25,16 +26,12 @@ export const ButtonContainer = styled.button<{
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
   font-weight: 500;
-  font-size: 14px;
-  line-height: 26px;
+  font-size: 0.875rem;
+  line-height: 1.625rem;
   display: flex;
   align-items: center;
-  letter-spacing: 0.25px;
-
-  display: flex;
+  letter-spacing: 0.015625rem;
   justify-content: center;
-  align-items: center;
-  letter-spacing: 0.25px;
   text-transform: uppercase;
 
   &:hover {
