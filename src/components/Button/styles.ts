@@ -1,23 +1,26 @@
 import styled from "styled-components";
+import { btnTypeList } from "./Button";
 
 export const ButtonContainer = styled.button<{
-  btnType: "primary" | "secondary" | "text-btn" | "welcome-btn";
+  btnType:
+    | btnTypeList.primary
+    | btnTypeList.secondary
+    | btnTypeList.textBtn
+    | btnTypeList.welcomeBtn;
 }>`
-  /* Button */
-
   cursor: pointer;
   padding: 0px 10px;
   height: 2.25rem;
 
   width: ${(props) =>
-    props.btnType === "welcome-btn" ? "100%" : "fit-content"};
+    props.btnType === btnTypeList.welcomeBtn ? "100%" : "fit-content"};
   background: ${(props) =>
-    props.btnType === "secondary"
+    props.btnType === btnTypeList.secondary
       ? "#D9DBE9"
-      : props.btnType === "text-btn"
+      : props.btnType === btnTypeList.textBtn
       ? "none"
       : "#0058B9"};
-  color: #${(props) => (props.btnType === "primary" || props.btnType === "welcome-btn" ? "FFFFFF" : "5A5A89")};
+  color: #${(props) => (props.btnType === btnTypeList.primary || props.btnType === btnTypeList.welcomeBtn ? "FFFFFF" : "5A5A89")};
   border-radius: 10px;
   border: none;
   font-size: 0.875rem;
@@ -34,12 +37,16 @@ export const ButtonContainer = styled.button<{
   justify-content: center;
   text-transform: uppercase;
 
-  &:hover {
+  & img {
+    margin-left: 0.5rem;
+  }
+  ß &:hover {
     background-color: ${(props) => {
-      if (props.btnType === "text-btn") return "rgba(217, 219, 233, 0.3)";
+      if (props.btnType === btnTypeList.textBtn)
+        return "rgba(217, 219, 233, 0.3)";
     }};
     opacity: ${(props) => {
-      if (props.btnType !== "text-btn") return 0.8;
+      if (props.btnType !== btnTypeList.textBtn) return 0.8;
     }};
   }
 `;

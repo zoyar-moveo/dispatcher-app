@@ -1,15 +1,16 @@
 import { TagItem, TagContainer } from "./styles";
 
 export interface TagListProps {
-  text: string;
+  tags: string[];
 }
 
 const TagList: React.FC<TagListProps> = (props) => {
   return (
     <TagContainer>
-      <TagItem>China </TagItem>
-      <TagItem>China </TagItem>
-      <TagItem>+2 </TagItem>
+      {props.tags.map((tag, idx) => {
+        return idx < 2 && <TagItem key={idx}>{tag}</TagItem>;
+      })}
+      <TagItem>+{props.tags.length - 2}</TagItem>
     </TagContainer>
   );
 };

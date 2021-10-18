@@ -12,6 +12,8 @@ export const TagItem = styled.div`
   font-weight: 500;
   font-size: 0.75rem;
   line-height: 0.875rem;
+  height: fit-content;
+  width: fit-content;
   color: #5a5a89;
   &:not(last-child) {
     margin-left: 0.625rem;

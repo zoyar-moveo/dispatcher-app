@@ -8,6 +8,7 @@ import {
 import Button from "../Button/Button";
 import TagList from "../TagList/TagList";
 import GlobalStyle from "./../../GlobalStyles";
+import { btnTypeList } from "../Button/Button";
 
 export interface FeedCardProps {
   author: string;
@@ -48,15 +49,15 @@ const FeedCard: React.FC<FeedCardProps> = (props) => {
             <CardSecondaryTitle>
               {formattedDate(props.publishedAt)}
             </CardSecondaryTitle>
-            <TagList text="tag" />
+            <TagList tags={["Economy", "Israel", "USA", "news"]} />
           </div>
           <CardHeader>{props.title}</CardHeader>
           <CardSecondaryTitle>{props.author}</CardSecondaryTitle>
           <CardBody>{props.content}</CardBody>
           <div className="flex end">
             <Button
-              btnType="primary"
-              onClickFunc={() => console.log("clicked")}
+              btnType={btnTypeList.primary}
+              onClickFunc={() => {}}
               isArrow={true}
               text="Navigate to dispatch"
             ></Button>

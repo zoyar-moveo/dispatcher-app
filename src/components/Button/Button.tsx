@@ -1,19 +1,19 @@
 import { ButtonContainer } from "./styles";
 import Arrow from "./assets/arrow-right.svg";
-// import GlobalStyle from "./../../GlobalStyles";
 
-type primary = "primary";
-type secondary = "secondary";
-type textBtn = "text-btn";
-type welcomeBtn = "welcome-btn";
+// type primary = "primary";
+// type secondary = "secondary";
+// type textBtn = "text-btn";
+// type welcomeBtn = "welcome-btn";
 
-// const btnType = {
-//   PRIMARY: "primary",
-//   SECONDARY: "secondary",
-//   TEXTBTN: "text-btn",
-//   WELCOMEBTN: "welcome-btn",
-// };
-export type btnTypeList = primary | secondary | textBtn | welcomeBtn;
+// export type btnTypeList = primary | secondary | textBtn | welcomeBtn;
+
+export enum btnTypeList {
+  primary = "primary",
+  secondary = "secondary",
+  textBtn = "textBtn",
+  welcomeBtn = "welcomeBtn",
+}
 
 export interface ButtonProps {
   text: string;
@@ -30,9 +30,8 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <>
-      {/* <GlobalStyle /> */}
       <ButtonContainer btnType={btnType} onClick={onClickFunc}>
-        {text + " "}
+        {text}
         {isArrow && <img src={Arrow} />}
       </ButtonContainer>
     </>

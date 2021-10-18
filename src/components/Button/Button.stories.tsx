@@ -1,5 +1,6 @@
 import { Meta, Story } from "@storybook/react";
 import Button, { ButtonProps } from "./Button";
+import { btnTypeList } from "./Button";
 
 export default {
   component: Button,
@@ -11,38 +12,30 @@ const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 export const WELCOME = Template.bind({});
 WELCOME.args = {
   text: "text",
-  btnType: "welcome-btn",
+  btnType: btnTypeList.welcomeBtn,
   isArrow: true,
-  onClickFunc: () => {
-    console.log("clicked");
-  },
+  onClickFunc: () => {},
 };
 
 export const PRIMARY = Template.bind({});
 PRIMARY.args = {
   text: "text",
-  btnType: "primary",
+  btnType: btnTypeList.primary,
   isArrow: true,
-  onClickFunc: () => {
-    console.log("clicked");
-  },
+  onClickFunc: () => {},
 };
 
 export const SECONDARY = Template.bind({});
 SECONDARY.args = {
-  text: "htghghg",
-  btnType: "secondary",
+  text: "text",
+  btnType: btnTypeList.secondary,
   isArrow: false,
-  onClickFunc: () => {
-    console.log("clicked");
-  },
+  onClickFunc: () => {},
 };
 export const TEXT = Template.bind({});
 TEXT.args = {
   text: "text",
-  btnType: "text-btn",
+  btnType: btnTypeList.textBtn,
   isArrow: false,
-  onClickFunc: () => {
-    console.log("clicked");
-  },
+  onClickFunc: () => {},
 };
