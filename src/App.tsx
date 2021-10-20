@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
@@ -21,6 +22,12 @@ function App() {
       </header>
     </div>
   );
+=======
+import "./App.css";
+
+function App() {
+  return <></>;
+>>>>>>> release/storybook-pr
 }
 
 export default App;
