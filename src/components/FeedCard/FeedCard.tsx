@@ -1,12 +1,12 @@
 import {
   CardBody,
-  CardContainer,
   CardHeader,
   FlexContainer,
   CardSecondaryTitle,
 } from "./styles";
 import Button from "../Button/Button";
 import TagList from "../TagList/TagList";
+import { CardContainer } from "./../styledComponents/CardContainer";
 import GlobalStyle from "./../../GlobalStyles";
 import { btnTypeList } from "../Button/Button";
 
