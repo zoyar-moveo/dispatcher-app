@@ -21,7 +21,8 @@ export const ButtonContainer = styled.button<{
       ? "none"
       : "#0058B9"};
   color: #${(props) => (props.btnType === btnTypeList.primary || props.btnType === btnTypeList.welcomeBtn ? "FFFFFF" : "5A5A89")};
-  border-radius: 10px;
+  border-radius: ${(props) =>
+    props.btnType === btnTypeList.welcomeBtn ? "10px" : "20px"};
   border: none;
   font-size: 0.875rem;
 

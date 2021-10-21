@@ -1,13 +1,6 @@
 import { ButtonContainer } from "./styles";
 import Arrow from "./assets/arrow-right.svg";
 
-// type primary = "primary";
-// type secondary = "secondary";
-// type textBtn = "text-btn";
-// type welcomeBtn = "welcome-btn";
-
-// export type btnTypeList = primary | secondary | textBtn | welcomeBtn;
-
 export enum btnTypeList {
   primary = "primary",
   secondary = "secondary",
@@ -32,7 +25,7 @@ const Button: React.FC<ButtonProps> = ({
     <>
       <ButtonContainer btnType={btnType} onClick={onClickFunc}>
         {text}
-        {isArrow && <img src={Arrow} />}
+        {isArrow && <img alt="" src={Arrow} />}
       </ButtonContainer>
     </>
   );

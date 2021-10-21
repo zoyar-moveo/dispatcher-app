@@ -7,7 +7,6 @@ export default {
   title: "Components/FeedCard",
 } as Meta;
 
-// args in TS way
 const Template: Story<FeedCardProps> = (args) => <FeedCard {...args} />;
 
 export const CARD_EXAMPLE = Template.bind({});
