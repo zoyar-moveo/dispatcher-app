@@ -16,6 +16,8 @@ export interface DataCardProps {
     | DataTypeList.sourcesChart
     | DataTypeList.datesChart
     | DataTypeList.tagsChart;
+  data: any;
+  options: any;
 }
 
 const FeedCard: React.FC<DataCardProps> = (props) => {
@@ -24,16 +26,16 @@ const FeedCard: React.FC<DataCardProps> = (props) => {
       <GlobalStyle />
       <CardContainer>
         <InnerContainer>
-          <CardHeader>{DataTypeList.sourcesChart}</CardHeader>
+          <CardHeader>{props.DataType}</CardHeader>
           <Underline />
           {props.DataType === DataTypeList.sourcesChart && (
-            <SourcesChart text="test" />
+            <SourcesChart data={props.data} options={props.options} />
           )}
           {props.DataType === DataTypeList.datesChart && (
-            <DatesChart text="test" />
+            <DatesChart data={props.data} />
           )}
           {props.DataType === DataTypeList.tagsChart && (
-            <TagsChart text="test" />
+            <TagsChart data={props.data} options={props.options} />
           )}
         </InnerContainer>
       </CardContainer>

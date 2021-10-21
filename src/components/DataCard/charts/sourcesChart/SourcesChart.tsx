@@ -1,40 +1,27 @@
 import GlobalStyle from "../../../../GlobalStyles";
 import { Doughnut } from "react-chartjs-2";
+import * as chartjs from "chart.js";
 
-const options = {
-  legend: {
-    display: false,
-    position: "right",
-  },
-  elements: {
-    arc: {
-      borderWidth: 0,
-    },
-  },
-  cutout: 95,
-};
-
-const data = {
-  maintainAspectRatio: false,
-  responsive: true,
-  labels: ["a", "b", "c", "d"],
-  datasets: [
-    {
-      data: [300, 50, 100, 50],
-      backgroundColor: ["red", "green", "yellow", "blue"],
-    },
-  ],
+type dataSetType = {
+  data: number[];
+  backgroundColor: string[];
 };
 
 export interface chartProps {
-  text: string;
+  data: {
+    maintainAspectRatio: boolean;
+    responsive: boolean;
+    labels: string[];
+    datasets: dataSetType[];
+  };
+  options: any;
 }
 
 const SourcesChart: React.FC<chartProps> = (props) => {
   return (
     <>
       <GlobalStyle />
-      <Doughnut data={data} options={options} />
+      <Doughnut data={props.data} options={props.options} />
     </>
   );
 };

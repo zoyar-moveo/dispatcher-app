@@ -25,7 +25,7 @@ const Button: React.FC<ButtonProps> = ({
     <>
       <ButtonContainer btnType={btnType} onClick={onClickFunc}>
         {text}
-        {isArrow && <img src={Arrow} />}
+        {isArrow && <img alt="" src={Arrow} />}
       </ButtonContainer>
     </>
   );

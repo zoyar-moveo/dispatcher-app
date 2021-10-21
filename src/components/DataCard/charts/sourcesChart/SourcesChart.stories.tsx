@@ -1,14 +1,27 @@
 import { Meta, Story } from "@storybook/react";
-import SourcesChart from "./SourcesChart";
+import SourcesChart, { chartProps } from "./SourcesChart";
 
 export default {
   component: SourcesChart,
   title: "Components/SourcesChart",
 } as Meta;
 
-const Template: Story<{ text: string }> = (args) => <SourcesChart {...args} />;
+const Template: Story<chartProps> = (args) => <SourcesChart {...args} />;
 
 export const DATACARD_EXAMPLE = Template.bind({});
 DATACARD_EXAMPLE.args = {
-  text: "test",
+  data: {
+    maintainAspectRatio: false,
+    responsive: true,
+    labels: ["a", "b", "c", "d"],
+    datasets: [
+      {
+        data: [300, 50, 100, 50],
+        backgroundColor: ["red", "green", "yellow", "blue"],
+      },
+    ],
+  },
+  options: {
+    cutout: 95,
+  },
 };
