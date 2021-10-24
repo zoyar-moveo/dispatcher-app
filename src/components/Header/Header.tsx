@@ -38,21 +38,19 @@ const Header: React.FC<HeaderProps> = (props) => {
   return (
     <>
       <GlobalStyles />
-      <div>
-        <HeaderContainer>
-          <ImgIcon alt="" src={props.logo} icon={IconType.LOGO} />
-          <InnerContainer></InnerContainer>
-          <RightSideContainer>
-            <ImgIcon alt="" src={props.settings} icon={IconType.SETTINGS} />
-            <ImgIcon
-              alt=""
-              src={props.notifications}
-              icon={IconType.NOTIFICATIONS}
-            />
-            <InitalsBtn>{getInitials()}</InitalsBtn>
-          </RightSideContainer>
-        </HeaderContainer>
-      </div>
+      <HeaderContainer>
+        <ImgIcon alt="" src={props.logo} icon={IconType.LOGO} />
+        <InnerContainer></InnerContainer>
+        <RightSideContainer>
+          <ImgIcon alt="" src={props.settings} icon={IconType.SETTINGS} />
+          <ImgIcon
+            alt=""
+            src={props.notifications}
+            icon={IconType.NOTIFICATIONS}
+          />
+          <InitalsBtn>{getInitials()}</InitalsBtn>
+        </RightSideContainer>
+      </HeaderContainer>
     </>
   );
 };
