@@ -1,5 +1,5 @@
 import { CardContainer } from "../styledComponents/CardContainer";
-import { CardHeader, Underline, InnerContainer } from "./styles";
+import { CardHeader, Underline, CardInnerContainer } from "./styles";
 import GlobalStyle from "../../GlobalStyles";
 import SourcesChart from "./charts/sourcesChart/SourcesChart";
 import DatesChart from "./charts/datesChart/DatesChart";
@@ -25,7 +25,7 @@ const FeedCard: React.FC<DataCardProps> = (props) => {
     <>
       <GlobalStyle />
       <CardContainer>
-        <InnerContainer>
+        <CardInnerContainer>
           <CardHeader>{props.DataType}</CardHeader>
           <Underline />
           {props.DataType === DataTypeList.sourcesChart && (
@@ -37,7 +37,7 @@ const FeedCard: React.FC<DataCardProps> = (props) => {
           {props.DataType === DataTypeList.tagsChart && (
             <TagsChart data={props.data} options={props.options} />
           )}
-        </InnerContainer>
+        </CardInnerContainer>
       </CardContainer>
     </>
   );

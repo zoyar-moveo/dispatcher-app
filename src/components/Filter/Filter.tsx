@@ -1,48 +1,62 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
-  FiltertContainer,
+  FilterContainer,
   DropDownList,
   DropDownItem,
   CurrFilter,
+  MainFilterContainer,
 } from "./styles";
 import Arrow from "./assets/Forward.svg";
 import GlobalStyles from "../../GlobalStyles";
 import React from "react";
 
 export interface FilterProps {
-  text: string;
   filterType: string;
-  filtersList: string[];
+  filtersList: any;
+  parentUpdate: (filter: string) => void;
 }
 
-const Filter: React.FC<FilterProps> = ({ text, filterType, filtersList }) => {
+const Filter: React.FC<FilterProps> = ({
+  filterType,
+  filtersList,
+  parentUpdate,
+}) => {
   const [IsDropDownOpen, SetIsDropDownOpen] = useState(false);
+
   const [currFilter, setCurrFilter] = useState(filterType);
 
-  useEffect(() => {
+  const updateFilter = (currFilter: string) => {
+    setCurrFilter(currFilter);
     SetIsDropDownOpen(false);
-  }, [currFilter]);
+    parentUpdate(currFilter);
+    return;
+  };
 
   return (
     <>
       <GlobalStyles />
-      <FiltertContainer>
-        <CurrFilter onClick={() => SetIsDropDownOpen((state) => !state)}>
-          <div>{currFilter}</div>
-          <img alt="" src={Arrow} />
-        </CurrFilter>
-      </FiltertContainer>
-      {IsDropDownOpen && (
-        <FiltertContainer>
-          <DropDownList>
-            {filtersList.map((filterItem) => (
-              <DropDownItem onClick={() => setCurrFilter(filterItem)}>
-                {filterItem}
-              </DropDownItem>
-            ))}
-          </DropDownList>
-        </FiltertContainer>
-      )}
+      <MainFilterContainer>
+        <FilterContainer>
+          <CurrFilter onClick={() => SetIsDropDownOpen((state) => !state)}>
+            <div>{currFilter}</div>
+            <img alt="" src={Arrow} />
+          </CurrFilter>
+        </FilterContainer>
+        {IsDropDownOpen && (
+          <FilterContainer>
+            <DropDownList>
+              {filtersList.map((filterItem: { id: string; value: string }) => (
+                <DropDownItem
+                  onClick={() => updateFilter(filterItem.value)}
+                  key={filterItem.id}
+                >
+                  {filterItem.value}
+                </DropDownItem>
+              ))}
+            </DropDownList>
+          </FilterContainer>
+        )}
+      </MainFilterContainer>
     </>
   );
 };

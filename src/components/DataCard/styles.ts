@@ -16,6 +16,6 @@ export const Underline = styled.div`
   border-radius: 5px;
 `;
 
-export const InnerContainer = styled.div`
+export const CardInnerContainer = styled.div`
   padding: 1rem;
 `;
