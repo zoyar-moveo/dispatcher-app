@@ -12,7 +12,7 @@ export const DATACARD_EXAMPLE = Template.bind({});
 DATACARD_EXAMPLE.args = {
   data: {
     maintainAspectRatio: false,
-    responsive: true,
+    responsive: false,
     labels: ["a", "b", "c", "d"],
     datasets: [
       {
@@ -22,6 +22,7 @@ DATACARD_EXAMPLE.args = {
     ],
   },
   options: {
-    cutout: 95,
+    cutout: 120,
+    plugins: { legend: { position: "bottom" } },
   },
 };

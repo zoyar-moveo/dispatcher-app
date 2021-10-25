@@ -24,7 +24,8 @@ SOURCES.args = {
     ],
   },
   options: {
-    cutout: 95,
+    cutout: 120,
+    plugins: { legend: { position: "bottom" } },
   },
 };
 
@@ -33,6 +34,11 @@ TAGS.args = {
   DataType: DataTypeList.tagsChart,
   options: {
     indexAxis: "y",
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
   },
   data: {
     maintainAspectRatio: false,
@@ -40,18 +46,9 @@ TAGS.args = {
     labels: ["a", "b", "c", "d"],
     datasets: [
       {
-        stack: "stack1",
-        xAxisID: "bar-x-axis2",
-        label: "1",
         data: [20, 50, 100, 70],
-        backgroundColor: ["red", "green", "yellow", "blue"],
-      },
-      {
-        stack: "stack1",
-        xAxisID: "bar-x-axis2",
-        data: [80, 50, 0, 30], // for the real data: to calculate 100 - num%
-        label: "2",
-        backgroundColor: ["grey", "grey", "grey", "grey"],
+        backgroundColor: ["blue", "blue", "blue", "blue"],
+        borderRadius: [30, 30, 30, 30],
       },
     ],
   },
@@ -74,5 +71,12 @@ DATES.args = {
         },
       },
     ],
+  },
+  options: {
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
   },
 };

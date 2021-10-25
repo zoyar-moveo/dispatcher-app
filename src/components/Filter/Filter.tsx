@@ -11,12 +11,14 @@ import GlobalStyles from "../../GlobalStyles";
 import React from "react";
 
 export interface FilterProps {
+  filterSort: string;
   filterType: string;
   filtersList: any;
   parentUpdate: (filter: string) => void;
 }
 
 const Filter: React.FC<FilterProps> = ({
+  filterSort,
   filterType,
   filtersList,
   parentUpdate,
@@ -36,14 +38,14 @@ const Filter: React.FC<FilterProps> = ({
     <>
       <GlobalStyles />
       <MainFilterContainer>
-        <FilterContainer>
+        <FilterContainer filterSort={filterSort}>
           <CurrFilter onClick={() => SetIsDropDownOpen((state) => !state)}>
             <div>{currFilter}</div>
             <img alt="" src={Arrow} />
           </CurrFilter>
         </FilterContainer>
         {IsDropDownOpen && (
-          <FilterContainer>
+          <FilterContainer filterSort={filterSort}>
             <DropDownList>
               {filtersList.map((filterItem: { id: string; value: string }) => (
                 <DropDownItem

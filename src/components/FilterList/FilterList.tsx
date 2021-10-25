@@ -12,6 +12,7 @@ const FilterList: React.FC<FilterListProps> = (props) => {
       {props.filterData.map((dataType: string, index: number) => {
         return (
           <Filter
+            filterSort="secondary"
             filterType={Object.keys(dataType).toString()}
             filtersList={Object.values(dataType)[0]}
             parentUpdate={props.parentUpdate}
