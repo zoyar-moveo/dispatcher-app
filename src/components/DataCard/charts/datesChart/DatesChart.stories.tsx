@@ -26,4 +26,14 @@ DATACARD_EXAMPLE.args = {
       },
     ],
   },
+  options: {
+    plugins: {
+      legend: {
+        legend: {
+          display: false,
+          text: "dsds",
+        },
+      },
+    },
+  },
 };

@@ -17,13 +17,14 @@ export interface chartProps {
     labels: string[];
     datasets: dataSetType[];
   };
+  options: any;
 }
 
 const DatesChart: React.FC<chartProps> = (props) => {
   return (
     <>
       <GlobalStyle />
-      <Line data={props.data} />
+      <Line data={props.data} options={props.options} />
     </>
   );
 };

@@ -4,7 +4,7 @@ import * as chartjs from "chart.js";
 
 type dataSetType = {
   data: number[];
-  backgroundColor: string[];
+  backgroundColor: any;
 };
 
 export interface chartProps {

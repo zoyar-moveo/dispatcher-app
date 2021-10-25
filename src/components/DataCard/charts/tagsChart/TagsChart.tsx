@@ -2,11 +2,9 @@ import GlobalStyle from "../../../../GlobalStyles";
 import { Bar } from "react-chartjs-2";
 
 type dataSetType = {
-  stack: string;
-  xAxisID: string;
   data: number[];
-  label: string;
   backgroundColor: string[];
+  borderRadius: number[];
 };
 
 export interface chartProps {
