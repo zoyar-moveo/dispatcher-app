@@ -15,9 +15,9 @@ export const FilterContainer = styled.div<{ filterSort: string }>`
   line-height: 1.375rem;
   letter-spacing: 0.015625rem;
   color: #5a5a89;
-  /* height: 3.125rem;
-  display: flex;
-  align-items: center; */
+  height: fit-content;
+  /* display: flex; */
+  /* align-items: center; */
   /* padding: 0.9375rem; */
   padding: ${(props) => (props.filterSort === "inner" ? "0" : "0.9375rem")};
   & img {

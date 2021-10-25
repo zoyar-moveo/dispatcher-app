@@ -22,15 +22,7 @@ export interface SearchFilterProps {
 const SearchFllter: React.FC<SearchFilterProps> = (props) => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
-  const [currFilter, setCurrFilter] = useState("All");
-  const inputRef: any = useRef();
-
-  const updateFilter = (currFilter: string) => {
-    setCurrFilter(currFilter);
-    setIsDropDownOpen(false);
-    // parentUpdate(currFilter);
-    return;
-  };
+  const inputRef = useRef<HTMLInputElement | null>();
 
   const inputUpdate = (ev: React.ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
@@ -42,23 +34,12 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
     setIsDropDownOpen((state) => !state);
   };
 
-  // const innerFilter = {
-  //   filterSort= "inner"
-  //   filterType= "Everything"
-  //   filtersList: [
-  //     { id: "Everything", value: "Everything" },
-  //     { id: "Top Headlines", value: "Top Headlines" },
-  //   ],
-
-  // };
-
   const parentUpdate = (filter: string) => console.log(filter);
 
   useEffect(() => {}, [isDropDownOpen]);
   return (
     <>
       <GlobalStyles />
-      {/* <SearchFilterContainer> */}
       <div>
         <FilterContainer filterSort="primary">
           <FlexSpaceBetween>
@@ -70,7 +51,6 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
                 placeholder="search"
                 onChange={inputUpdate}
                 onFocus={toggleResentSearches}
-                // ref={inputRef}
               ></input>
             </SearchContainer>
             <Filter
@@ -82,10 +62,6 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
               ]}
               parentUpdate={parentUpdate}
             ></Filter>
-            {/* <InnerFilter>
-              <span>All</span>
-              <img alt="" src={props.forwardIcon} />
-            </InnerFilter> */}
           </FlexSpaceBetween>
         </FilterContainer>
 
@@ -106,7 +82,6 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
           </FilterContainer>
         )}
       </div>
-      {/* </SearchFilterContainer> */}
     </>
   );
 };

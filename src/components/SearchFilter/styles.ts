@@ -44,6 +44,7 @@ export const SearchPlasholder = styled.span`
 export const SearchContainer = styled.div`
   display: flex;
   align-items: center;
+  height: fit-content;
   & input {
     border: none;
   }
