@@ -10,11 +10,23 @@ const Template: Story<FilterProps> = (args) => <Filter {...args} />;
 
 export const FilterEXP = Template.bind({});
 FilterEXP.args = {
+  filterSort: "secondary",
   filterType: "source",
   filtersList: [
     { id: "Walla", value: "Walla" },
     { id: "Mako", value: "Mako" },
     { id: "BBC", value: "BBC" },
+  ],
+  parentUpdate: (filter: string) => console.log(filter),
+};
+
+export const INNER_FILTER = Template.bind({});
+INNER_FILTER.args = {
+  filterSort: "inner",
+  filterType: "Everything",
+  filtersList: [
+    { id: "Everything", value: "Everything" },
+    { id: "Top Headlines", value: "Top Headlines" },
   ],
   parentUpdate: (filter: string) => console.log(filter),
 };
