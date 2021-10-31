@@ -6,7 +6,7 @@ export const FilterContainer = styled.div<{ filterSort: string }>`
       ? "175px"
       : props.filterSort === "inner"
       ? "fit-content"
-      : "450px"};
+      : "423px"};
   background: #ffffff;
   border-radius: 10px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -16,9 +16,6 @@ export const FilterContainer = styled.div<{ filterSort: string }>`
   letter-spacing: 0.015625rem;
   color: #5a5a89;
   height: fit-content;
-  /* display: flex; */
-  /* align-items: center; */
-  /* padding: 0.9375rem; */
   padding: ${(props) => (props.filterSort === "inner" ? "0" : "0.9375rem")};
   & img {
     margin-left: 0.5rem;
@@ -27,6 +24,8 @@ export const FilterContainer = styled.div<{ filterSort: string }>`
   &:not(:last-child) {
     margin-bottom: 0.625rem;
   }
+  position: relative;
+  z-index: 3;
 `;
 
 export const MainFilterContainer = styled.div<{}>`

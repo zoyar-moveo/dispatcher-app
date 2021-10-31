@@ -1,6 +1,5 @@
 import { CardContainer } from "../styledComponents/CardContainer";
 import { CardHeader, Underline, InnerContainer } from "./styles";
-import GlobalStyle from "../../GlobalStyles";
 import SourcesChart from "./charts/sourcesChart/SourcesChart";
 import DatesChart from "./charts/datesChart/DatesChart";
 import TagsChart from "./charts/tagsChart/TagsChart";
@@ -23,7 +22,6 @@ export interface DataCardProps {
 const FeedCard: React.FC<DataCardProps> = (props) => {
   return (
     <>
-      <GlobalStyle />
       <CardContainer>
         <InnerContainer>
           <CardHeader>{props.DataType}</CardHeader>

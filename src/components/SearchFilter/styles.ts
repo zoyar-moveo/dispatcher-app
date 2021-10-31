@@ -1,7 +1,12 @@
 import styled from "styled-components";
 
 export const SearchFilterContainer = styled.div`
-  width: 28.125rem;
+  /* width: 28.125rem; */
+  /* align-self: baseline; */
+
+  @media (max-width: 375px) {
+    display: none;
+  }
 `;
 export const SearchSubTitle = styled.div`
   display: flex;

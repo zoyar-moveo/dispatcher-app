@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { InnerFilter, SearchFilterContainer, SearchSubTitle } from "./styles";
-import GlobalStyles from "../../GlobalStyles";
 import { FilterContainer } from "../Filter/styles";
 import Filter from "../Filter/Filter";
 import {
@@ -17,6 +16,7 @@ export interface SearchFilterProps {
   SearchsList: string[];
   searchIcon: string;
   forwardIcon: string;
+  isLargeScreen: boolean;
 }
 
 const SearchFllter: React.FC<SearchFilterProps> = (props) => {
@@ -39,8 +39,7 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
   useEffect(() => {}, [isDropDownOpen]);
   return (
     <>
-      <GlobalStyles />
-      <div>
+      <SearchFilterContainer>
         <FilterContainer filterSort="primary">
           <FlexSpaceBetween>
             <SearchContainer>
@@ -53,15 +52,17 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
                 onFocus={toggleResentSearches}
               ></input>
             </SearchContainer>
-            <Filter
-              filterSort="inner"
-              filterType="Everything"
-              filtersList={[
-                { id: "Everything", value: "Everything" },
-                { id: "Top Headlines", value: "Top Headlines" },
-              ]}
-              parentUpdate={parentUpdate}
-            ></Filter>
+            {props.isLargeScreen && (
+              <Filter
+                filterSort="inner"
+                filterType="Everything"
+                filtersList={[
+                  { id: "Everything", value: "Everything" },
+                  { id: "Top Headlines", value: "Top Headlines" },
+                ]}
+                parentUpdate={parentUpdate}
+              ></Filter>
+            )}
           </FlexSpaceBetween>
         </FilterContainer>
 
@@ -81,7 +82,7 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
             })}
           </FilterContainer>
         )}
-      </div>
+      </SearchFilterContainer>
     </>
   );
 };

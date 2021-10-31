@@ -1,6 +1,4 @@
-import GlobalStyle from "../../../../GlobalStyles";
 import { Doughnut } from "react-chartjs-2";
-import * as chartjs from "chart.js";
 
 type dataSetType = {
   data: number[];
@@ -20,8 +18,9 @@ export interface chartProps {
 const SourcesChart: React.FC<chartProps> = (props) => {
   return (
     <>
-      <GlobalStyle />
-      <Doughnut data={props.data} options={props.options} />
+      <div style={{ width: "150px", height: "150px" }}>
+        <Doughnut data={props.data} options={props.options} />
+      </div>
     </>
   );
 };
