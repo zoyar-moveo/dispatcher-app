@@ -17,11 +17,7 @@ export interface chartProps {
 }
 
 const TagsChart: React.FC<chartProps> = (props) => {
-  return (
-    <>
-      <Bar data={props.data} options={props.options} />
-    </>
-  );
+  return <Bar data={props.data} options={props.options} />;
 };
 
 export default TagsChart;

@@ -21,23 +21,22 @@ export interface DataCardProps {
 
 const FeedCard: React.FC<DataCardProps> = (props) => {
   return (
-    <>
-      <CardContainer>
-        <InnerContainer>
-          <CardHeader>{props.DataType}</CardHeader>
-          <Underline />
-          {props.DataType === DataTypeList.sourcesChart && (
-            <SourcesChart data={props.data} options={props.options} />
-          )}
-          {props.DataType === DataTypeList.datesChart && (
-            <DatesChart data={props.data} options={props.options} />
-          )}
-          {props.DataType === DataTypeList.tagsChart && (
-            <TagsChart data={props.data} options={props.options} />
-          )}
-        </InnerContainer>
-      </CardContainer>
-    </>
+    <CardContainer>
+      <InnerContainer>
+        <CardHeader>{props.DataType}</CardHeader>
+        <Underline />
+        {props.DataType === DataTypeList.sourcesChart && (
+          <SourcesChart data={props.data} options={props.options} />
+        )}
+        {props.DataType === DataTypeList.datesChart && (
+          <DatesChart data={props.data} options={props.options} />
+        )}
+        {props.DataType === DataTypeList.tagsChart && (
+          <TagsChart data={props.data} options={props.options} />
+        )}
+      </InnerContainer>
+    </CardContainer>
+
   );
 };
 

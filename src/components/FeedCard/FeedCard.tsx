@@ -12,7 +12,7 @@ import Button from "../Button/Button";
 import TagList from "../TagList/TagList";
 import { btnTypeList } from "../Button/Button";
 
-export interface FeedCardProps {
+export interface feedDataObj {
   author: string;
   title: string;
   description: string;
@@ -20,7 +20,10 @@ export interface FeedCardProps {
   urlToImage: string;
   publishedAt: string;
   content: string;
-  cardImg: string;
+}
+
+export interface FeedCardProps {
+  feedCardObj: feedDataObj;
   isMobile: boolean;
 }
 
@@ -31,7 +34,7 @@ export interface DateFormat {
   day: string;
 }
 
-const FeedCard: React.FC<FeedCardProps> = (props) => {
+const FeedCard: React.FC<FeedCardProps> = ({ feedCardObj, isMobile }) => {
   const formattedDate = (publishedAt: string): string => {
     const dateOptions: any = {
       weekday: "long",
@@ -43,35 +46,33 @@ const FeedCard: React.FC<FeedCardProps> = (props) => {
   };
 
   return (
-    <>
-      <CardContainer>
-        <Img alt="" src={props.cardImg} />
-        <FlexContainer>
-          <div className="flex row space-between">
-            <CardSecondaryTitle>
-              {formattedDate(props.publishedAt)}
-            </CardSecondaryTitle>
-            <TagList
-              tags={["Economy", "Israel", "USA", "news"]}
-              isMobile={props.isMobile}
-            />
-          </div>
-          <ContentContainer>
-            <CardHeader>{props.title}</CardHeader>
-            <CardSecondaryTitle>{props.author}</CardSecondaryTitle>
-            <CardBody>{props.content}</CardBody>
-            <FlexButton>
-              <Button
-                btnType={btnTypeList.primary}
-                onClickFunc={() => {}}
-                isArrow={true}
-                text="Navigate to dispatch"
-              ></Button>
-            </FlexButton>
-          </ContentContainer>
-        </FlexContainer>
-      </CardContainer>
-    </>
+    <CardContainer>
+      <Img alt="" src={feedCardObj.urlToImage} />
+      <FlexContainer>
+        <div className="flex row space-between">
+          <CardSecondaryTitle>
+            {formattedDate(feedCardObj.publishedAt)}
+          </CardSecondaryTitle>
+          <TagList
+            tags={["Economy", "Israel", "USA", "news"]}
+            isMobile={isMobile}
+          />
+        </div>
+        <ContentContainer>
+          <CardHeader>{feedCardObj.title}</CardHeader>
+          <CardSecondaryTitle>{feedCardObj.author}</CardSecondaryTitle>
+          <CardBody>{feedCardObj.content}</CardBody>
+          <FlexButton>
+            <Button
+              btnType={btnTypeList.primary}
+              onClickFunc={() => {}}
+              isArrow={true}
+              text="Navigate to dispatch"
+            ></Button>
+          </FlexButton>
+        </ContentContainer>
+      </FlexContainer>
+    </CardContainer>
   );
 };
 

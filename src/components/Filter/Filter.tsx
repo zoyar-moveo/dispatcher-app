@@ -34,30 +34,28 @@ const Filter: React.FC<FilterProps> = ({
   };
 
   return (
-    <>
-      <MainFilterContainer>
+    <MainFilterContainer>
+      <FilterContainer filterSort={filterSort}>
+        <CurrFilter onClick={() => SetIsDropDownOpen((state) => !state)}>
+          <div>{currFilter}</div>
+          <img alt="" src={Arrow} />
+        </CurrFilter>
+      </FilterContainer>
+      {IsDropDownOpen && (
         <FilterContainer filterSort={filterSort}>
-          <CurrFilter onClick={() => SetIsDropDownOpen((state) => !state)}>
-            <div>{currFilter}</div>
-            <img alt="" src={Arrow} />
-          </CurrFilter>
+          <DropDownList>
+            {filtersList.map((filterItem: { id: string; value: string }) => (
+              <DropDownItem
+                onClick={() => updateFilter(filterItem.value)}
+                key={filterItem.id}
+              >
+                {filterItem.value}
+              </DropDownItem>
+            ))}
+          </DropDownList>
         </FilterContainer>
-        {IsDropDownOpen && (
-          <FilterContainer filterSort={filterSort}>
-            <DropDownList>
-              {filtersList.map((filterItem: { id: string; value: string }) => (
-                <DropDownItem
-                  onClick={() => updateFilter(filterItem.value)}
-                  key={filterItem.id}
-                >
-                  {filterItem.value}
-                </DropDownItem>
-              ))}
-            </DropDownList>
-          </FilterContainer>
-        )}
-      </MainFilterContainer>
-    </>
+      )}
+    </MainFilterContainer>
   );
 };
 

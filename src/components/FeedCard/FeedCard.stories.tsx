@@ -10,8 +10,8 @@ export default {
 const Template: Story<FeedCardProps> = (args) => <FeedCard {...args} />;
 
 export const CARD_EXAMPLE = Template.bind({});
-CARD_EXAMPLE.args = {
-  cardImg: CardImg,
+
+const feedDataObj = {
   author: "Seth Weintraub",
   title:
     "Refreshed Tesla Model X with gorgeous interior delivered to customers [video]",
@@ -23,4 +23,9 @@ CARD_EXAMPLE.args = {
   publishedAt: "2021-10-17T04:02:05Z",
   content:
     "It looks like today’s the first day of deliveries for the refreshed Model X at a very small event where a handful of vehicles were delivered to new customers. Let’s take a peek inside! \r\nTMC Forum us… [+1192 chars]",
+};
+
+CARD_EXAMPLE.args = {
+  // feedDataObj: feedDataObj,
+  isMobile: true,
 };

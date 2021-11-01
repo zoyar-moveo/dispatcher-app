@@ -6,7 +6,12 @@ export interface TagListProps {
 }
 
 const TagList: React.FC<TagListProps> = (props) => {
-  const numTags = props.isMobile ? 1 : 2;
+  const MAX_TAG_NUMBER_LARGE_SCREEN = 2;
+  const MAX_TAG_NUMBER_MOBILE = 1;
+
+  const numTags = props.isMobile
+    ? MAX_TAG_NUMBER_MOBILE
+    : MAX_TAG_NUMBER_LARGE_SCREEN;
   return (
     <TagContainer>
       {props.tags.map((tag, idx) => {

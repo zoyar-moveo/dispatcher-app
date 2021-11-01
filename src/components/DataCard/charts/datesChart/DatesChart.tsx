@@ -20,11 +20,7 @@ export interface chartProps {
 }
 
 const DatesChart: React.FC<chartProps> = (props) => {
-  return (
-    <>
-      <Line data={props.data} options={props.options} />
-    </>
-  );
+  return <Line data={props.data} options={props.options} />;
 };
 
 export default DatesChart;

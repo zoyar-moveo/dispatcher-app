@@ -22,12 +22,10 @@ const Button: React.FC<ButtonProps> = ({
   onClickFunc,
 }) => {
   return (
-    <>
-      <ButtonContainer btnType={btnType} onClick={onClickFunc}>
-        {text}
-        {isArrow && <img alt="" src={Arrow} />}
-      </ButtonContainer>
-    </>
+    <ButtonContainer btnType={btnType} onClick={onClickFunc}>
+      {text}
+      {isArrow && <img alt="" src={Arrow} />}
+    </ButtonContainer>
   );
 };
 
