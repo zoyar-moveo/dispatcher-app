@@ -3,6 +3,7 @@ import DataCard from "./../DataCard/DataCard";
 import { DataCardContainer } from "./styles";
 
 const DataCardList: React.FC = () => {
+
   return (
     <DataCardContainer>
       <DataCard

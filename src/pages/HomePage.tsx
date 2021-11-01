@@ -15,6 +15,7 @@ import DataCardList from "../components/DataCardList/DataCardList";
 import useWindowDimensions from "../utiles/useDimantions";
 import breakpoints from "../breakpoints";
 
+
 const HomePage: React.FC = () => {
   const filterData = [
     {
@@ -53,6 +54,7 @@ const HomePage: React.FC = () => {
           notifications={NotificationsIcon}
           userName="Zoya Rumin"
           isLargeScreen={width > breakpoints.size.lg}
+
         />
         {width > 768 && (
           <FilterList filterData={filterData} parentUpdate={parentUpdate} />
@@ -61,6 +63,7 @@ const HomePage: React.FC = () => {
         <FeedDataMainContainer>
           <FeedDataContainer>
             <FeedCardList isMobile={width < breakpoints.size.xs} />
+
             <DataCardList />
           </FeedDataContainer>
         </FeedDataMainContainer>
