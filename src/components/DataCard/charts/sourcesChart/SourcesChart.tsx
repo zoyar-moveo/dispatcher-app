@@ -17,11 +17,9 @@ export interface chartProps {
 
 const SourcesChart: React.FC<chartProps> = (props) => {
   return (
-    <>
-      <div style={{ width: "150px", height: "150px" }}>
-        <Doughnut data={props.data} options={props.options} />
-      </div>
-    </>
+    <div style={{ width: "150px", height: "150px" }}>
+      <Doughnut data={props.data} options={props.options} />
+    </div>
   );
 };
 

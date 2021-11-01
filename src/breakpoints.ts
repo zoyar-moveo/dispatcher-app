@@ -1,18 +1,18 @@
 interface iSize {
-  xs: string;
-  sm: string;
-  lg: string;
+  xs: number;
+  sm: number;
+  lg: number;
 }
 
 const size: iSize = {
-  xs: "375px",
-  sm: "768px",
-  lg: "1200px",
+  xs: 375,
+  sm: 768,
+  lg: 1200,
 };
 
 const device = {
-  xs: `(max-width: ${size.xs})`,
-  sm: `(max-width: ${size.sm})`,
-  lg: `(max-width: ${size.lg})`,
+  xs: `(max-width: ${size.xs})px`,
+  sm: `(max-width: ${size.sm})px`,
+  lg: `(max-width: ${size.lg})px`,
 };
 export default { size, device };

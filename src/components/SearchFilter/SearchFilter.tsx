@@ -38,52 +38,50 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
 
   useEffect(() => {}, [isDropDownOpen]);
   return (
-    <>
-      <SearchFilterContainer>
-        <FilterContainer filterSort="primary">
-          <FlexSpaceBetween>
-            <SearchContainer>
-              <Img alt="" src={props.searchIcon} />
-              <input
-                type="text"
-                value={searchInput}
-                placeholder="search"
-                onChange={inputUpdate}
-                onFocus={toggleResentSearches}
-              ></input>
-            </SearchContainer>
-            {props.isLargeScreen && (
-              <Filter
-                filterSort="inner"
-                filterType="Everything"
-                filtersList={[
-                  { id: "Everything", value: "Everything" },
-                  { id: "Top Headlines", value: "Top Headlines" },
-                ]}
-                parentUpdate={parentUpdate}
-              ></Filter>
-            )}
-          </FlexSpaceBetween>
-        </FilterContainer>
+    <SearchFilterContainer>
+      <FilterContainer filterSort="primary">
+        <FlexSpaceBetween>
+          <SearchContainer>
+            <Img alt="" src={props.searchIcon} />
+            <input
+              type="text"
+              value={searchInput}
+              placeholder="search"
+              onChange={inputUpdate}
+              onFocus={toggleResentSearches}
+            ></input>
+          </SearchContainer>
+          {props.isLargeScreen && (
+            <Filter
+              filterSort="inner"
+              filterType="Everything"
+              filtersList={[
+                { id: "Everything", value: "Everything" },
+                { id: "Top Headlines", value: "Top Headlines" },
+              ]}
+              parentUpdate={parentUpdate}
+            ></Filter>
+          )}
+        </FlexSpaceBetween>
+      </FilterContainer>
 
-        {isDropDownOpen && (
-          <FilterContainer filterSort="primary">
-            <SearchSubTitle>
-              <span>{"resent searches".toUpperCase()}</span>
-              <span>{"clear".toUpperCase()}</span>
-            </SearchSubTitle>
-            {props.SearchsList.map((searchItem: string, index: number) => {
-              return (
-                <DropDownItem key={index}>
-                  <div>{searchItem}</div>
-                  <div>X</div>
-                </DropDownItem>
-              );
-            })}
-          </FilterContainer>
-        )}
-      </SearchFilterContainer>
-    </>
+      {isDropDownOpen && (
+        <FilterContainer filterSort="primary">
+          <SearchSubTitle>
+            <span>{"resent searches".toUpperCase()}</span>
+            <span>{"clear".toUpperCase()}</span>
+          </SearchSubTitle>
+          {props.SearchsList.map((searchItem: string, index: number) => {
+            return (
+              <DropDownItem key={index}>
+                <div>{searchItem}</div>
+                <div>X</div>
+              </DropDownItem>
+            );
+          })}
+        </FilterContainer>
+      )}
+    </SearchFilterContainer>
   );
 };
 
