@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
 export const InnerContainer = styled.div`
-  width: clamp(16rem, 80vw, 70rem);
+  width: clamp(16rem, 75vw, 70rem);
+  /*align-self: baseline;
+  position: relative;
+  z-index: 5;
+  margin-top: 6px; */
+  /* @media (max-width: 375px) {
+    padding: 0 16px;
+  } */
 `;

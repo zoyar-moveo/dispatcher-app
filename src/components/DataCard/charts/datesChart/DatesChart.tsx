@@ -1,4 +1,3 @@
-import GlobalStyle from "../../../../GlobalStyles";
 import { Line } from "react-chartjs-2";
 
 type dataSetType = {
@@ -23,7 +22,6 @@ export interface chartProps {
 const DatesChart: React.FC<chartProps> = (props) => {
   return (
     <>
-      <GlobalStyle />
       <Line data={props.data} options={props.options} />
     </>
   );

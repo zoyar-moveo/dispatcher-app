@@ -7,7 +7,6 @@ import {
   MainFilterContainer,
 } from "./styles";
 import Arrow from "./assets/Forward.svg";
-import GlobalStyles from "../../GlobalStyles";
 import React from "react";
 
 export interface FilterProps {
@@ -36,7 +35,6 @@ const Filter: React.FC<FilterProps> = ({
 
   return (
     <>
-      <GlobalStyles />
       <MainFilterContainer>
         <FilterContainer filterSort={filterSort}>
           <CurrFilter onClick={() => SetIsDropDownOpen((state) => !state)}>

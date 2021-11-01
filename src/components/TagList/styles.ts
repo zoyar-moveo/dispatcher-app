@@ -23,5 +23,5 @@ export const TagItem = styled.div`
 export const TagContainer = styled.div`
   display: flex;
   flex-direction: row;
-  margin-bottom: 0.875rem;
+  /* margin-bottom: 0.875rem; */
 `;

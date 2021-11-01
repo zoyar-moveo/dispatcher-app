@@ -1,4 +1,3 @@
-import GlobalStyle from "../../../../GlobalStyles";
 import { Bar } from "react-chartjs-2";
 
 type dataSetType = {
@@ -20,7 +19,6 @@ export interface chartProps {
 const TagsChart: React.FC<chartProps> = (props) => {
   return (
     <>
-      <GlobalStyle />
       <Bar data={props.data} options={props.options} />
     </>
   );

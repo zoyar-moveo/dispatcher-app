@@ -2,15 +2,17 @@ import { TagItem, TagContainer } from "./styles";
 
 export interface TagListProps {
   tags: string[];
+  isMobile: boolean;
 }
 
 const TagList: React.FC<TagListProps> = (props) => {
+  const numTags = props.isMobile ? 1 : 2;
   return (
     <TagContainer>
       {props.tags.map((tag, idx) => {
-        return idx < 2 && <TagItem key={idx}>{tag}</TagItem>;
+        return idx < numTags && <TagItem key={idx}>{tag}</TagItem>;
       })}
-      <TagItem>+{props.tags.length - 2}</TagItem>
+      <TagItem>+{props.tags.length - numTags}</TagItem>
     </TagContainer>
   );
 };
