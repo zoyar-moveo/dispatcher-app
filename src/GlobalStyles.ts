@@ -1,10 +1,9 @@
 import { createGlobalStyle } from "styled-components";
-import Breakpoints from "./breakpoints";
 
 export default createGlobalStyle`
     *{
-        /* margin: 0;
-        padding: 0;
+        margin: 0;
+        /*padding: 0;
         outline:0; */
         box-sizing:border-box;
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -17,8 +16,8 @@ export default createGlobalStyle`
 body{
     overflow: hidden;
 }
-    @media only screen and (max-width: 678px){
-        body{
+@media only screen and (max-width: 768px){
+body{
             overflow: scroll;
         }
 }

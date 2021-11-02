@@ -3,6 +3,7 @@ import Header from "../components/Header/Header";
 import LogoIcon from "../components/Header/assets/LOGO1.svg";
 import SettingsIcon from "../components/Header/assets/settings.svg";
 import NotificationsIcon from "../components/Header/assets/notifications.svg";
+import SearchIcon from "../components/Header/assets/search.svg";
 import FilterList from "../components/FilterList/FilterList";
 import {
   FeedDataContainer,
@@ -14,7 +15,8 @@ import FeedCardList from "../components/FeedCardList/FeedCardList";
 import DataCardList from "../components/DataCardList/DataCardList";
 import useWindowDimensions from "../utiles/useDimantions";
 import breakpoints from "../breakpoints";
-
+import { useState } from "react";
+import MobileSearch from "../components/MobileSearch/MobileSearch";
 
 const HomePage: React.FC = () => {
   const filterData = [
@@ -42,32 +44,48 @@ const HomePage: React.FC = () => {
   ];
   const parentUpdate = (filter: string) => console.log(filter);
   const { height, width } = useWindowDimensions();
+  const [isMobileSearch, setIsMobileSearch] = useState(false);
+  const searchsList = ["Bitcoin", "Stockes", "Weather"];
+  const onMobileSearch = () => {
+    setIsMobileSearch(true);
+  };
+
+  const onBack = () => {
+    setIsMobileSearch(false);
+    console.log("exit click");
+  };
 
   return (
     <>
       <GlobalStyles />
-      <HomePageContainer>
-        <Header
-          text="text"
-          logo={LogoIcon}
-          settings={SettingsIcon}
-          notifications={NotificationsIcon}
-          userName="Zoya Rumin"
-          isLargeScreen={width > breakpoints.size.lg}
+      {isMobileSearch && (
+        <MobileSearch searchsList={searchsList} onBack={onBack} />
+      )}
+      {!isMobileSearch && (
+        <HomePageContainer>
+          <Header
+            text="text"
+            logo={LogoIcon}
+            settings={SettingsIcon}
+            notifications={NotificationsIcon}
+            search={SearchIcon}
+            userName="Zoya Rumin"
+            width={width}
+            onMobileSearch={onMobileSearch}
+          />
+          {width > breakpoints.size.sm && (
+            <FilterList filterData={filterData} parentUpdate={parentUpdate} />
+          )}
+          <SeparetorLine />
+          <FeedDataMainContainer>
+            <FeedDataContainer>
+              <FeedCardList isMobile={width < breakpoints.size.xs} />
 
-        />
-        {width > 768 && (
-          <FilterList filterData={filterData} parentUpdate={parentUpdate} />
-        )}
-        <SeparetorLine />
-        <FeedDataMainContainer>
-          <FeedDataContainer>
-            <FeedCardList isMobile={width < breakpoints.size.xs} />
-
-            <DataCardList />
-          </FeedDataContainer>
-        </FeedDataMainContainer>
-      </HomePageContainer>
+              <DataCardList />
+            </FeedDataContainer>
+          </FeedDataMainContainer>
+        </HomePageContainer>
+      )}
     </>
   );
 };

@@ -9,6 +9,8 @@ import {
 import SearchFllter from "../SearchFilter/SearchFilter";
 import SearchIcon from "../SearchFilter/assets/search.svg";
 import ForwardIcon from "../SearchFilter/assets/Forward.svg";
+import breakpoints from "../../breakpoints";
+
 import { useState } from "react";
 
 export enum IconType {
@@ -16,6 +18,7 @@ export enum IconType {
   SETTINGS = "settings",
   NOTIFICATIONS = "notifications",
   INITIALS = "initials",
+  SEARCH = "search",
 }
 
 export interface HeaderProps {
@@ -23,8 +26,10 @@ export interface HeaderProps {
   logo: string;
   settings: string;
   notifications: string;
+  search: string;
   userName: string;
-  isLargeScreen: boolean;
+  width: number;
+  onMobileSearch: () => void;
 }
 
 const Header: React.FC<HeaderProps> = (props) => {
@@ -65,7 +70,7 @@ const Header: React.FC<HeaderProps> = (props) => {
             SearchsList={searchProps.SearchsList}
             searchIcon={searchProps.searchIcon}
             forwardIcon={searchProps.forwardIcon}
-            isLargeScreen={props.isLargeScreen}
+            isLargeScreen={props.width > breakpoints.size.sm}
           />
         </InnerSearchContainer>
         <RightSideContainer>
@@ -75,9 +80,15 @@ const Header: React.FC<HeaderProps> = (props) => {
             src={props.notifications}
             icon={IconType.NOTIFICATIONS}
           />
-          {/* <div className="flex"> */}
+          {props.width < breakpoints.size.xs && (
+            <ImgIcon
+              alt=""
+              src={props.search}
+              icon={IconType.SEARCH}
+              onClick={props.onMobileSearch}
+            />
+          )}
           <InitalsBtn onClick={loginSignOut}>{getInitials()}</InitalsBtn>
-          {/* </div> */}
         </RightSideContainer>
       </HeaderContainer>
       {isLoginSignOutOpen && <LoginSignOut>Sign Out</LoginSignOut>}

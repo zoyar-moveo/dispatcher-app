@@ -27,7 +27,7 @@ export const FeedDataMainContainer = styled.div`
     padding: 0 20px;
     width: 100%;
   }
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 480px) {
     padding: 0 16px;
   }
 `;

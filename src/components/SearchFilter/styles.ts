@@ -4,7 +4,7 @@ export const SearchFilterContainer = styled.div`
   /* width: 28.125rem; */
   /* align-self: baseline; */
 
-  @media (max-width: 375px) {
+  @media (max-width: 480px) {
     display: none;
   }
 `;

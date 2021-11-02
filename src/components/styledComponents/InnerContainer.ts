@@ -6,7 +6,7 @@ export const InnerContainer = styled.div`
   position: relative;
   z-index: 5;
   margin-top: 6px; */
-  /* @media (max-width: 375px) {
+  /* @media (max-width: 480px) {
     padding: 0 16px;
   } */
 `;

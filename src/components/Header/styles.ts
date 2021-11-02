@@ -9,7 +9,7 @@ export const HeaderContainer = styled.div<{}>`
   justify-content: space-between;
   height: 64px;
 
-  @media (max-width: 375px) {
+  @media (max-width: 480px) {
     /* display: none; */
   }
 `;
@@ -49,6 +49,7 @@ export const ImgIcon = styled.img<{ icon: IconType }>`
   height: ${(props) =>
     props.icon === IconType.LOGO ? "3.125rem" : "1.625rem"};
   margin: 0.4375rem 0.5rem;
+  cursor: pointer;
 `;
 
 export const InitalsBtn = styled.div`
