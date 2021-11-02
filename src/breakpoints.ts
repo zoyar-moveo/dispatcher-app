@@ -5,7 +5,7 @@ interface iSize {
 }
 
 const size: iSize = {
-  xs: 375,
+  xs: 480,
   sm: 768,
   lg: 1200,
 };
@@ -13,7 +13,7 @@ const size: iSize = {
 const device = {
   xs: `(max-width: ${size.xs})px`,
   sm: `(max-width: ${size.sm})px`,
-  lg: `(max-width: ${size.lg})px`,
-
+  lg: `(min-width: ${size.sm})px`,
+  xl: `(min-width: ${size.lg})px`,
 };
 export default { size, device };

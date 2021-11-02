@@ -20,8 +20,7 @@ export const CardContainer = styled.div`
       justify-content: space-between;
     }
   }
-
-  @media (max-width: 375px) {
+  @media (max-width: 480px) {
     flex-direction: column;
     height: 450px;
   }
@@ -75,8 +74,7 @@ export const Img = styled.img`
   width: clamp(100px, 40%, 244px);
   height: 100%;
   object-fit: cover;
-
-  @media (max-width: 375px) {
+  @media (max-width: 480px) {
     width: 100%;
     border-radius: 20px 20px 0px 0px;
   }
