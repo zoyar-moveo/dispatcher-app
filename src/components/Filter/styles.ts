@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FilterContainer = styled.div<{ filterSort: string }>`
-  width: ${(props) =>
+  max-width: ${(props) =>
     props.filterSort === "secondary"
       ? "175px"
       : props.filterSort === "inner"

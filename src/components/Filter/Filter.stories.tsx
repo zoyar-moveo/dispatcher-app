@@ -17,7 +17,7 @@ FilterEXP.args = {
     { id: "Mako", value: "Mako" },
     { id: "BBC", value: "BBC" },
   ],
-  parentUpdate: (filter: string) => console.log(filter),
+  parentUpdate: (filter: string) => {},
 };
 
 export const INNER_FILTER = Template.bind({});
@@ -28,5 +28,5 @@ INNER_FILTER.args = {
     { id: "Everything", value: "Everything" },
     { id: "Top Headlines", value: "Top Headlines" },
   ],
-  parentUpdate: (filter: string) => console.log(filter),
+  parentUpdate: (filter: string) => {},
 };

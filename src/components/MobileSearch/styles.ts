@@ -5,12 +5,11 @@ export const MobileSearchContainer = styled.div<{}>`
 `;
 
 export const RecentSearchesArea = styled.div<{}>`
-  padding: 0 15px;
   & > div {
     color: rgba(90, 90, 137, 1);
     height: 56px;
   }
-  background-color: #e5e5e5;
+  background-color: #f8f8ff;
   height: 100%;
 `;
 
@@ -30,7 +29,7 @@ export const SearchRow = styled.div<{}>`
 
 export const SearchInput = styled.div<{}>`
   width: 100%;
-  margin-left: 10px;
+  padding: 0 10px;
 `;
 
 export const DeleteBtn = styled.img`
@@ -48,12 +47,13 @@ export const SearchSubtitle = styled.div<{}>`
   justify-content: space-between;
   align-items: center;
   font-weight: 500;
+  padding: 0 10px;
 `;
 
 export const ClearBtn = styled.span<{}>`
   font-size: 0.75rem;
   border: none;
-  background-color: #d9dbe9;
+  background-color: rgba(217, 219, 233, 1);
   padding: 4px 6px;
 `;
 
@@ -69,6 +69,7 @@ export const ResentSearchItem = styled.div<{}>`
   align-items: center;
   height: 42px;
   border-bottom: 1px solid #d9dbe9;
+  padding: 0 10px;
 `;
 
 export const SearchKey = styled.span<{}>`
@@ -86,4 +87,5 @@ export const ExitImg = styled.img<{}>`
 export const BackImg = styled.img<{}>`
   height: 1.25rem;
   cursor: pointer;
+  margin-right: 10px;
 `;

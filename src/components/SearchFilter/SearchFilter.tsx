@@ -30,10 +30,6 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
     setSearchInput(val);
   };
 
-  // const toggleResentSearches = () => {
-  //   setIsDropDownOpen((state) => !state);
-  // };
-
   const parentUpdate = (filter: string) => console.log(filter);
 
   useEffect(() => {}, [isDropDownOpen]);

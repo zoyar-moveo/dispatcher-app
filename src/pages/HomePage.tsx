@@ -17,6 +17,8 @@ import useWindowDimensions from "../utiles/useDimantions";
 import breakpoints from "../breakpoints";
 import { useState } from "react";
 import MobileSearch from "../components/MobileSearch/MobileSearch";
+import FilterModal from "../components/FilterModal/FilterModal";
+import SortByFilterRowContainer from "../components/SortByFilterRow/SortByFilterRow";
 
 const HomePage: React.FC = () => {
   const filterData = [
@@ -45,6 +47,8 @@ const HomePage: React.FC = () => {
   const parentUpdate = (filter: string) => console.log(filter);
   const { height, width } = useWindowDimensions();
   const [isMobileSearch, setIsMobileSearch] = useState(false);
+  const [isEverything, setIsEverything] = useState(true);
+  const [isMobileTabletFilter, setIsMobileTabletFilter] = useState(false);
   const searchsList = ["Bitcoin", "Stockes", "Weather"];
   const onMobileSearch = () => {
     setIsMobileSearch(true);
@@ -52,7 +56,18 @@ const HomePage: React.FC = () => {
 
   const onBack = () => {
     setIsMobileSearch(false);
-    console.log("exit click");
+  };
+
+  const onMobileTabletFilter = () => {
+    setIsMobileTabletFilter(true);
+  };
+
+  const toggleSearchIn = () => {
+    setIsEverything((state) => !state);
+  };
+
+  const onCloseFilter = () => {
+    setIsMobileTabletFilter(false);
   };
 
   return (
@@ -73,10 +88,25 @@ const HomePage: React.FC = () => {
             width={width}
             onMobileSearch={onMobileSearch}
           />
-          {width > breakpoints.size.sm && (
-            <FilterList filterData={filterData} parentUpdate={parentUpdate} />
+          {width < breakpoints.size.sm ? (
+            <>
+              <SortByFilterRowContainer
+                onMobileTabletFilter={onMobileTabletFilter}
+              />
+              {isMobileTabletFilter ? (
+                <FilterModal
+                  onCloseFilter={onCloseFilter}
+                  toggleSearchIn={toggleSearchIn}
+                  isEverything={isEverything}
+                />
+              ) : null}
+            </>
+          ) : (
+            <>
+              <FilterList filterData={filterData} parentUpdate={parentUpdate} />
+              <SeparetorLine />
+            </>
           )}
-          <SeparetorLine />
           <FeedDataMainContainer>
             <FeedDataContainer>
               <FeedCardList isMobile={width < breakpoints.size.xs} />
