@@ -8,34 +8,11 @@ import {
 import backIcon from "./assets/back.svg";
 import { BackImg } from "../MobileSearch/styles";
 import { Overlay } from "../MobileFilter/styles";
-
-type FilterEverythingT = {
-  Sources: { selected: string; options: string[] };
-  Language: { selected: string; options: string[] };
-  Dates: { selected: string; options: string[] };
-};
-type FilterTopT = {
-  Sources: { selected: string; options: string[] };
-  Country: { selected: string; options: string[] };
-  Catagory: { selected: string; options: string[] };
-};
-
-export interface FilterI {
-  FilterEverything: FilterEverythingT;
-  FilterTop: FilterTopT;
-}
-
-export interface MobileFilterProps {
-  FilterCatagories: FilterI;
-  isEverything: boolean;
-  toggleSearchIn: () => void;
-  onFilterBack: () => void;
-  onCloseFilter: () => void;
-}
+import { EveryKey, MobileFilterProps, TopKey } from "./MobileFilter.types";
 
 const MobileFilter: React.FC<MobileFilterProps> = (props) => {
   const [isInnerFilter, setIsInnerFilter] = useState(false);
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState<EveryKey | TopKey | null>(null);
 
   const getFilterType = () => {
     return props.isEverything
@@ -43,7 +20,7 @@ const MobileFilter: React.FC<MobileFilterProps> = (props) => {
       : props.FilterCatagories.FilterTop;
   };
 
-  const OpenCurrFilter = (key: string) => {
+  const OpenCurrFilter = (key: EveryKey | TopKey) => {
     setIsInnerFilter(true);
     setTitle(key);
   };
@@ -52,23 +29,24 @@ const MobileFilter: React.FC<MobileFilterProps> = (props) => {
     setIsInnerFilter(false);
   };
 
-  const getEverythingKey = (): "Dates" | "Language" | "Sources" => {
-    return title === "Dates"
-      ? "Dates"
-      : title === "Language"
-      ? "Language"
-      : "Sources";
+  const getEverythingKey = (): EveryKey => {
+    return title === EveryKey.DATES
+      ? EveryKey.DATES
+      : title === EveryKey.LANGUAGE
+      ? EveryKey.LANGUAGE
+      : EveryKey.SOURCES;
   };
 
-  const getTopKey = (): "Catagory" | "Country" | "Sources" => {
-    return title === "Catagory"
-      ? "Catagory"
-      : title === "Country"
-      ? "Country"
-      : "Sources";
+  const getTopKey = (): TopKey => {
+    return title === TopKey.CATAGORY
+      ? TopKey.CATAGORY
+      : title === TopKey.COUNTRY
+      ? TopKey.COUNTRY
+      : TopKey.SOURCES;
   };
 
-  const getOptions = () => {
+  const getOptions = (title: EveryKey | TopKey) => {
+    if (!title) return;
     return props.isEverything
       ? props.FilterCatagories.FilterEverything[getEverythingKey()]
       : props.FilterCatagories.FilterTop[getTopKey()];
@@ -95,11 +73,18 @@ const MobileFilter: React.FC<MobileFilterProps> = (props) => {
         <ListArea>
           {isInnerFilter ? (
             <>
-              {getOptions().options.map((option: string, idx: number) => (
-                <CatagoryItem key={idx} onClick={() => updateFilter(option)}>
-                  {option}
-                </CatagoryItem>
-              ))}
+              {title
+                ? getOptions(title)!.options.map(
+                    (option: string, idx: number) => (
+                      <CatagoryItem
+                        key={idx}
+                        onClick={() => updateFilter(option)}
+                      >
+                        {option}
+                      </CatagoryItem>
+                    )
+                  )
+                : null}
             </>
           ) : (
             <>
@@ -109,7 +94,7 @@ const MobileFilter: React.FC<MobileFilterProps> = (props) => {
                   {props.isEverything ? "Everything" : "Top Headlines"}
                 </span>
               </CatagoryItem>
-              {Object.entries(getFilterType()).map(([key, value], idx) => (
+              {Object.entries(getFilterType()).map(([key, value]: any, idx) => (
                 <>
                   <CatagoryItem onClick={() => OpenCurrFilter(key)} key={idx}>
                     <span>{key}</span>

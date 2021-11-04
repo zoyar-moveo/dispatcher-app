@@ -1,5 +1,6 @@
-import MobileFilter, { FilterI } from "../MobileFilter/MobileFilter";
+import MobileFilter from "../MobileFilter/MobileFilter";
 import ReactDOM from "react-dom";
+import { FilterI } from "../MobileFilter/MobileFilter.types";
 
 export interface FilterModalProps {
   isEverything: boolean;
