@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const SearchFilterContainer = styled.div`
-  /* width: 28.125rem; */
-  /* align-self: baseline; */
+  padding: 0 15px;
 
   @media (max-width: 480px) {
     display: none;
@@ -34,6 +33,7 @@ export const DropDownItem = styled.div`
   }
   display: flex;
   justify-content: space-between;
+  padding: 0 15px;
 `;
 
 export const Img = styled.img`
@@ -50,6 +50,8 @@ export const SearchContainer = styled.div`
   display: flex;
   align-items: center;
   height: fit-content;
+  padding: 0 15px;
+
   & input {
     border: none;
   }

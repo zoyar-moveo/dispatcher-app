@@ -10,8 +10,6 @@ const Template: Story<FilterListProps> = (args) => <FilterList {...args} />;
 
 export const FilterEXP = Template.bind({});
 FilterEXP.args = {
-  //   filterType: "source",
-  //   filtersList: 2["Walla", "Mako", "BBC"],
   filterData: [
     {
       Source: [
