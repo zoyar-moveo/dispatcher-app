@@ -19,6 +19,7 @@ import { useState } from "react";
 import MobileSearch from "../components/MobileSearch/MobileSearch";
 import FilterModal from "../components/FilterModal/FilterModal";
 import SortByFilterRowContainer from "../components/SortByFilterRow/SortByFilterRow";
+// import { getData } from "../services/ApiData";
 
 const HomePage: React.FC = () => {
   const filterData = [
@@ -70,6 +71,10 @@ const HomePage: React.FC = () => {
     setIsMobileTabletFilter(false);
   };
 
+  const removeItem = () => {};
+
+  // getData();
+
   return (
     <>
       <GlobalStyles />
@@ -86,7 +91,9 @@ const HomePage: React.FC = () => {
             search={SearchIcon}
             userName="Zoya Rumin"
             width={width}
+            SearchsList={["Bitcoin", "Stockes", "Weather"]}
             onMobileSearch={onMobileSearch}
+            removeItem={removeItem}
           />
           {width < breakpoints.size.sm ? (
             <>

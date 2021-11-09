@@ -27,18 +27,31 @@ export const InnerFilter = styled.div`
 `;
 
 export const DropDownItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 0 15px;
+  align-items: center;
+`;
+
+export const ItemText = styled.div`
+  width: 100%;
   &:hover {
     background-color: rgba(223, 224, 235, 0.41);
     cursor: pointer;
   }
-  display: flex;
-  justify-content: space-between;
-  padding: 0 15px;
 `;
-
 export const Img = styled.img`
   height: 1.125rem;
   margin-right: 0.3125rem;
+`;
+
+export const ExitImg = styled.img`
+  height: 0.75rem;
+  align-self: center;
+  &:hover {
+    cursor: pointer;
+    height: 1rem;
+  }
 `;
 
 export const SearchPlasholder = styled.span`

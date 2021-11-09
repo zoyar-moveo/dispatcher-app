@@ -1,12 +1,11 @@
 import {
   CardBody,
   CardHeader,
-  FlexContainer,
+  ContentContainer,
   CardSecondaryTitle,
   FlexButton,
   Img,
   CardContainer,
-  ContentContainer,
 } from "./styles";
 import Button from "../Button/Button";
 import TagList from "../TagList/TagList";
@@ -48,7 +47,7 @@ const FeedCard: React.FC<FeedCardProps> = ({ feedCardObj, isMobile }) => {
   return (
     <CardContainer>
       <Img alt="" src={feedCardObj.urlToImage} />
-      <FlexContainer>
+      <ContentContainer>
         <div className="flex row space-between">
           <CardSecondaryTitle>
             {formattedDate(feedCardObj.publishedAt)}
@@ -58,20 +57,18 @@ const FeedCard: React.FC<FeedCardProps> = ({ feedCardObj, isMobile }) => {
             isMobile={isMobile}
           />
         </div>
-        <ContentContainer>
-          <CardHeader>{feedCardObj.title}</CardHeader>
-          <CardSecondaryTitle>{feedCardObj.author}</CardSecondaryTitle>
-          <CardBody>{feedCardObj.content}</CardBody>
-          <FlexButton>
-            <Button
-              btnType={btnTypeList.primary}
-              onClickFunc={() => {}}
-              isArrow={true}
-              text="Navigate to dispatch"
-            ></Button>
-          </FlexButton>
-        </ContentContainer>
-      </FlexContainer>
+        <CardHeader>{feedCardObj.title}</CardHeader>
+        <CardSecondaryTitle>{feedCardObj.author}</CardSecondaryTitle>
+        <CardBody>{feedCardObj.content}</CardBody>
+        <FlexButton>
+          <Button
+            btnType={btnTypeList.primary}
+            onClickFunc={() => {}}
+            isArrow={true}
+            text="Navigate to dispatch"
+          ></Button>
+        </FlexButton>
+      </ContentContainer>
     </CardContainer>
   );
 };

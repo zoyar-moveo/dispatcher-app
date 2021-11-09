@@ -15,6 +15,7 @@ export default createGlobalStyle`
 }
 body{
     overflow: hidden;
+    font-size : 16px;
 }
 @media only screen and (max-width: 768px){
 body{
