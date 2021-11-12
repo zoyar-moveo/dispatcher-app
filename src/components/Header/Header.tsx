@@ -29,7 +29,9 @@ export interface HeaderProps {
   search: string;
   userName: string;
   width: number;
+  SearchsList: string[];
   onMobileSearch: () => void;
+  removeItem: () => void;
 }
 
 const Header: React.FC<HeaderProps> = (props) => {
@@ -54,7 +56,6 @@ const Header: React.FC<HeaderProps> = (props) => {
   const searchProps = {
     filterType: "Everything",
     FilterList: ["Top Headlines", "Everything"],
-    SearchsList: ["Bitcoin", "Stockes", "Weather"],
     searchIcon: SearchIcon,
     forwardIcon: ForwardIcon,
   };
@@ -67,10 +68,11 @@ const Header: React.FC<HeaderProps> = (props) => {
           <SearchFllter
             filterType={searchProps.filterType}
             FilterList={searchProps.FilterList}
-            SearchsList={searchProps.SearchsList}
+            SearchsList={props.SearchsList}
             searchIcon={searchProps.searchIcon}
             forwardIcon={searchProps.forwardIcon}
             isLargeScreen={props.width > breakpoints.size.sm}
+            removeItem={props.removeItem}
           />
         </InnerSearchContainer>
         <RightSideContainer>

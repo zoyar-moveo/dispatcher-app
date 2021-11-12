@@ -36,7 +36,6 @@ const FeedCard: React.FC<DataCardProps> = (props) => {
         )}
       </InnerContainer>
     </CardContainer>
-
   );
 };
 

@@ -18,4 +18,5 @@ export const Underline = styled.div`
 
 export const InnerContainer = styled.div`
   padding: 1rem;
+  width: 100%;
 `;

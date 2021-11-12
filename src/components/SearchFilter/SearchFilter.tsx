@@ -1,7 +1,14 @@
 import { useState, useEffect, useRef } from "react";
-import { InnerFilter, SearchFilterContainer, SearchSubTitle } from "./styles";
+import {
+  ExitImg,
+  InnerFilter,
+  ItemText,
+  SearchFilterContainer,
+  SearchSubTitle,
+} from "./styles";
 import { FilterContainer } from "../Filter/styles";
 import Filter from "../Filter/Filter";
+import ExitIcon from "./assets/exit.svg";
 import {
   DropDownItem,
   Img,
@@ -17,13 +24,12 @@ export interface SearchFilterProps {
   searchIcon: string;
   forwardIcon: string;
   isLargeScreen: boolean;
+  removeItem: () => void;
 }
 
 const SearchFllter: React.FC<SearchFilterProps> = (props) => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
-  const inputRef = useRef<HTMLInputElement | null>();
-
   const inputUpdate = (ev: React.ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
     let val = ev.target.value;
@@ -31,6 +37,10 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
   };
 
   const parentUpdate = (filter: string) => console.log(filter);
+
+  const updateSearch = (searchItem: string) => {
+    setSearchInput(searchItem);
+  };
 
   useEffect(() => {}, [isDropDownOpen]);
   return (
@@ -71,8 +81,10 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
           {props.SearchsList.map((searchItem: string, index: number) => {
             return (
               <DropDownItem key={index}>
-                <div>{searchItem}</div>
-                <div>X</div>
+                <ItemText onClick={() => updateSearch(searchItem)}>
+                  {searchItem}
+                </ItemText>
+                <ExitImg alt="" src={ExitIcon} onClick={props.removeItem} />
               </DropDownItem>
             );
           })}

@@ -26,11 +26,6 @@ export const CardContainer = styled.div`
   }
 `;
 
-export const ContentContainer = styled.div`
-  padding: 1rem 0;
-  height: 100%;
-`;
-
 export const CardHeader = styled.div`
   font-weight: 700;
   font-size: 1.125rem;
@@ -58,12 +53,19 @@ export const CardBody = styled.div`
   max-height: 2.5em;
 `;
 
-export const FlexContainer = styled.div`
+export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 1rem;
+  height: 100%;
+  justify-content: space-evenly;
 `;
 
+export const FlexRowContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
 export const FlexButton = styled.div`
   display: flex;
   justify-content: flex-end;
