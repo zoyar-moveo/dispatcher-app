@@ -61,6 +61,11 @@ export const ContentContainer = styled.div`
   justify-content: space-evenly;
 `;
 
+export const FlexRowContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
 export const FlexButton = styled.div`
   display: flex;
   justify-content: flex-end;

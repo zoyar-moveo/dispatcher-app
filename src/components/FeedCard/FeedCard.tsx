@@ -6,6 +6,7 @@ import {
   FlexButton,
   Img,
   CardContainer,
+  FlexRowContainer,
 } from "./styles";
 import Button from "../Button/Button";
 import TagList from "../TagList/TagList";
@@ -48,7 +49,7 @@ const FeedCard: React.FC<FeedCardProps> = ({ feedCardObj, isMobile }) => {
     <CardContainer>
       <Img alt="" src={feedCardObj.urlToImage} />
       <ContentContainer>
-        <div className="flex row space-between">
+        <FlexRowContainer>
           <CardSecondaryTitle>
             {formattedDate(feedCardObj.publishedAt)}
           </CardSecondaryTitle>
@@ -56,7 +57,7 @@ const FeedCard: React.FC<FeedCardProps> = ({ feedCardObj, isMobile }) => {
             tags={["Economy", "Israel", "USA", "news"]}
             isMobile={isMobile}
           />
-        </div>
+        </FlexRowContainer>
         <CardHeader>{feedCardObj.title}</CardHeader>
         <CardSecondaryTitle>{feedCardObj.author}</CardSecondaryTitle>
         <CardBody>{feedCardObj.content}</CardBody>
