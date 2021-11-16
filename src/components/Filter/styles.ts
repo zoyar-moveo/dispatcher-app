@@ -34,13 +34,18 @@ export const MainFilterContainer = styled.div<{}>`
   }
 `;
 
-export const DropDownList = styled.div<{}>``;
+export const DropDownList = styled.div<{}>`
+  height: 50px;
+  overflow: scroll;
+  padding-right: 10px;
+`;
 
 export const DropDownItem = styled.div<{}>`
   &:hover {
     background-color: rgba(223, 224, 235, 0.41);
     cursor: pointer;
   }
+  padding-right: 10px;
 `;
 
 export const CurrFilter = styled.div<{}>`

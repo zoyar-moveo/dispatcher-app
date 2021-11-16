@@ -1,7 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import {
   ExitImg,
-  InnerFilter,
   ItemText,
   SearchFilterContainer,
   SearchSubTitle,
@@ -9,13 +8,9 @@ import {
 import { FilterContainer } from "../Filter/styles";
 import Filter from "../Filter/Filter";
 import ExitIcon from "./assets/exit.svg";
-import {
-  DropDownItem,
-  Img,
-  SearchPlasholder,
-  SearchContainer,
-  FlexSpaceBetween,
-} from "./styles";
+import { DropDownItem, Img, SearchContainer, FlexSpaceBetween } from "./styles";
+import { localStorageService } from "../../services/localStorage";
+const KEY = "resentSearches";
 
 export interface SearchFilterProps {
   filterType: string;
@@ -30,10 +25,19 @@ export interface SearchFilterProps {
 const SearchFllter: React.FC<SearchFilterProps> = (props) => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
-  const inputUpdate = (ev: React.ChangeEvent<HTMLInputElement>) => {
+  const [searchVal, setSearchVal] = useState("");
+
+  const onInputVal = (ev: React.ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
     let val = ev.target.value;
-    setSearchInput(val);
+    setSearchVal(val);
+    setIsDropDownOpen(false);
+  };
+
+  const onInputUpdate = (ev: any) => {
+    ev.preventDefault();
+    setSearchInput(searchVal);
+    localStorageService.saveToStorage(KEY, searchVal);
   };
 
   const parentUpdate = (filter: string) => console.log(filter);
@@ -49,14 +53,16 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
         <FlexSpaceBetween>
           <SearchContainer>
             <Img alt="" src={props.searchIcon} />
-            <input
-              type="text"
-              value={searchInput}
-              placeholder="search"
-              onChange={inputUpdate}
-              onFocus={() => setIsDropDownOpen(true)}
-              onBlur={() => setIsDropDownOpen(false)}
-            ></input>
+            <form onSubmit={onInputUpdate}>
+              <input
+                type="text"
+                value={searchVal}
+                placeholder="search"
+                onChange={onInputVal}
+                onFocus={() => setIsDropDownOpen(true)}
+                onBlur={() => setIsDropDownOpen(false)}
+              ></input>
+            </form>
           </SearchContainer>
           {props.isLargeScreen && (
             <Filter

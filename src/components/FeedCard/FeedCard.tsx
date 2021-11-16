@@ -60,7 +60,7 @@ const FeedCard: React.FC<FeedCardProps> = ({ feedCardObj, isMobile }) => {
         </FlexRowContainer>
         <CardHeader>{feedCardObj.title}</CardHeader>
         <CardSecondaryTitle>{feedCardObj.author}</CardSecondaryTitle>
-        <CardBody>{feedCardObj.content}</CardBody>
+        <CardBody>{feedCardObj.description}</CardBody>
         <FlexButton>
           <Button
             btnType={btnTypeList.primary}

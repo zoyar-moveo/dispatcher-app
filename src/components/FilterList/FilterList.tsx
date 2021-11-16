@@ -1,9 +1,14 @@
 import { FilterListContainer } from "./styles";
 import Filter from "../Filter/Filter";
+import { useDispatch } from "react-redux";
 
 export interface FilterListProps {
   filterData: any;
-  parentUpdate: (filter: string) => void;
+  parentUpdate: (
+    filterType: string,
+    filter: any
+    // filter: { Sources: string; Country: string; Category: string }
+  ) => void;
 }
 
 const FilterList: React.FC<FilterListProps> = (props) => {

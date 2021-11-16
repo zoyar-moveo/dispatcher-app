@@ -37,7 +37,7 @@ export const Overlay = styled.div`
   z-index: 6;
 `;
 
-export const CatagoryItem = styled.div`
+export const CategoryItem = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
