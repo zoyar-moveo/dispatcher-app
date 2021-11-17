@@ -13,14 +13,14 @@ export const FeedDataContainer = styled.div`
 export const SeparetorLine = styled.div`
   width: 100%;
   border: 1px solid rgba(217, 219, 233, 1);
-  width: clamp(16rem, 75vw, 70rem);
+  width: clamp(16rem, 80vw, 70rem);
   margin: auto;
   margin-bottom: 0.625rem;
 `;
 
 export const FeedDataMainContainer = styled.div`
   display: flex;
-  width: clamp(16rem, 75vw, 70rem);
+  width: clamp(16rem, 80vw, 70rem);
   margin: auto;
   justify-content: center;
   @media (max-width: 768px) {

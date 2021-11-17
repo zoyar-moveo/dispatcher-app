@@ -23,6 +23,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <ButtonContainer btnType={btnType} onClick={onClickFunc}>
+      {/* <ButtonContainer btnType={btnType}> */}
       {text}
       {isArrow && <img alt="" src={Arrow} />}
     </ButtonContainer>

@@ -11,9 +11,9 @@ const App: React.FC = () => {
     <>
       <GlobalStyles />
       <Routes>
+        <Route path="/" element={<Navigate replace to="/welcomepage" />} />
         <Route path="/homepage" element={<HomePage />}></Route>
         <Route path="/welcomepage" element={<WelcomePage />}></Route>
-        <Route path="/" element={<Navigate replace to="/homepage" />} />
       </Routes>
     </>
   );
