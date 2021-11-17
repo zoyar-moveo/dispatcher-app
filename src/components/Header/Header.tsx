@@ -10,6 +10,7 @@ import SearchFllter from "../SearchFilter/SearchFilter";
 import SearchIcon from "../SearchFilter/assets/search.svg";
 import ForwardIcon from "../SearchFilter/assets/Forward.svg";
 import breakpoints from "../../breakpoints";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import { useState } from "react";
 
@@ -36,6 +37,7 @@ export interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = (props) => {
   const [isLoginSignOutOpen, setIsLoginSignOutOpen] = useState(false);
+  const { logout } = useAuth0();
 
   const getInitials = () => {
     let nameArr: string[] = props.userName.split(" ").slice(0, 2);
@@ -93,7 +95,13 @@ const Header: React.FC<HeaderProps> = (props) => {
           <InitalsBtn onClick={loginSignOut}>{getInitials()}</InitalsBtn>
         </RightSideContainer>
       </HeaderContainer>
-      {isLoginSignOutOpen && <LoginSignOut>Sign Out</LoginSignOut>}
+      {isLoginSignOutOpen && (
+        <LoginSignOut
+          onClick={() => logout({ returnTo: window.location.origin })}
+        >
+          Logout
+        </LoginSignOut>
+      )}
     </>
   );
 };

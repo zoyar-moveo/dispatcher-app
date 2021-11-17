@@ -10,12 +10,11 @@ export const HeaderContainer = styled.div<{}>`
   height: 64px;
 
   @media (max-width: 480px) {
-    /* display: none; */
   }
 `;
 
 export const InnerSearchContainer = styled.div`
-  width: clamp(16rem, 75vw, 70rem);
+  width: clamp(16rem, 80vw, 70rem);
   align-self: baseline;
   position: relative;
   z-index: 5;
@@ -29,8 +28,7 @@ export const RightSideContainer = styled.div<{}>`
 
 export const LoginSignOut = styled.div`
   background: #ffffff;
-  height: 32px;
-  left: 0;
+  right: 0.5rem;
   width: 95px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
   border-radius: 10px;
@@ -39,10 +37,14 @@ export const LoginSignOut = styled.div`
   font-size: 0.75rem;
   line-height: 1rem;
   letter-spacing: 0.00625rem;
-  display: inline-flex;
-  align-items: center;
+  display: block;
+  position: absolute;
   color: #5a5a89;
-  padding: 0 8px;
+  padding: 8px;
+  text-align: center;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const ImgIcon = styled.img<{ icon: IconType }>`
@@ -56,7 +58,6 @@ export const InitalsBtn = styled.div`
   width: 3.125rem;
   height: 3.125rem;
   color: #ffffff;
-  /* Primary / Default */
 
   background-color: #0058b9;
   border-radius: 30px;
@@ -64,4 +65,7 @@ export const InitalsBtn = styled.div`
   align-items: center;
   justify-content: center;
   margin: 0.4375rem 0.5rem;
+  &:hover {
+    cursor: pointer;
+  }
 `;
