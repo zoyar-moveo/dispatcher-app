@@ -17,7 +17,7 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
     },
     FilterTop: {
       Country: { selected: "Israel", options: ["Israel", "USA"] },
-      Catagory: {
+      Category: {
         selected: "Finance",
         options: ["Health", "Politics", "Finance"],
       },

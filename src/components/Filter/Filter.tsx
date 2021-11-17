@@ -13,7 +13,7 @@ export interface FilterProps {
   filterSort: string;
   filterType: string;
   filtersList: any;
-  parentUpdate: (filter: string) => void;
+  parentUpdate: (filterType: string, filter: string) => void;
 }
 
 const Filter: React.FC<FilterProps> = ({
@@ -26,10 +26,14 @@ const Filter: React.FC<FilterProps> = ({
 
   const [currFilter, setCurrFilter] = useState(filterType);
 
-  const updateFilter = (currFilter: string) => {
-    setCurrFilter(currFilter);
+  const updateFilter = (
+    filterType: string,
+    currFilterId: string,
+    currFilterValue: string
+  ) => {
+    setCurrFilter(currFilterValue);
     SetIsDropDownOpen(false);
-    parentUpdate(currFilter);
+    parentUpdate(filterType, currFilterId);
     return;
   };
 
@@ -46,7 +50,9 @@ const Filter: React.FC<FilterProps> = ({
           <DropDownList>
             {filtersList.map((filterItem: { id: string; value: string }) => (
               <DropDownItem
-                onClick={() => updateFilter(filterItem.value)}
+                onClick={() =>
+                  updateFilter(filterType, filterItem.id, filterItem.value)
+                }
                 key={filterItem.id}
               >
                 {filterItem.value}

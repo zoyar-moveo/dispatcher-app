@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-  CatagoryItem,
+  CategoryItem,
   FilterTitle,
   ListArea,
   MobileFilterContainer,
@@ -38,8 +38,8 @@ const MobileFilter: React.FC<MobileFilterProps> = (props) => {
   };
 
   const getTopKey = (): TopKey => {
-    return title === TopKey.CATAGORY
-      ? TopKey.CATAGORY
+    return title === TopKey.CATEGORY
+      ? TopKey.CATEGORY
       : title === TopKey.COUNTRY
       ? TopKey.COUNTRY
       : TopKey.SOURCES;
@@ -76,30 +76,30 @@ const MobileFilter: React.FC<MobileFilterProps> = (props) => {
               {title
                 ? getOptions(title)!.options.map(
                     (option: string, idx: number) => (
-                      <CatagoryItem
+                      <CategoryItem
                         key={idx}
                         onClick={() => updateFilter(option)}
                       >
                         {option}
-                      </CatagoryItem>
+                      </CategoryItem>
                     )
                   )
                 : null}
             </>
           ) : (
             <>
-              <CatagoryItem onClick={props.toggleSearchIn}>
+              <CategoryItem onClick={props.toggleSearchIn}>
                 <span>Search In</span>
                 <span>
                   {props.isEverything ? "Everything" : "Top Headlines"}
                 </span>
-              </CatagoryItem>
+              </CategoryItem>
               {Object.entries(getFilterType()).map(([key, value]: any, idx) => (
                 <>
-                  <CatagoryItem onClick={() => OpenCurrFilter(key)} key={idx}>
+                  <CategoryItem onClick={() => OpenCurrFilter(key)} key={idx}>
                     <span>{key}</span>
                     <span>{value.selected}</span>
-                  </CatagoryItem>
+                  </CategoryItem>
                 </>
               ))}
             </>

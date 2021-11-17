@@ -6,7 +6,7 @@ type FilterEverythingT = {
 type FilterTopT = {
   Sources: { selected: string; options: string[] };
   Country: { selected: string; options: string[] };
-  Catagory: { selected: string; options: string[] };
+  Category: { selected: string; options: string[] };
 };
 
 export interface FilterI {
@@ -30,5 +30,5 @@ export enum EveryKey {
 export enum TopKey {
   COUNTRY = "Country",
   SOURCES = "Sources",
-  CATAGORY = "Catagory",
+  CATEGORY = "Category",
 }

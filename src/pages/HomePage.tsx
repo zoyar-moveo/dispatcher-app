@@ -19,9 +19,12 @@ import { useState } from "react";
 import MobileSearch from "../components/MobileSearch/MobileSearch";
 import FilterModal from "../components/FilterModal/FilterModal";
 import SortByFilterRowContainer from "../components/SortByFilterRow/SortByFilterRow";
-// import { getData } from "../services/ApiData";
+import FetchData from "../services/ApiData";
+import { useDispatch, useSelector } from "react-redux";
+import { filterActions } from "../store/filter";
 
 const HomePage: React.FC = () => {
+  const dispatch = useDispatch();
   const filterData = [
     {
       Source: [
@@ -32,20 +35,41 @@ const HomePage: React.FC = () => {
     },
     {
       Country: [
-        { id: "USA", value: "USA" },
-        { id: "Israel", value: "USA" },
-        { id: "Canada", value: "Canada" },
+        { id: "us", value: "United State" },
+        { id: "il", value: "Israel" },
+        { id: "ru", value: "Russia" },
+        { id: "ar", value: "Argentina" },
+        { id: "gb", value: "Great Briten" },
       ],
     },
     {
       Category: [
-        { id: "Politics", value: "Politics" },
-        { id: "Health", value: "Health" },
-        { id: "Finance", value: "Finance" },
+        { id: "general", value: "General" },
+        { id: "business", value: "Business" },
+        { id: "health", value: "Health" },
+        { id: "entertainment", value: "Entertainment" },
+        { id: "science", value: "Science" },
+        { id: "sports", value: "Sports" },
+        { id: "technology", value: "Technology" },
       ],
     },
   ];
-  const parentUpdate = (filter: string) => console.log(filter);
+  const parentUpdate = (filterType: string, filter: string) => {
+    switch (filterType) {
+      case "Source":
+        dispatch(filterActions.updateSource(filter));
+        return;
+      case "Country":
+        dispatch(filterActions.updateCountry(filter));
+        return;
+      case "Category":
+        dispatch(filterActions.updateCategory(filter));
+        return;
+      default:
+        return;
+    }
+  };
+
   const { height, width } = useWindowDimensions();
   const [isMobileSearch, setIsMobileSearch] = useState(false);
   const [isEverything, setIsEverything] = useState(true);
@@ -72,8 +96,6 @@ const HomePage: React.FC = () => {
   };
 
   const removeItem = () => {};
-
-  // getData();
 
   return (
     <>
