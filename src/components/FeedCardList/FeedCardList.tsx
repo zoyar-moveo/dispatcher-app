@@ -1,8 +1,6 @@
 import FeedCard from "../FeedCard/FeedCard";
 import { FeedCardListContainer, FeedCardListScroll } from "./styles";
-import feedCardData from "../../services/feedDate";
 import makeGetRequest from "../../services/ApiData";
-// import FetchData from "../../services/ApiData";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
