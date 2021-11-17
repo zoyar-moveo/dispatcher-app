@@ -15,23 +15,29 @@ import FeedCardList from "../components/FeedCardList/FeedCardList";
 import DataCardList from "../components/DataCardList/DataCardList";
 import useWindowDimensions from "../utiles/useDimantions";
 import breakpoints from "../breakpoints";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MobileSearch from "../components/MobileSearch/MobileSearch";
 import FilterModal from "../components/FilterModal/FilterModal";
 import SortByFilterRowContainer from "../components/SortByFilterRow/SortByFilterRow";
-import FetchData from "../services/ApiData";
 import { useDispatch, useSelector } from "react-redux";
 import { filterActions } from "../store/filter";
+import { getSources } from "../services/ApiData";
+import makeGetRequest from "../services/ApiData";
+
+// const sources = getSources();
 
 const HomePage: React.FC = () => {
+  var sources;
   const dispatch = useDispatch();
+
   const filterData = [
     {
-      Source: [
-        { id: "Walla", value: "Walla" },
-        { id: "Mako", value: "Mako" },
-        { id: "BBC", value: "BBC" },
-      ],
+      // Source: [
+      //   { id: "Walla", value: "Walla" },
+      //   { id: "Mako", value: "Mako" },
+      //   { id: "BBC", value: "BBC" },
+      // ],
+      Sources: sources,
     },
     {
       Country: [
@@ -75,6 +81,20 @@ const HomePage: React.FC = () => {
   const [isEverything, setIsEverything] = useState(true);
   const [isMobileTabletFilter, setIsMobileTabletFilter] = useState(false);
   const searchsList = ["Bitcoin", "Stockes", "Weather"];
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    getData();
+    if (data) {
+      sources = getSources();
+    }
+  }, []);
+
+  const getData = async () => {
+    let res = await makeGetRequest();
+    setData(res.data);
+  };
+
   const onMobileSearch = () => {
     setIsMobileSearch(true);
   };
@@ -138,7 +158,11 @@ const HomePage: React.FC = () => {
           )}
           <FeedDataMainContainer>
             <FeedDataContainer>
-              <FeedCardList isMobile={width < breakpoints.size.xs} />
+              <FeedCardList
+                isMobile={width < breakpoints.size.xs}
+                getData={getData}
+                data={data}
+              />
 
               <DataCardList />
             </FeedDataContainer>

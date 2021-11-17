@@ -2,7 +2,6 @@ import FeedCard from "../FeedCard/FeedCard";
 import { FeedCardListContainer, FeedCardListScroll } from "./styles";
 import feedCardData from "../../services/feedDate";
 import makeGetRequest from "../../services/ApiData";
-// import FetchData from "../../services/ApiData";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -16,8 +15,12 @@ export interface feedDataObj {
   content: string;
 }
 
-const FeedCardList: React.FC<{ isMobile: boolean }> = (props) => {
-  const [data, setData] = useState<any>();
+const FeedCardList: React.FC<{
+  isMobile: boolean;
+  getData: () => void;
+  data: any;
+}> = (props) => {
+  // const [data, setData] = useState<any>();
   const filters = useSelector<{
     filter: {
       Source: string;
@@ -27,19 +30,19 @@ const FeedCardList: React.FC<{ isMobile: boolean }> = (props) => {
   }>((state) => state.filter);
 
   useEffect(() => {
-    if (filters) getData();
+    if (filters) props.getData();
   }, [filters]);
 
-  const getData = async () => {
-    let res = await makeGetRequest(filters);
-    setData(res.data);
-  };
+  // const getData = async () => {
+  //   let res = await makeGetRequest(filters);
+  //   setData(res.data);
+  // };
 
   return (
     <FeedCardListScroll>
       <FeedCardListContainer>
-        {data
-          ? data.articles.map((val: feedDataObj, idx: number) => (
+        {props.data
+          ? props.data.articles.map((val: feedDataObj, idx: number) => (
               // {feedCardData.map((val: feedDataObj, idx: number) => (
               <>
                 <FeedCard
