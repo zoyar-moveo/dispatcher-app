@@ -5,7 +5,7 @@ import DatesChart from "./charts/datesChart/DatesChart";
 import TagsChart from "./charts/tagsChart/TagsChart";
 
 export enum DataTypeList {
-  sourcesChart = "sources",
+  sourcesChart = "Sources",
   datesChart = "Dates",
   tagsChart = "Tags",
 }
@@ -22,7 +22,7 @@ export interface DataCardProps {
 const FeedCard: React.FC<DataCardProps> = (props) => {
   return (
     <CardContainer>
-      <InnerContainer>
+      <InnerContainer DataType={props.DataType}>
         <CardHeader>{props.DataType}</CardHeader>
         <Underline />
         {props.DataType === DataTypeList.sourcesChart && (

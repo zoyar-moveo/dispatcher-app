@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DataTypeList } from "./DataCard";
 
 export const CardHeader = styled.div`
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -16,7 +17,9 @@ export const Underline = styled.div`
   border-radius: 5px;
 `;
 
-export const InnerContainer = styled.div`
+export const InnerContainer = styled.div<{ DataType: any }>`
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
   width: 100%;
 `;

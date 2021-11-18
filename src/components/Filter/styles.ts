@@ -5,7 +5,7 @@ export const FilterContainer = styled.div<{ filterSort: string }>`
     props.filterSort === "secondary"
       ? "175px"
       : props.filterSort === "inner"
-      ? "fit-content"
+      ? "max(fit-content,125px)"
       : "423px"};
   background: #ffffff;
   border-radius: 10px;
@@ -53,4 +53,5 @@ export const CurrFilter = styled.div<{}>`
   flex-direction: row;
   justify-content: space-between;
   cursor: pointer;
+  width: 130;
 `;

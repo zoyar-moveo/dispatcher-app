@@ -10,8 +10,10 @@ import {
 } from "./styles";
 import Logo from "./assets/LOGO.svg";
 import Button, { btnTypeList } from "../../components/Button/Button";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const WelcomePage: React.FC = () => {
+  const { loginWithRedirect } = useAuth0();
   return (
     <WelcomeContainer>
       <LogoArea>
@@ -30,7 +32,7 @@ const WelcomePage: React.FC = () => {
             text="continue"
             isArrow={true}
             btnType={btnTypeList.welcomeBtn}
-            onClickFunc={() => {}}
+            onClickFunc={() => loginWithRedirect()}
           />
         </TextBtnContsiner>
       </ContentArea>
