@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-const initialFiltersState = {
+interface TFilters {
+  filter: {
+    Source: string;
+    Country: string;
+    Category: string;
+  };
+}
+const initialFiltersState: TFilters = {
   filter: {
     Source: "",
     Country: "",
