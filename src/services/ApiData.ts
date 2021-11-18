@@ -2,6 +2,14 @@ import axios from "axios";
 const _ = require("lodash");
 const API_KEY = process.env.REACT_APP_API_KEY;
 
+const API_DEFAULT_PARAMS = {
+  apikey: API_KEY,
+  country: "us",
+};
+const axios1 = axios.create({
+  baseURL: "https://newsapi.org/v2",
+});
+
 export async function getSources() {
   const sourcesObj = await axios.get(
     `https://newsapi.org/v2/top-headlines/sources?apiKey=${API_KEY}`
@@ -11,14 +19,6 @@ export async function getSources() {
   });
   return sourcesNames;
 }
-
-const API_DEFAULT_PARAMS = {
-  apikey: API_KEY,
-  country: "us",
-};
-const axios1 = axios.create({
-  baseURL: "https://newsapi.org/v2",
-});
 
 async function makeGetRequest(filters: {
   filter: {
