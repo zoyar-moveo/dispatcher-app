@@ -21,23 +21,22 @@ import FilterModal from "../components/FilterModal/FilterModal";
 import SortByFilterRowContainer from "../components/SortByFilterRow/SortByFilterRow";
 import { useDispatch, useSelector } from "react-redux";
 import { filterActions } from "../store/filter";
+import { sourcesActions } from "../store/sources";
 import { getSources } from "../services/ApiData";
 import makeGetRequest from "../services/ApiData";
-
-// const sources = getSources();
+import { dataActions } from "../store/data";
 
 const HomePage: React.FC = () => {
-  var sources;
   const dispatch = useDispatch();
-
+  const { height, width } = useWindowDimensions();
+  const [isMobileSearch, setIsMobileSearch] = useState(false);
+  const [isEverything, setIsEverything] = useState(true);
+  const [isMobileTabletFilter, setIsMobileTabletFilter] = useState(false);
+  const searchsList = ["Bitcoin", "Stockes", "Weather"];
+  const [sources, setSources] = useState([{ id: "walla", value: "walla" }]);
   const filterData = [
     {
-      // Source: [
-      //   { id: "Walla", value: "Walla" },
-      //   { id: "Mako", value: "Mako" },
-      //   { id: "BBC", value: "BBC" },
-      // ],
-      Sources: sources,
+      Source: sources,
     },
     {
       Country: [
@@ -76,23 +75,23 @@ const HomePage: React.FC = () => {
     }
   };
 
-  const { height, width } = useWindowDimensions();
-  const [isMobileSearch, setIsMobileSearch] = useState(false);
-  const [isEverything, setIsEverything] = useState(true);
-  const [isMobileTabletFilter, setIsMobileTabletFilter] = useState(false);
-  const searchsList = ["Bitcoin", "Stockes", "Weather"];
-  const [data, setData] = useState();
-
   useEffect(() => {
+    getSources().then((res) => {
+      dispatch(sourcesActions.updateSources(res));
+      setSources(res);
+    });
     getData();
-    if (data) {
-      sources = getSources();
-    }
   }, []);
 
   const getData = async () => {
-    let res = await makeGetRequest();
-    setData(res.data);
+    let res = await makeGetRequest({
+      filter: {
+        Source: "",
+        Country: "",
+        Category: "general",
+      },
+    });
+    dispatch(dataActions.updateData(res.data.articles));
   };
 
   const onMobileSearch = () => {
@@ -161,7 +160,6 @@ const HomePage: React.FC = () => {
               <FeedCardList
                 isMobile={width < breakpoints.size.xs}
                 getData={getData}
-                data={data}
               />
 
               <DataCardList />

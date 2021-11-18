@@ -1,6 +1,5 @@
 import { FilterListContainer } from "./styles";
 import Filter from "../Filter/Filter";
-import { useDispatch } from "react-redux";
 
 export interface FilterListProps {
   filterData: any;

@@ -70,7 +70,7 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
               filterType="Everything"
               filtersList={[
                 { id: "Everything", value: "Everything" },
-                { id: "Top Headlines", value: "Top Headlines" },
+                { id: "Top-headlines", value: "Top Headlines" },
               ]}
               parentUpdate={parentUpdate}
             ></Filter>
