@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
-export const SearchFilterContainer = styled.div`
-  padding: 0 15px;
+export const SearchFilterContainer = styled.div<{ isDropDownOpen: boolean }>`
+  /* padding: 0 15px; */
+  width: ${(props) =>
+    props.isDropDownOpen ? "667px" : "fit-content"}; // not working
 
   @media (max-width: 480px) {
     display: none;
@@ -51,6 +53,12 @@ export const ExitImg = styled.img`
   &:hover {
     cursor: pointer;
     height: 1rem;
+  }
+`;
+
+export const ClearBtn = styled.span`
+  &:hover {
+    cursor: pointer;
   }
 `;
 

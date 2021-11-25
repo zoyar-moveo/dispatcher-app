@@ -25,6 +25,11 @@ import { sourcesActions } from "../store/sources";
 import { getSources } from "../services/ApiData";
 import makeGetRequest from "../services/ApiData";
 import { dataActions } from "../store/data";
+import { localStorageService } from "../services/localStorage";
+import { endPointActions } from "../store/endPoint";
+import { makeGetRequestEvery } from "../services/ApiData";
+import { filterEverythingActions } from "../store/filterEverything";
+const KEY = "resentSearches";
 
 const HomePage: React.FC = () => {
   const dispatch = useDispatch();
@@ -32,11 +37,15 @@ const HomePage: React.FC = () => {
   const [isMobileSearch, setIsMobileSearch] = useState(false);
   const [isEverything, setIsEverything] = useState(true);
   const [isMobileTabletFilter, setIsMobileTabletFilter] = useState(false);
-  const searchsList = ["Bitcoin", "Stockes", "Weather"];
-  const [sources, setSources] = useState([{ id: "walla", value: "walla" }]);
-  const filterData = [
+  const [searchsList, setSearchsList] = useState<string[]>([]);
+  const [searchItem, setSearchItem] = useState<string>("");
+  const [sources, setSources] = useState();
+  // const [sources, setSources] = useState<{}>([{ id: "walla", value: "walla" }]);
+  const endPoint: any = useSelector<any>((state) => state.endPoint.endPoint);
+
+  const filterTopData = [
     {
-      Source: sources,
+      Sources: sources,
     },
     {
       Country: [
@@ -60,10 +69,43 @@ const HomePage: React.FC = () => {
       ],
     },
   ];
-  const parentUpdate = (filterType: string, filter: string) => {
+
+  const filterEveryData = [
+    {
+      Sources: sources,
+    },
+    {
+      Language: [
+        { id: "he", value: "hebrew" },
+        { id: "en", value: "English" },
+        { id: "ru", value: "Russian" },
+        { id: "es", value: "Spanish" },
+      ],
+    },
+    {
+      Dates: ["2021-11-21", "2021-10-21"],
+    },
+  ];
+
+  useEffect(() => {}, [endPoint, searchsList]);
+
+  const getFilterData = () => {
+    if (endPoint === "top-headlines") {
+      return filterTopData;
+    } else {
+      return filterEveryData;
+    }
+  };
+
+  const parentFilterUpdate = (
+    filterType: string,
+    filter: string | string[]
+  ) => {
     switch (filterType) {
-      case "Source":
-        dispatch(filterActions.updateSource(filter));
+      case "Sources":
+        if (endPoint === "top-headlines")
+          dispatch(filterActions.updateSource(filter));
+        else dispatch(filterEverythingActions.updateSource(filter));
         return;
       case "Country":
         dispatch(filterActions.updateCountry(filter));
@@ -71,28 +113,65 @@ const HomePage: React.FC = () => {
       case "Category":
         dispatch(filterActions.updateCategory(filter));
         return;
+      case "Language":
+        dispatch(filterEverythingActions.updateLanguage(filter));
+        return;
+      case "Dates":
+        dispatch(filterEverythingActions.updateDates(filter));
+        return;
+      case "Top Headlines":
+        dispatch(endPointActions.updateEndPoint(filter));
+        return;
       default:
         return;
     }
   };
 
   useEffect(() => {
-    getSources().then((res) => {
-      dispatch(sourcesActions.updateSources(res));
-      setSources(res);
-    });
+    if (!sources) {
+      getSources().then((res) => {
+        dispatch(sourcesActions.updateSources(res));
+        setSources(res);
+      });
+    }
     getData();
-  }, []);
+  }, [endPoint]);
+
+  useEffect(() => {
+    let itemsList = localStorageService.loadFromStorage(KEY);
+    setSearchsList(itemsList);
+  }, [searchItem]);
 
   const getData = async () => {
-    let res = await makeGetRequest({
-      filter: {
-        Source: "",
-        Country: "",
-        Category: "general",
-      },
-    });
-    dispatch(dataActions.updateData(res.data.articles));
+    let res;
+    if (endPoint === "top-headlines") {
+      res = await makeGetRequest(
+        {
+          filter: {
+            Country: "il",
+            Category: "",
+            Sources: "",
+          },
+          searchQ: "",
+        },
+        endPoint
+      );
+    } else {
+      res = await makeGetRequestEvery({
+        filter: {
+          Dates: [],
+          Language: "",
+          Sources: "",
+        },
+        searchQ: "",
+      });
+    }
+    if (res) dispatch(dataActions.updateData(res.data.articles));
+  };
+
+  const updateSearchInput = (item: string) => {
+    setSearchItem(item);
+    dispatch(filterActions.updateSearchQ(item));
   };
 
   const onMobileSearch = () => {
@@ -115,7 +194,18 @@ const HomePage: React.FC = () => {
     setIsMobileTabletFilter(false);
   };
 
-  const removeItem = () => {};
+  const removeItem = (searchItem: string) => {
+    localStorageService.removeItem(KEY, searchItem);
+    setSearchItem(searchItem);
+  };
+
+  const onClearStorage = () => {
+    localStorageService.clearStorage(KEY);
+    setSearchsList([]);
+    // setSearchItem("");
+
+    // setIsDropDownOpen(false);
+  };
 
   return (
     <>
@@ -133,9 +223,13 @@ const HomePage: React.FC = () => {
             search={SearchIcon}
             userName="Zoya Rumin"
             width={width}
-            SearchsList={["Bitcoin", "Stockes", "Weather"]}
+            SearchsList={searchsList}
+            endPoint={endPoint}
             onMobileSearch={onMobileSearch}
             removeItem={removeItem}
+            updateSearchInput={updateSearchInput}
+            parentFilterUpdate={parentFilterUpdate}
+            onClearStorage={onClearStorage}
           />
           {width < breakpoints.size.sm ? (
             <>
@@ -152,7 +246,10 @@ const HomePage: React.FC = () => {
             </>
           ) : (
             <>
-              <FilterList filterData={filterData} parentUpdate={parentUpdate} />
+              <FilterList
+                filterData={getFilterData()}
+                parentFilterUpdate={parentFilterUpdate}
+              />
               <SeparetorLine />
             </>
           )}
@@ -162,7 +259,6 @@ const HomePage: React.FC = () => {
                 isMobile={width < breakpoints.size.xs}
                 getData={getData}
               />
-
               <DataCardList />
             </FeedDataContainer>
           </FeedDataMainContainer>

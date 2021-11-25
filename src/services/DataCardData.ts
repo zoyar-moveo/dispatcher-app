@@ -14,8 +14,18 @@ const sourceArgs = {
     ],
   },
   options: {
-    // cutout: 90,
-    plugins: { legend: { position: "bottom" } },
+    cutout: "80%",
+    plugins: {
+      legend: {
+        position: "bottom",
+        labels: {
+          usePointStyle: true,
+          font: {
+            size: 10,
+          },
+        },
+      },
+    },
   },
 };
 
@@ -26,6 +36,21 @@ const tagArgs = {
     plugins: {
       legend: {
         display: false,
+      },
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+        ticks: {
+          display: false,
+        },
+      },
+      y: {
+        grid: {
+          display: false,
+        },
       },
     },
   },
@@ -57,6 +82,31 @@ const datesArgs = {
     ],
   },
   options: {
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+      },
+      y: {
+        ticks: {
+          display: false,
+        },
+        grid: {
+          display: false,
+        },
+      },
+    },
+    elements: {
+      point: {
+        radius: 0,
+      },
+      line: {
+        backgroundColor: "#e6f2fb",
+        borderColor: "blue",
+        borderWidth: "10px",
+      },
+    },
     plugins: {
       legend: {
         display: false,

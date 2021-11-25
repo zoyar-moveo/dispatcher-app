@@ -41,7 +41,7 @@ export const ButtonContainer = styled.button<{
   & img {
     margin-left: 0.5rem;
   }
-  ß &:hover {
+  &:hover {
     background-color: ${(props) => {
       if (props.btnType === btnTypeList.textBtn)
         return "rgba(217, 219, 233, 0.3)";
