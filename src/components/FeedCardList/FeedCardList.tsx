@@ -5,7 +5,7 @@ import makeGetRequest, { makeGetRequestEvery } from "../../services/ApiData";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { dataActions } from "../../store/data";
-import { ConsoleView } from "react-device-detect";
+import { endPointTypes } from "../../utiles/endPoint.types";
 
 export interface feedDataObj {
   author: string;
@@ -54,7 +54,8 @@ const FeedCardList: React.FC<{
 
   const getData = async () => {
     let res;
-    if (endPoint === "top-headlines") {
+    if (endPoint === endPointTypes.TOP_HEADLINES) {
+      // if (endPoint === "top-headlines") {
       try {
         res = await makeGetRequest(filters, endPoint);
       } catch (err) {
@@ -63,6 +64,7 @@ const FeedCardList: React.FC<{
     } else {
       try {
         res = await makeGetRequestEvery(filterEverything);
+        console.log(res);
       } catch (err) {
         console.log(err);
       }

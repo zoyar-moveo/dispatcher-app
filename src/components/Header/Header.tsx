@@ -60,7 +60,6 @@ const Header: React.FC<HeaderProps> = (props) => {
 
   const searchProps = {
     filterType: "top-headlines",
-    // filterType: props.endPoint,
     FilterList: ["Top Headlines", "Everything"],
     searchIcon: SearchIcon,
     forwardIcon: ForwardIcon,
@@ -80,7 +79,6 @@ const Header: React.FC<HeaderProps> = (props) => {
             isLargeScreen={props.width > breakpoints.size.sm}
             removeItem={props.removeItem}
             updateSearchInput={props.updateSearchInput}
-            // parentFilterUpdate={endPointUpdate}
             parentFilterUpdate={props.parentFilterUpdate}
             endPoint={props.endPoint}
             onClearStorage={props.onClearStorage}

@@ -29,6 +29,7 @@ import { localStorageService } from "../services/localStorage";
 import { endPointActions } from "../store/endPoint";
 import { makeGetRequestEvery } from "../services/ApiData";
 import { filterEverythingActions } from "../store/filterEverything";
+import { endPointTypes } from "../utiles/endPoint.types";
 const KEY = "resentSearches";
 
 const HomePage: React.FC = () => {
@@ -40,7 +41,6 @@ const HomePage: React.FC = () => {
   const [searchsList, setSearchsList] = useState<string[]>([]);
   const [searchItem, setSearchItem] = useState<string>("");
   const [sources, setSources] = useState();
-  // const [sources, setSources] = useState<{}>([{ id: "walla", value: "walla" }]);
   const endPoint: any = useSelector<any>((state) => state.endPoint.endPoint);
 
   const filterTopData = [
@@ -90,7 +90,8 @@ const HomePage: React.FC = () => {
   useEffect(() => {}, [endPoint, searchsList]);
 
   const getFilterData = () => {
-    if (endPoint === "top-headlines") {
+    if (endPoint === endPointTypes.TOP_HEADLINES) {
+      // if (endPoint === "top-headlines") {
       return filterTopData;
     } else {
       return filterEveryData;
@@ -172,6 +173,7 @@ const HomePage: React.FC = () => {
   const updateSearchInput = (item: string) => {
     setSearchItem(item);
     dispatch(filterActions.updateSearchQ(item));
+    dispatch(filterEverythingActions.updateSearchQ(item));
   };
 
   const onMobileSearch = () => {

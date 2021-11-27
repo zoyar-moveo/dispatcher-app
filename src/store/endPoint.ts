@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { endPointTypes } from "../utiles/endPoint.types";
 
 const initialSourcessState: { endPoint: string } = {
-  // endPoint: "Everything",
-  endPoint: "top-headlines",
+  endPoint: endPointTypes.TOP_HEADLINES,
 };
 
 const endPointSlice = createSlice({

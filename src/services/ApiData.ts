@@ -58,7 +58,7 @@ export async function makeGetRequestEvery(filtersEvery: {
   for (let [key, value] of Object.entries(filtersObj!)) {
     if (value !== "" && key !== "Dates")
       filterObj = { ...filterObj, [key.toLowerCase()]: value };
-    if (key === "Dates" && value !== []) {
+    if (key === "Dates" && value.length !== 0) {
       filterObj = { ...filterObj, from: value[0], to: value[1] };
     }
   }

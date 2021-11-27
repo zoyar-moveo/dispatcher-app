@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
   ClearBtn,
   ExitImg,
@@ -12,7 +11,9 @@ import Filter from "../Filter/Filter";
 import ExitIcon from "./assets/exit.svg";
 import { DropDownItem, Img, SearchContainer, FlexSpaceBetween } from "./styles";
 import { localStorageService } from "../../services/localStorage";
-// import { endPointActions } from "../../store/endPoint";
+import { endPointTypes } from "../../utiles/endPoint.types";
+import endPoint from "../../store/endPoint";
+
 const KEY = "resentSearches";
 
 export interface SearchFilterProps {
@@ -86,10 +87,6 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
     setIsDropDownOpen(true);
     // setIsFocus(true)
   };
-  // const onClearStorage = () => {
-  //   localStorageService.clearStorage(KEY);
-  //   setIsDropDownOpen(false);
-  // };
 
   return (
     <SearchFilterContainer ref={ref} isDropDownOpen={isDropDownOpen}>
@@ -116,8 +113,10 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
               filterSort="inner"
               filterType="Top Headlines"
               filtersList={[
-                { id: "everything", value: "Everything" },
-                { id: "top-headlines", value: "Top Headlines" },
+                { id: endPointTypes.EVERYTHING, value: "Everything" },
+                { id: endPointTypes.TOP_HEADLINES, value: "Top Headlines" },
+                // { id: "everything", value: "Everything" },
+                // { id: "top-headlines", value: "Top Headlines" },
               ]}
               parentFilterUpdate={props.parentFilterUpdate}
             ></Filter>
