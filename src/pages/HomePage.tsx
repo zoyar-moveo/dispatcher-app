@@ -25,9 +25,14 @@ import { sourcesActions } from "../store/sources";
 import { getSources } from "../services/ApiData";
 import makeGetRequest from "../services/ApiData";
 import { dataActions } from "../store/data";
+import getSourcesMap from "../utiles/getSourcesMap";
 
 const HomePage: React.FC = () => {
   const dispatch = useDispatch();
+  const [sourcesMap, setSourcesMap] = useState<{
+    labels: string[];
+    dataSetData: number[];
+  }>({ labels: [], dataSetData: [] }); /// counter for sources
   const { height, width } = useWindowDimensions();
   const [isMobileSearch, setIsMobileSearch] = useState(false);
   const [isEverything, setIsEverything] = useState(true);
@@ -93,6 +98,9 @@ const HomePage: React.FC = () => {
       },
     });
     dispatch(dataActions.updateData(res.data.articles));
+    /// adding sources counter
+    let sources = getSourcesMap(res.data.articles);
+    setSourcesMap(sources);
   };
 
   const onMobileSearch = () => {
@@ -163,7 +171,9 @@ const HomePage: React.FC = () => {
                 getData={getData}
               />
 
-              <DataCardList />
+              {width > breakpoints.size.sm && (
+                <DataCardList sourcesMap={sourcesMap} />
+              )}
             </FeedDataContainer>
           </FeedDataMainContainer>
         </HomePageContainer>

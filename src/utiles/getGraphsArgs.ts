@@ -20,7 +20,7 @@ const sourceArgs = {
     ],
   },
   options: {
-    cutout: "85%",
+    cutout: "80%",
     plugins: { legend: { display: false } },
   },
 };
@@ -71,4 +71,34 @@ const datesArgs = {
   },
 };
 
-export { datesArgs, tagArgs, sourceArgs };
+const getSourcesDataArgs = (sourcesMap: {
+  labels: string[];
+  dataSetData: number[];
+}): any => {
+  return {
+    data: {
+      maintainAspectRatio: true,
+      responsive: true,
+      labels: sourcesMap.labels,
+      datasets: [
+        {
+          data: sourcesMap.dataSetData,
+          backgroundColor: [
+            "#FF9800",
+            "#030035",
+            "#E8E8E8",
+            "#343A6E",
+            "#DDF3FE",
+            "#f5dbb3",
+            "#f8f8ff",
+            "#5a5962",
+            "#5773b8",
+            "##dccfc5",
+          ],
+        },
+      ],
+    },
+  };
+};
+
+export { datesArgs, tagArgs, sourceArgs, getSourcesDataArgs };

@@ -17,6 +17,8 @@ export interface DataCardProps {
     | DataTypeList.tagsChart;
   data: any;
   options: any;
+  // dataSetData: number[];
+  // labels: string[];
 }
 
 const FeedCard: React.FC<DataCardProps> = (props) => {
