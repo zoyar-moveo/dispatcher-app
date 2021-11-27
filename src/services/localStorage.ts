@@ -1,5 +1,5 @@
 function loadFromStorage(key: string) {
-  return localStorage.getItem(key);
+  return JSON.parse(localStorage.getItem(key) as string);
 }
 
 function saveToStorage(key: string, val: string) {
@@ -11,7 +11,21 @@ function saveToStorage(key: string, val: string) {
   localStorage.setItem(key, JSON.stringify(searches));
 }
 
+function clearStorage(key: string) {
+  localStorage.removeItem(key);
+}
+
+function removeItem(key: string, itemToRemove: string) {
+  let oldItemList = loadFromStorage(key);
+  const updatedItemList = oldItemList.filter(
+    (item: string) => item !== itemToRemove
+  );
+  localStorage.setItem(key, JSON.stringify(updatedItemList));
+}
+
 export const localStorageService = {
   loadFromStorage,
   saveToStorage,
+  clearStorage,
+  removeItem,
 };

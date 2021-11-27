@@ -11,7 +11,6 @@ import SearchIcon from "../SearchFilter/assets/search.svg";
 import ForwardIcon from "../SearchFilter/assets/Forward.svg";
 import breakpoints from "../../breakpoints";
 import { useAuth0 } from "@auth0/auth0-react";
-
 import { useState } from "react";
 
 export enum IconType {
@@ -31,8 +30,12 @@ export interface HeaderProps {
   userName: string;
   width: number;
   SearchsList: string[];
+  endPoint: string;
   onMobileSearch: () => void;
-  removeItem: () => void;
+  removeItem: (searchItem: string) => void;
+  updateSearchInput: (item: string) => void;
+  parentFilterUpdate: (filterType: string, filter: string | string[]) => void;
+  onClearStorage: () => void;
 }
 
 const Header: React.FC<HeaderProps> = (props) => {
@@ -56,7 +59,7 @@ const Header: React.FC<HeaderProps> = (props) => {
   };
 
   const searchProps = {
-    filterType: "Everything",
+    filterType: "top-headlines",
     FilterList: ["Top Headlines", "Everything"],
     searchIcon: SearchIcon,
     forwardIcon: ForwardIcon,
@@ -75,6 +78,10 @@ const Header: React.FC<HeaderProps> = (props) => {
             forwardIcon={searchProps.forwardIcon}
             isLargeScreen={props.width > breakpoints.size.sm}
             removeItem={props.removeItem}
+            updateSearchInput={props.updateSearchInput}
+            parentFilterUpdate={props.parentFilterUpdate}
+            endPoint={props.endPoint}
+            onClearStorage={props.onClearStorage}
           />
         </InnerSearchContainer>
         <RightSideContainer>

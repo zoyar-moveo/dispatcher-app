@@ -33,5 +33,5 @@ FilterEXP.args = {
       ],
     },
   ],
-  parentUpdate: (filter: string) => console.log(filter),
+  parentFilterUpdate: (filter: string) => console.log(filter),
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FilterContainer,
   DropDownList,
@@ -8,23 +8,29 @@ import {
 } from "./styles";
 import Arrow from "./assets/Forward.svg";
 import React from "react";
+import DatePickerComp from "../dapePickerCmp/datePickerCmp";
+import moment from "moment";
 
 export interface FilterProps {
   filterSort: string;
   filterType: string;
   filtersList: any;
-  parentUpdate: (filterType: string, filter: string) => void;
+  parentFilterUpdate: (filterType: string, filter: string | string[]) => void;
 }
 
 const Filter: React.FC<FilterProps> = ({
   filterSort,
   filterType,
   filtersList,
-  parentUpdate,
+  parentFilterUpdate,
 }) => {
   const [IsDropDownOpen, SetIsDropDownOpen] = useState(false);
 
   const [currFilter, setCurrFilter] = useState(filterType);
+
+  useEffect(() => {
+    setCurrFilter(filterType);
+  }, [filterType]);
 
   const updateFilter = (
     filterType: string,
@@ -33,8 +39,16 @@ const Filter: React.FC<FilterProps> = ({
   ) => {
     setCurrFilter(currFilterValue);
     SetIsDropDownOpen(false);
-    parentUpdate(filterType, currFilterId);
+    parentFilterUpdate(filterType, currFilterId);
     return;
+  };
+
+  const updateDateFilter = (start: string, end: string) => {
+    let startDate = moment(Date.parse(start)).format("YYYY-MM-DD");
+    let endDate = moment(Date.parse(end)).format("YYYY-MM-DD");
+    parentFilterUpdate("Dates", [startDate, endDate]);
+    if (end) SetIsDropDownOpen(false);
+    setCurrFilter(`${startDate} - ${endDate}`);
   };
 
   return (
@@ -45,7 +59,7 @@ const Filter: React.FC<FilterProps> = ({
           <img alt="" src={Arrow} />
         </CurrFilter>
       </FilterContainer>
-      {IsDropDownOpen && (
+      {IsDropDownOpen && filterType !== "Dates" && (
         <FilterContainer filterSort={filterSort}>
           <DropDownList>
             {filtersList.map((filterItem: { id: string; value: string }) => (
@@ -60,6 +74,9 @@ const Filter: React.FC<FilterProps> = ({
             ))}
           </DropDownList>
         </FilterContainer>
+      )}
+      {IsDropDownOpen && filterType === "Dates" && (
+        <DatePickerComp updateDateFilter={updateDateFilter} />
       )}
     </MainFilterContainer>
   );

@@ -2,32 +2,32 @@ import { createSlice } from "@reduxjs/toolkit";
 interface TFilters {
   filter: {
     Sources: string;
-    Country: string;
-    Category: string;
+    Language: string;
+    Dates: string[];
   };
   searchQ: string;
 }
 const initialFiltersState: TFilters = {
   filter: {
     Sources: "",
-    Country: "",
-    Category: "",
+    Language: "",
+    Dates: [],
   },
   searchQ: "",
 };
 
-const filterSlice = createSlice({
-  name: "filter",
+const filterEverythingSlice = createSlice({
+  name: "filterEverything",
   initialState: initialFiltersState,
   reducers: {
     updateSource(state, action) {
       state.filter.Sources = action.payload;
     },
-    updateCountry(state, action) {
-      state.filter.Country = action.payload;
+    updateLanguage(state, action) {
+      state.filter.Language = action.payload;
     },
-    updateCategory(state, action) {
-      state.filter.Category = action.payload;
+    updateDates(state, action) {
+      state.filter.Dates = action.payload;
     },
     updateSearchQ(state, action) {
       state.searchQ = action.payload;
@@ -35,6 +35,6 @@ const filterSlice = createSlice({
   },
 });
 
-export const filterActions = filterSlice.actions;
+export const filterEverythingActions = filterEverythingSlice.actions;
 
-export default filterSlice.reducer;
+export default filterEverythingSlice.reducer;

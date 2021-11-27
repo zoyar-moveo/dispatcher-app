@@ -1,9 +1,10 @@
 import { FilterListContainer } from "./styles";
 import Filter from "../Filter/Filter";
+import _ from "lodash";
 
 export interface FilterListProps {
   filterData: any;
-  parentUpdate: (
+  parentFilterUpdate: (
     filterType: string,
     filter: any
     // filter: { Sources: string; Country: string; Category: string }
@@ -11,6 +12,7 @@ export interface FilterListProps {
 }
 
 const FilterList: React.FC<FilterListProps> = (props) => {
+  if (_.isEmpty(props.filterData)) return <div>loading..</div>;
   return (
     <FilterListContainer>
       {props.filterData.map((dataType: string, index: number) => {
@@ -19,7 +21,7 @@ const FilterList: React.FC<FilterListProps> = (props) => {
             filterSort="secondary"
             filterType={Object.keys(dataType).toString()}
             filtersList={Object.values(dataType)[0]}
-            parentUpdate={props.parentUpdate}
+            parentFilterUpdate={props.parentFilterUpdate}
             key={index}
           ></Filter>
         );
