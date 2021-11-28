@@ -21,17 +21,7 @@ const sourceArgs = {
   },
   options: {
     cutout: "80%",
-    plugins: {
-      legend: {
-        position: "bottom",
-        labels: {
-          usePointStyle: true,
-          font: {
-            size: 10,
-          },
-        },
-      },
-    },
+    plugins: { legend: { display: false } },
   },
 };
 
@@ -42,21 +32,6 @@ const tagArgs = {
     plugins: {
       legend: {
         display: false,
-      },
-    },
-    scales: {
-      x: {
-        grid: {
-          display: false,
-        },
-        ticks: {
-          display: false,
-        },
-      },
-      y: {
-        grid: {
-          display: false,
-        },
       },
     },
   },
@@ -88,31 +63,6 @@ const datesArgs = {
     ],
   },
   options: {
-    scales: {
-      x: {
-        grid: {
-          display: false,
-        },
-      },
-      y: {
-        ticks: {
-          display: false,
-        },
-        grid: {
-          display: false,
-        },
-      },
-    },
-    elements: {
-      point: {
-        radius: 0,
-      },
-      line: {
-        backgroundColor: "#e6f2fb",
-        borderColor: "blue",
-        borderWidth: "10px",
-      },
-    },
     plugins: {
       legend: {
         display: false,
@@ -121,4 +71,34 @@ const datesArgs = {
   },
 };
 
-export { datesArgs, tagArgs, sourceArgs };
+const getSourcesDataArgs = (sourcesMap: {
+  labels: string[];
+  dataSetData: number[];
+}): any => {
+  return {
+    data: {
+      maintainAspectRatio: true,
+      responsive: true,
+      labels: sourcesMap.labels,
+      datasets: [
+        {
+          data: sourcesMap.dataSetData,
+          backgroundColor: [
+            "#FF9800",
+            "#030035",
+            "#E8E8E8",
+            "#343A6E",
+            "#DDF3FE",
+            "#f5dbb3",
+            "#f8f8ff",
+            "#5a5962",
+            "#5773b8",
+            "##dccfc5",
+          ],
+        },
+      ],
+    },
+  };
+};
+
+export { datesArgs, tagArgs, sourceArgs, getSourcesDataArgs };

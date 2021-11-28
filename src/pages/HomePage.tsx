@@ -30,10 +30,15 @@ import { endPointActions } from "../store/endPoint";
 import { makeGetRequestEvery } from "../services/ApiData";
 import { filterEverythingActions } from "../store/filterEverything";
 import { endPointTypes } from "../utiles/endPoint.types";
+import getSourcesMap from "../utiles/getSourcesMap";
 const KEY = "resentSearches";
 
 const HomePage: React.FC = () => {
   const dispatch = useDispatch();
+  const [sourcesMap, setSourcesMap] = useState<{
+    labels: string[];
+    dataSetData: number[];
+  }>({ labels: [], dataSetData: [] }); /// counter for sources
   const { height, width } = useWindowDimensions();
   const [isMobileSearch, setIsMobileSearch] = useState(false);
   const [isEverything, setIsEverything] = useState(true);
@@ -91,7 +96,6 @@ const HomePage: React.FC = () => {
 
   const getFilterData = () => {
     if (endPoint === endPointTypes.TOP_HEADLINES) {
-      // if (endPoint === "top-headlines") {
       return filterTopData;
     } else {
       return filterEveryData;
@@ -168,6 +172,8 @@ const HomePage: React.FC = () => {
       });
     }
     if (res) dispatch(dataActions.updateData(res.data.articles));
+    let sources = getSourcesMap(res.data.articles);
+    setSourcesMap(sources);
   };
 
   const updateSearchInput = (item: string) => {
@@ -261,7 +267,9 @@ const HomePage: React.FC = () => {
                 isMobile={width < breakpoints.size.xs}
                 getData={getData}
               />
-              <DataCardList />
+              {width > breakpoints.size.sm && (
+                <DataCardList sourcesMap={sourcesMap} />
+              )}
             </FeedDataContainer>
           </FeedDataMainContainer>
         </HomePageContainer>
