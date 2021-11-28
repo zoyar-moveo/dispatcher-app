@@ -9,8 +9,8 @@ import {
   FlexRowContainer,
 } from "./styles";
 import Button from "../Button/Button";
-import TagList from "../TagList/TagList";
 import { btnTypeList } from "../Button/Button";
+import DefaultImage from "./assets/DefaultImage.png";
 
 export interface feedDataObj {
   author: string;
@@ -45,18 +45,21 @@ const FeedCard: React.FC<FeedCardProps> = ({ feedCardObj, isMobile }) => {
     return new Date(publishedAt).toLocaleDateString("en-US", dateOptions);
   };
 
+  const redirecToLink = (url: string) => {
+    window.open(url, "_blank");
+  };
+
   return (
     <CardContainer>
-      <Img alt="" src={feedCardObj.urlToImage} />
+      <Img
+        alt=""
+        src={feedCardObj.urlToImage ? feedCardObj.urlToImage : DefaultImage}
+      />
       <ContentContainer>
         <FlexRowContainer>
           <CardSecondaryTitle>
             {formattedDate(feedCardObj.publishedAt)}
           </CardSecondaryTitle>
-          <TagList
-            tags={["Economy", "Israel", "USA", "news"]}
-            isMobile={isMobile}
-          />
         </FlexRowContainer>
         <CardHeader>{feedCardObj.title}</CardHeader>
         <CardSecondaryTitle>{feedCardObj.author}</CardSecondaryTitle>
@@ -64,7 +67,7 @@ const FeedCard: React.FC<FeedCardProps> = ({ feedCardObj, isMobile }) => {
         <FlexButton>
           <Button
             btnType={btnTypeList.primary}
-            onClickFunc={() => {}}
+            onClickFunc={() => redirecToLink(feedCardObj.url)}
             isArrow={true}
             text="Navigate to dispatch"
           ></Button>

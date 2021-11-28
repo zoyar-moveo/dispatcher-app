@@ -62,14 +62,16 @@ const MobileSearch: React.FC<MobileSearchProps> = (props) => {
           <ClearBtn>clear</ClearBtn>
         </SearchSubtitle>
         <ResentList>
-          {props.searchsList.map((searchItem: string, index: number) => {
-            return (
-              <ResentSearchItem key={index}>
-                <SearchKey>{searchItem}</SearchKey>
-                <ExitImg alt="" src={ExitIcon} />
-              </ResentSearchItem>
-            );
-          })}
+          {props.searchsList
+            ? props.searchsList.map((searchItem: string, index: number) => {
+                return (
+                  <ResentSearchItem key={index}>
+                    <SearchKey>{searchItem}</SearchKey>
+                    <ExitImg alt="" src={ExitIcon} />
+                  </ResentSearchItem>
+                );
+              })
+            : null}
         </ResentList>
       </RecentSearchesArea>
     </MobileSearchContainer>

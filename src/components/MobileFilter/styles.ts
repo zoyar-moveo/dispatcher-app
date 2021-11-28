@@ -4,13 +4,21 @@ export const MobileFilterContainer = styled.div<{}>`
   width: 70vw;
   background-color: #ffffff;
   margin: 0;
-  display: inline-block;
   position: fixed;
   height: 100vh;
   z-index: 7;
   right: 0;
   color: rgba(90, 90, 137, 1);
   align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+export const TitleListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `;
 
 export const FilterTitle = styled.div<{}>`
@@ -49,4 +57,9 @@ export const CategoryItem = styled.div`
     background-color: rgba(223, 224, 235, 0.41);
     cursor: pointer;
   }
+`;
+
+export const BtnContiner = styled.div`
+  margin: 10px;
+  background-color: #f8f8ff;
 `;

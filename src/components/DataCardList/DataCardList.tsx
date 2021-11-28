@@ -1,4 +1,4 @@
-import { datesArgs, sourceArgs, tagArgs } from "../../services/DataCardData";
+import { datesArgs, sourceArgs } from "../../services/DataCardData";
 import DataCard from "./../DataCard/DataCard";
 import { DataCardContainer } from "./styles";
 
@@ -14,11 +14,6 @@ const DataCardList: React.FC = () => {
         DataType={datesArgs.DataType}
         data={datesArgs.data}
         options={datesArgs.options}
-      />
-      <DataCard
-        DataType={tagArgs.DataType}
-        data={tagArgs.data}
-        options={tagArgs.options}
       />
     </DataCardContainer>
   );

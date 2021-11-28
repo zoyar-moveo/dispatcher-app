@@ -12,7 +12,6 @@ import ExitIcon from "./assets/exit.svg";
 import { DropDownItem, Img, SearchContainer, FlexSpaceBetween } from "./styles";
 import { localStorageService } from "../../services/localStorage";
 import { endPointTypes } from "../../utiles/endPoint.types";
-import endPoint from "../../store/endPoint";
 
 const KEY = "resentSearches";
 
@@ -32,6 +31,7 @@ export interface SearchFilterProps {
 
 const SearchFllter: React.FC<SearchFilterProps> = (props) => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [searchVal, setSearchVal] = useState("");
   const [isResentSearchSelected, setIsResentSearchSelected] = useState(false);
@@ -49,6 +49,8 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
     ev.preventDefault();
     setSearchInput(searchVal);
     localStorageService.saveToStorage(KEY, searchVal);
+    setIsFocus(false);
+
     // props.updateSearchInput(searchVal); // to check it
     // dispatch(filterActions.updateSearchQ(searchVal));
   };
@@ -56,6 +58,7 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
   const onReasentSearchItem = (searchItem: string) => {
     setIsResentSearchSelected(true);
     setIsDropDownOpen(false);
+    setIsFocus(false);
     setSearchInput(searchItem);
     setSearchVal(searchItem);
   };
@@ -65,6 +68,7 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
   const handleClickOutside = (ev: any) => {
     if (ref.current && !ref.current.contains(ev.target)) {
       setIsDropDownOpen(false);
+      setIsFocus(false);
     }
   };
 
@@ -85,12 +89,12 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
 
   const onFocusInput = () => {
     setIsDropDownOpen(true);
-    // setIsFocus(true)
+    setIsFocus(true);
   };
 
   return (
-    <SearchFilterContainer ref={ref} isDropDownOpen={isDropDownOpen}>
-      <FilterContainer filterSort="primary">
+    <SearchFilterContainer ref={ref} isFocus={true}>
+      <FilterContainer filterSort="primary" isFocus={isFocus}>
         <FlexSpaceBetween>
           <SearchContainer>
             <Img alt="" src={props.searchIcon} />
@@ -101,7 +105,6 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
                 placeholder="search"
                 onChange={onInputVal}
                 onFocus={onFocusInput}
-                // onFocus={() => setIsDropDownOpen(true)}
                 onKeyDown={handleKeyDown}
                 autoComplete="false"
                 ref={refInput}
@@ -125,7 +128,7 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
       </FilterContainer>
 
       {isDropDownOpen && props.SearchsList && (
-        <FilterContainer filterSort="primary">
+        <FilterContainer filterSort="primary" isFocus={true}>
           <SearchSubTitle>
             <span>{"resent searches".toUpperCase()}</span>
             <ClearBtn onClick={props.onClearStorage}>
