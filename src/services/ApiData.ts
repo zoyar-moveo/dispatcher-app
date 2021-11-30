@@ -13,6 +13,7 @@ export async function getSources() {
 }
 const API_DEFAULT_PARAMS = {
   apikey: API_KEY,
+  pageSize: 10,
 };
 
 const axios1 = axios.create({
