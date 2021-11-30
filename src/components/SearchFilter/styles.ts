@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export const SearchFilterContainer = styled.div<{ isDropDownOpen: boolean }>`
+export const SearchFilterContainer = styled.div<{ isFocus: boolean }>`
   /* padding: 0 15px; */
-  width: ${(props) =>
-    props.isDropDownOpen ? "667px" : "fit-content"}; // not working
 
+  /* width: ${(props) => (props.isFocus ? "667px" : "300px")}; // not working */
+  width: 667px;
   @media (max-width: 480px) {
     display: none;
   }

@@ -10,6 +10,7 @@ import {
   FeedDataMainContainer,
   HomePageContainer,
   SeparetorLine,
+  Title,
 } from "./styles";
 import FeedCardList from "../components/FeedCardList/FeedCardList";
 import DataCardList from "../components/DataCardList/DataCardList";
@@ -30,10 +31,15 @@ import { endPointActions } from "../store/endPoint";
 import { makeGetRequestEvery } from "../services/ApiData";
 import { filterEverythingActions } from "../store/filterEverything";
 import { endPointTypes } from "../utiles/endPoint.types";
+import getSourcesMap from "../utiles/getSourcesMap";
 const KEY = "resentSearches";
 
 const HomePage: React.FC = () => {
   const dispatch = useDispatch();
+  const [sourcesMap, setSourcesMap] = useState<{
+    labels: string[];
+    dataSetData: number[];
+  }>({ labels: [], dataSetData: [] }); /// counter for sources
   const { height, width } = useWindowDimensions();
   const [isMobileSearch, setIsMobileSearch] = useState(false);
   const [isEverything, setIsEverything] = useState(true);
@@ -42,6 +48,8 @@ const HomePage: React.FC = () => {
   const [searchItem, setSearchItem] = useState<string>("");
   const [sources, setSources] = useState();
   const endPoint: any = useSelector<any>((state) => state.endPoint.endPoint);
+  const data: any = useSelector<any>((state) => state.data.data);
+  const [title, setTitle] = useState<string>("");
 
   const filterTopData = [
     {
@@ -87,11 +95,8 @@ const HomePage: React.FC = () => {
     },
   ];
 
-  useEffect(() => {}, [endPoint, searchsList]);
-
   const getFilterData = () => {
     if (endPoint === endPointTypes.TOP_HEADLINES) {
-      // if (endPoint === "top-headlines") {
       return filterTopData;
     } else {
       return filterEveryData;
@@ -135,8 +140,8 @@ const HomePage: React.FC = () => {
         setSources(res);
       });
     }
-    getData();
-  }, [endPoint]);
+    if (data) setTitle("Top Headlines in Israel");
+  }, []);
 
   useEffect(() => {
     let itemsList = localStorageService.loadFromStorage(KEY);
@@ -167,7 +172,7 @@ const HomePage: React.FC = () => {
         searchQ: "",
       });
     }
-    if (res) dispatch(dataActions.updateData(res.data.articles));
+    if (res.status === 200) dispatch(dataActions.updateData(res.data.articles));
   };
 
   const updateSearchInput = (item: string) => {
@@ -205,8 +210,6 @@ const HomePage: React.FC = () => {
     localStorageService.clearStorage(KEY);
     setSearchsList([]);
     // setSearchItem("");
-
-    // setIsDropDownOpen(false);
   };
 
   return (
@@ -253,15 +256,13 @@ const HomePage: React.FC = () => {
                 parentFilterUpdate={parentFilterUpdate}
               />
               <SeparetorLine />
+              <Title>{title}</Title>
             </>
           )}
           <FeedDataMainContainer>
             <FeedDataContainer>
-              <FeedCardList
-                isMobile={width < breakpoints.size.xs}
-                getData={getData}
-              />
-              <DataCardList />
+              <FeedCardList isMobile={width < breakpoints.size.xs} />
+              {width > breakpoints.size.sm && <DataCardList />}
             </FeedDataContainer>
           </FeedDataMainContainer>
         </HomePageContainer>

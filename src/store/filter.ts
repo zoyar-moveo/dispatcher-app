@@ -10,7 +10,7 @@ interface TFilters {
 const initialFiltersState: TFilters = {
   filter: {
     Sources: "",
-    Country: "",
+    Country: "il",
     Category: "",
   },
   searchQ: "",

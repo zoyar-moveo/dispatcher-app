@@ -9,7 +9,7 @@ export const TagItem = styled.div`
   background: #f3f3ff;
   border-radius: 10px;
   font-family: "Poppins", sans-serif;
-  font-weight: 500;
+  font-weight: 500px;
   font-size: 0.75rem;
   line-height: 0.875rem;
   height: fit-content;
