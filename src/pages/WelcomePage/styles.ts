@@ -72,7 +72,7 @@ export const LogoImg = styled.img`
 
 export const Title = styled.div`
   color: #5a5a89;
-  font-weight: 300;
+  font-weight: 300px;
   font-size: 2rem;
   margin-bottom: 24px;
   @media (max-width: 768px) {
@@ -81,7 +81,7 @@ export const Title = styled.div`
 `;
 
 export const Subtitle = styled.div`
-  font-weight: 200;
+  font-weight: 200px;
   font-size: 1.5rem;
   color: #b3b3cb;
   margin-bottom: 48px;

@@ -1,11 +1,16 @@
 import styled from "styled-components";
 
-export const FilterContainer = styled.div<{ filterSort: string }>`
+export const FilterContainer = styled.div<{
+  filterSort: string;
+  isFocus?: boolean;
+}>`
   width: ${(props) =>
     props.filterSort === "secondary"
       ? "175px"
       : props.filterSort === "inner"
       ? "max(fit-content,150px)"
+      : props.isFocus === true
+      ? "667px"
       : "423px"};
   background: #ffffff;
   border-radius: 10px;

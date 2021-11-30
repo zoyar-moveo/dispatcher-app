@@ -22,4 +22,26 @@ export const InnerContainer = styled.div<{ DataType: any }>`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
+`;
+
+export const NoChartContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+`;
+
+export const NoDataImg = styled.img`
+  width: 133px;
+  margin-bottom: 16px;
+`;
+
+export const NoDataText = styled.div`
+  color: #5a5a89;
+  margin-bottom: 63px;
+  font-size: 1.125rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 `;

@@ -85,12 +85,6 @@ const Header: React.FC<HeaderProps> = (props) => {
           />
         </InnerSearchContainer>
         <RightSideContainer>
-          <ImgIcon alt="" src={props.settings} icon={IconType.SETTINGS} />
-          <ImgIcon
-            alt=""
-            src={props.notifications}
-            icon={IconType.NOTIFICATIONS}
-          />
           {props.width < breakpoints.size.xs && (
             <ImgIcon
               alt=""
