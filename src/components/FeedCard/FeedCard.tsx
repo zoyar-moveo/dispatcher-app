@@ -20,6 +20,7 @@ export interface feedDataObj {
   urlToImage: string;
   publishedAt: string;
   content: string;
+  source: { id: string; name: string };
 }
 
 export interface FeedCardProps {
@@ -53,7 +54,13 @@ const FeedCard: React.FC<FeedCardProps> = ({ feedCardObj, isMobile }) => {
     <CardContainer>
       <Img
         alt=""
-        src={feedCardObj.urlToImage ? feedCardObj.urlToImage : DefaultImage}
+        src={
+          feedCardObj.urlToImage === "" ||
+          feedCardObj.urlToImage === "null" ||
+          feedCardObj.urlToImage === null
+            ? DefaultImage
+            : feedCardObj.urlToImage
+        }
       />
       <ContentContainer>
         <FlexRowContainer>
@@ -62,7 +69,7 @@ const FeedCard: React.FC<FeedCardProps> = ({ feedCardObj, isMobile }) => {
           </CardSecondaryTitle>
         </FlexRowContainer>
         <CardHeader>{feedCardObj.title}</CardHeader>
-        <CardSecondaryTitle>{feedCardObj.author}</CardSecondaryTitle>
+        <CardSecondaryTitle>{feedCardObj.source.name}</CardSecondaryTitle>
         <CardBody>{feedCardObj.description}</CardBody>
         <FlexButton>
           <Button

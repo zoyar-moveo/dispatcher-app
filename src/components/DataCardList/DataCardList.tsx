@@ -1,28 +1,49 @@
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { datesArgs, sourceArgs } from "../../services/DataCardData";
-import { getSourcesDataArgs } from "../../utiles/getGraphsArgs";
+import {
+  getDatesDataArgs,
+  getSourcesDataArgs,
+} from "../../utiles/getGraphsArgs";
+import getSourcesMap, { getDatesMap } from "../../utiles/getSourcesMap";
 import DataCard from "./../DataCard/DataCard";
 import { DataCardContainer } from "./styles";
 
-const DataCardList: React.FC<{
-  sourcesMap: { labels: string[]; dataSetData: number[] };
-}> = (props) => {
-  console.log("data card list");
-  console.log(props.sourcesMap.labels, props.sourcesMap.dataSetData);
+const DataCardList: React.FC<{}> = (props) => {
+  const data: any = useSelector<any>((state) => state.data.data);
+  const [sourcesMap, setSourcesMap] = useState<any>();
+  const [datesMap, setDatesMap] = useState<any>();
+  const [sourcesDataArgs, setSourcesArgs] = useState(sourceArgs.data);
+  const [datesDataArgs, setDatesDataArgs] = useState(datesArgs.data);
+  const [isData, setIsData] = useState(false);
+
+  useEffect(() => {
+    if (data.length > 0) {
+      setSourcesMap(getSourcesMap(data));
+      setDatesMap(getDatesMap(data));
+      setIsData(true);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (sourcesMap) setSourcesArgs(getSourcesDataArgs(sourcesMap).data);
+  }, [sourcesMap]);
+
+  useEffect(() => {
+    if (datesMap) setDatesDataArgs(getDatesDataArgs(datesMap).data);
+  }, [datesMap]);
+
   return (
-    <DataCardContainer>
+    <DataCardContainer isData={isData}>
       <DataCard
         DataType={sourceArgs.DataType}
-        data={getSourcesDataArgs(props.sourcesMap).data}
+        data={sourcesDataArgs}
         options={sourceArgs.options}
-        // dataSetData={props.sourcesMap.dataSetData}
-        // labels={props.sourcesMap.labels}
       />
       <DataCard
         DataType={datesArgs.DataType}
-        data={datesArgs.data}
+        data={datesDataArgs}
         options={datesArgs.options}
-        // dataSetData={props.sourcesMap.dataSetData}
-        // labels={props.sourcesMap.labels}
       />
     </DataCardContainer>
   );

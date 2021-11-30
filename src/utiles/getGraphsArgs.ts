@@ -1,74 +1,19 @@
 import { DataTypeList } from "../components/DataCard/DataCard";
 
-const sourceArgs = {
-  DataType: DataTypeList.sourcesChart,
-  data: {
-    maintainAspectRatio: true,
-    responsive: true,
-    labels: ["a", "b", "c", "d"],
-    datasets: [
-      {
-        data: [300, 50, 100, 500, 40],
-        backgroundColor: [
-          "#FF9800",
-          "#030035",
-          "#E8E8E8",
-          "#343A6E",
-          "#DDF3FE",
-        ],
-      },
-    ],
-  },
-  options: {
-    cutout: "80%",
-    plugins: { legend: { display: false } },
-  },
-};
-
-const tagArgs = {
-  DataType: DataTypeList.tagsChart,
-  options: {
-    indexAxis: "y",
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-  },
-  data: {
-    labels: ["a", "b", "c", "d"],
-    datasets: [
-      {
-        data: [20, 50, 100, 70],
-        backgroundColor: ["blue", "blue", "blue", "blue"],
-        borderRadius: [30, 30, 30, 30],
-      },
-    ],
-  },
-};
-
-const datesArgs = {
-  DataType: DataTypeList.datesChart,
-  data: {
-    labels: ["a", "b", "c", "d"],
-    datasets: [
-      {
-        data: [300, 50, 100, 50],
-        tension: 1,
-        fill: {
-          target: "origin",
-          below: "rgb(60, 60, 190)", // And blue below the origin
+const getDatesDataArgs: any = (datesMap: any) => {
+  return {
+    data: {
+      labels: datesMap.months,
+      datasets: [
+        {
+          data: datesMap.dataSetData,
+          pointRadius: 1,
+          backgroundColor: "rgba(0, 185, 255, 0.2)",
+          borderColor: "blue",
         },
-      },
-    ],
-  },
-  options: {
-    plugins: {
-      legend: {
-        display: false,
-      },
+      ],
     },
-  },
+  };
 };
 
 const getSourcesDataArgs = (sourcesMap: {
@@ -79,10 +24,10 @@ const getSourcesDataArgs = (sourcesMap: {
     data: {
       maintainAspectRatio: true,
       responsive: true,
-      labels: sourcesMap.labels,
+      labels: sourcesMap?.labels,
       datasets: [
         {
-          data: sourcesMap.dataSetData,
+          data: sourcesMap?.dataSetData,
           backgroundColor: [
             "#FF9800",
             "#030035",
@@ -101,4 +46,4 @@ const getSourcesDataArgs = (sourcesMap: {
   };
 };
 
-export { datesArgs, tagArgs, sourceArgs, getSourcesDataArgs };
+export { getSourcesDataArgs, getDatesDataArgs };

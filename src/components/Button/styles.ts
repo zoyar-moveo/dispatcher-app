@@ -29,7 +29,7 @@ export const ButtonContainer = styled.button<{
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
-  font-weight: 500;
+  font-weight: 500px;
   font-size: 0.875rem;
   line-height: 1.625rem;
   display: flex;

@@ -10,6 +10,7 @@ import {
   FeedDataMainContainer,
   HomePageContainer,
   SeparetorLine,
+  Title,
 } from "./styles";
 import FeedCardList from "../components/FeedCardList/FeedCardList";
 import DataCardList from "../components/DataCardList/DataCardList";
@@ -47,6 +48,8 @@ const HomePage: React.FC = () => {
   const [searchItem, setSearchItem] = useState<string>("");
   const [sources, setSources] = useState();
   const endPoint: any = useSelector<any>((state) => state.endPoint.endPoint);
+  const data: any = useSelector<any>((state) => state.data.data);
+  const [title, setTitle] = useState<string>("");
 
   const filterTopData = [
     {
@@ -91,8 +94,6 @@ const HomePage: React.FC = () => {
       Dates: ["2021-11-21", "2021-10-21"],
     },
   ];
-
-  useEffect(() => {}, [endPoint, searchsList]);
 
   const getFilterData = () => {
     if (endPoint === endPointTypes.TOP_HEADLINES) {
@@ -139,8 +140,8 @@ const HomePage: React.FC = () => {
         setSources(res);
       });
     }
-    getData();
-  }, [endPoint]);
+    if (data) setTitle("Top Headlines in Israel");
+  }, []);
 
   useEffect(() => {
     let itemsList = localStorageService.loadFromStorage(KEY);
@@ -171,9 +172,7 @@ const HomePage: React.FC = () => {
         searchQ: "",
       });
     }
-    if (res) dispatch(dataActions.updateData(res.data.articles));
-    let sources = getSourcesMap(res.data.articles);
-    setSourcesMap(sources);
+    if (res.status === 200) dispatch(dataActions.updateData(res.data.articles));
   };
 
   const updateSearchInput = (item: string) => {
@@ -211,8 +210,6 @@ const HomePage: React.FC = () => {
     localStorageService.clearStorage(KEY);
     setSearchsList([]);
     // setSearchItem("");
-
-    // setIsDropDownOpen(false);
   };
 
   return (
@@ -259,17 +256,13 @@ const HomePage: React.FC = () => {
                 parentFilterUpdate={parentFilterUpdate}
               />
               <SeparetorLine />
+              <Title>{title}</Title>
             </>
           )}
           <FeedDataMainContainer>
             <FeedDataContainer>
-              <FeedCardList
-                isMobile={width < breakpoints.size.xs}
-                getData={getData}
-              />
-              {width > breakpoints.size.sm && (
-                <DataCardList sourcesMap={sourcesMap} />
-              )}
+              <FeedCardList isMobile={width < breakpoints.size.xs} />
+              {width > breakpoints.size.sm && <DataCardList />}
             </FeedDataContainer>
           </FeedDataMainContainer>
         </HomePageContainer>

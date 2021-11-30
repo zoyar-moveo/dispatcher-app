@@ -23,7 +23,7 @@ export const TitleListContainer = styled.div`
 
 export const FilterTitle = styled.div<{}>`
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 500px;
   font-size: 1rem;
   line-height: 1.375rem;
   padding-left: 10px;

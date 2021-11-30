@@ -8,7 +8,7 @@ const sourceArgs = {
     labels: ["a", "b", "c", "d"],
     datasets: [
       {
-        data: [300, 50, 100, 500, 40],
+        data: [],
         backgroundColor: [
           "#FF9800",
           "#030035",
@@ -23,7 +23,7 @@ const sourceArgs = {
     cutout: "80%",
     plugins: {
       legend: {
-        position: "bottom",
+        display: false,
         labels: {
           usePointStyle: true,
           font: {
@@ -75,11 +75,13 @@ const tagArgs = {
 const datesArgs = {
   DataType: DataTypeList.datesChart,
   data: {
-    labels: ["a", "b", "c", "d"],
+    labels: [],
     datasets: [
       {
-        data: [300, 50, 100, 50],
-        tension: 1,
+        data: [],
+        tension: 0.5,
+        backgroundColor: "rgba(0, 185, 255, 0.2)",
+
         fill: {
           target: "origin",
           below: "rgb(60, 60, 190)", // And blue below the origin
@@ -88,13 +90,23 @@ const datesArgs = {
     ],
   },
   options: {
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
     scales: {
       x: {
         grid: {
           display: false,
         },
+        ticks: {
+          display: true,
+        },
       },
       y: {
+        display: false,
+        beginAtZero: true,
         ticks: {
           display: false,
         },
@@ -103,20 +115,9 @@ const datesArgs = {
         },
       },
     },
-    elements: {
-      point: {
-        radius: 0,
-      },
-      line: {
-        backgroundColor: "#e6f2fb",
-        borderColor: "blue",
-        borderWidth: "10px",
-      },
-    },
-    plugins: {
-      legend: {
-        display: false,
-      },
+    tension: 0.5,
+    fill: {
+      target: "origin",
     },
   },
 };

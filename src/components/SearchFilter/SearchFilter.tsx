@@ -50,9 +50,6 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
     setSearchInput(searchVal);
     localStorageService.saveToStorage(KEY, searchVal);
     setIsFocus(false);
-
-    // props.updateSearchInput(searchVal); // to check it
-    // dispatch(filterActions.updateSearchQ(searchVal));
   };
 
   const onReasentSearchItem = (searchItem: string) => {
@@ -118,8 +115,6 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
               filtersList={[
                 { id: endPointTypes.EVERYTHING, value: "Everything" },
                 { id: endPointTypes.TOP_HEADLINES, value: "Top Headlines" },
-                // { id: "everything", value: "Everything" },
-                // { id: "top-headlines", value: "Top Headlines" },
               ]}
               parentFilterUpdate={props.parentFilterUpdate}
             ></Filter>

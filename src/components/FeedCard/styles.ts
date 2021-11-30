@@ -35,14 +35,14 @@ export const CardHeader = styled.div`
 
 export const CardSecondaryTitle = styled.div`
   font-size: 0.875rem;
-  font-weight: 300;
+  font-weight: 300px;
   color: rgba(90, 90, 137, 0.5);
   line-height: 1.375rem;
   letter-spacing: 0.015625rem;
 `;
 
 export const CardBody = styled.div`
-  font-weight: 300;
+  font-weight: 300px;
   font-size: 0.875rem;
   line-height: 1rem;
   color: #5a5a89;
@@ -58,6 +58,7 @@ export const ContentContainer = styled.div`
   flex-direction: column;
   margin: 1rem;
   height: 100%;
+  width: 100%;
   justify-content: space-evenly;
 `;
 

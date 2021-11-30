@@ -46,7 +46,7 @@ export const SearchSubtitle = styled.div<{}>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: 500;
+  font-weight: 500px;
   padding: 0 10px;
 `;
 
