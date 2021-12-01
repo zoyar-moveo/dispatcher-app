@@ -7,7 +7,7 @@ import {
   Persents,
   Row,
 } from "./styles";
-const ARTICLESNUM = 20;
+const ARTICLESNUM = 10;
 
 const SourcesLegend: React.FC<{ labels: string[]; dataSetData: any }> = (
   props

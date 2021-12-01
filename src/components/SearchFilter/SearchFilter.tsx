@@ -58,6 +58,7 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
     setIsFocus(false);
     setSearchInput(searchItem);
     setSearchVal(searchItem);
+    props.updateSearchInput(searchItem);
   };
 
   useEffect(() => props.updateSearchInput(searchInput), [searchInput]); // update filter in redux
@@ -89,6 +90,11 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
     setIsFocus(true);
   };
 
+  const onClearBtn = () => {
+    props.onClearStorage();
+    setIsDropDownOpen(false);
+  };
+
   return (
     <SearchFilterContainer ref={ref} isFocus={true}>
       <FilterContainer filterSort="primary" isFocus={isFocus}>
@@ -99,7 +105,7 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
               <input
                 type="text"
                 value={searchVal}
-                placeholder="search"
+                placeholder="Search"
                 onChange={onInputVal}
                 onFocus={onFocusInput}
                 onKeyDown={handleKeyDown}
@@ -123,12 +129,10 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
       </FilterContainer>
 
       {isDropDownOpen && props.SearchsList && (
-        <FilterContainer filterSort="primary" isFocus={true}>
+        <FilterContainer filterSort="resent" isFocus={true}>
           <SearchSubTitle>
             <span>{"resent searches".toUpperCase()}</span>
-            <ClearBtn onClick={props.onClearStorage}>
-              {"clear".toUpperCase()}
-            </ClearBtn>
+            <ClearBtn onClick={onClearBtn}>{"clear".toUpperCase()}</ClearBtn>
           </SearchSubTitle>
           {props.SearchsList.map((searchItem: string, index: number) => {
             return (

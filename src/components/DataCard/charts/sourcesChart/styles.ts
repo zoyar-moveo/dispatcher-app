@@ -17,6 +17,7 @@ export const Row = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 0 24px;
   margin-bottom: 11px;
 `;
 

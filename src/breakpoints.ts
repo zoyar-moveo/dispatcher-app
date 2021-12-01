@@ -6,7 +6,7 @@ interface iSize {
 
 const size: iSize = {
   xs: 480,
-  sm: 768,
+  sm: 800,
   lg: 1200,
 };
 

@@ -1,6 +1,7 @@
 const feedCardData = [
   {
     author: "Seth Weintraub",
+    source: { id: "walla", name: "walla" },
     title:
       "Refreshed Tesla Model X with gorgeous interior delivered to customers [video]",
     description:
@@ -14,6 +15,8 @@ const feedCardData = [
   },
   {
     author: "Seth Weintraub",
+    source: { id: "walla1", name: "walla" },
+
     title:
       "Refreshed Tesla Model X with gorgeous interior delivered to customers [video]",
     description:
@@ -27,6 +30,8 @@ const feedCardData = [
   },
   {
     author: "Seth Weintraub",
+    source: { id: "walla3", name: "walla" },
+
     title:
       "Refreshed Tesla Model X with gorgeous interior delivered to customers [video]",
     description:
@@ -40,6 +45,7 @@ const feedCardData = [
   },
   {
     author: "Seth Weintraub",
+    source: { id: "walla3", name: "walla" },
     title:
       "Refreshed Tesla Model X with gorgeous interior delivered to customers [video]",
     description:
@@ -53,6 +59,8 @@ const feedCardData = [
   },
   {
     author: "Seth Weintraub",
+    source: { id: "walla4", name: "walla" },
+
     title:
       "Refreshed Tesla Model X with gorgeous interior delivered to customers [video]",
     description:

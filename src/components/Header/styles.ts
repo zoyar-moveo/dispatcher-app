@@ -7,18 +7,18 @@ export const HeaderContainer = styled.div<{}>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  height: 74px;
 
   @media (max-width: 480px) {
   }
 `;
 
 export const InnerSearchContainer = styled.div`
-  width: clamp(16rem, 80vw, 70rem);
+  /* width: clamp(16rem, 80vw, 70rem); */
   align-self: baseline;
   position: relative;
   z-index: 5;
-  margin-top: 6px;
+  margin-top: 11px;
 `;
 
 export const RightSideContainer = styled.div<{}>`
@@ -50,7 +50,7 @@ export const LoginSignOut = styled.div`
 export const ImgIcon = styled.img<{ icon: IconType }>`
   height: ${(props) =>
     props.icon === IconType.LOGO ? "3.125rem" : "1.625rem"};
-  margin: 0.4375rem 0.5rem;
+  margin-left: 20px;
   cursor: pointer;
 `;
 
@@ -64,7 +64,7 @@ export const InitalsBtn = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0.4375rem 0.5rem;
+  margin: 20px 12px;
   &:hover {
     cursor: pointer;
   }

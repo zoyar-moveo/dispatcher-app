@@ -49,7 +49,7 @@ const MobileSearch: React.FC<MobileSearchProps> = (props) => {
         <input
           type="text"
           value={searchInput}
-          placeholder="search"
+          placeholder="Search"
           onChange={inputUpdate}
           onBlur={upperCaseValue}
         ></input>

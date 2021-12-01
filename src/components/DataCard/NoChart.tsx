@@ -1,4 +1,3 @@
-import { CardContainer } from "../FeedCard/styles";
 import NoDataSVG from "./assets/chart.svg";
 import { NoChartContainer, NoDataImg, NoDataText } from "./styles";
 

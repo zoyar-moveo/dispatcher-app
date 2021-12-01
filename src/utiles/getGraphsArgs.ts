@@ -16,15 +16,21 @@ const getDatesDataArgs: any = (datesMap: any) => {
   };
 };
 
+const getSourceName = (fullName: string) => {
+  return fullName.split("." || "/" || " /")[0];
+};
+
 const getSourcesDataArgs = (sourcesMap: {
   labels: string[];
   dataSetData: number[];
 }): any => {
+  const labels = sourcesMap?.labels.map((label) => getSourceName(label)) || [];
   return {
     data: {
       maintainAspectRatio: true,
       responsive: true,
-      labels: sourcesMap?.labels,
+      labels: labels,
+      // labels: sourcesMap?.labels,
       datasets: [
         {
           data: sourcesMap?.dataSetData,

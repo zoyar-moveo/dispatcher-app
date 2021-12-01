@@ -9,6 +9,7 @@ export interface FilterListProps {
     filter: any
     // filter: { Sources: string; Country: string; Category: string }
   ) => void;
+  updateSearchInput: (item: string) => void;
 }
 
 const FilterList: React.FC<FilterListProps> = (props) => {

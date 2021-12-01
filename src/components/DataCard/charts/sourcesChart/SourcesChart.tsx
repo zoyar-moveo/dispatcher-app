@@ -27,7 +27,7 @@ const SourcesChart: React.FC<chartProps> = (props) => {
         alignItems: "center",
       }}
     >
-      <div style={{ width: "60%", paddingTop: "10px", paddingBottom: "15px" }}>
+      <div style={{ width: "35%", paddingTop: "10px", paddingBottom: "15px" }}>
         <Doughnut data={props.data} options={props.options} />
       </div>
       <SourcesLegend

@@ -2,9 +2,12 @@ import styled from "styled-components";
 
 export const SearchFilterContainer = styled.div<{ isFocus: boolean }>`
   /* padding: 0 15px; */
-
+  width: 80vw;
   /* width: ${(props) => (props.isFocus ? "667px" : "300px")}; // not working */
-  width: 667px;
+  /* width: 667px; */
+  @media (max-width: 800px) {
+    width: 100%;
+  }
   @media (max-width: 480px) {
     display: none;
   }
@@ -44,12 +47,14 @@ export const ItemText = styled.div`
 `;
 export const Img = styled.img`
   height: 1.125rem;
-  margin-right: 0.3125rem;
+  margin-right: 17px;
+  /* margin-left: 2.8px; */
 `;
 
 export const ExitImg = styled.img`
   height: 0.75rem;
   align-self: center;
+
   &:hover {
     cursor: pointer;
     height: 1rem;
@@ -64,16 +69,26 @@ export const ClearBtn = styled.span`
 
 export const SearchPlasholder = styled.span`
   font-size: 0.875rem;
-  color: rgba(90, 90, 137, 0.5);
 `;
 
 export const SearchContainer = styled.div`
   display: flex;
   align-items: center;
   height: fit-content;
-  padding: 0 15px;
+  /* padding: 0 15px; */
 
   & input {
     border: none;
+    color: rgba(90, 90, 137, 1);
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  }
+  & input:focus,
+  & select:focus {
+    outline: none;
+  }
+  & input::placeholder {
+    color: rgba(90, 90, 137, 0.5);
   }
 `;

@@ -9,6 +9,7 @@ import {
   FeedDataContainer,
   FeedDataMainContainer,
   HomePageContainer,
+  InnerHomeContainer,
   SeparetorLine,
   Title,
 } from "./styles";
@@ -42,7 +43,7 @@ const HomePage: React.FC = () => {
   }>({ labels: [], dataSetData: [] }); /// counter for sources
   const { height, width } = useWindowDimensions();
   const [isMobileSearch, setIsMobileSearch] = useState(false);
-  const [isEverything, setIsEverything] = useState(true);
+  const [isEverything, setIsEverything] = useState(false);
   const [isMobileTabletFilter, setIsMobileTabletFilter] = useState(false);
   const [searchsList, setSearchsList] = useState<string[]>([]);
   const [searchItem, setSearchItem] = useState<string>("");
@@ -52,9 +53,6 @@ const HomePage: React.FC = () => {
   const [title, setTitle] = useState<string>("");
 
   const filterTopData = [
-    {
-      Sources: sources,
-    },
     {
       Country: [
         { id: "us", value: "United State" },
@@ -76,22 +74,32 @@ const HomePage: React.FC = () => {
         { id: "technology", value: "Technology" },
       ],
     },
+    {
+      Sources: sources,
+    },
   ];
 
   const filterEveryData = [
+    // {
+    //   SortBy: [
+    //     { id: "popularity", value: "Popularity" },
+    //     { id: "publishedAt", value: "Resent" },
+    //     { id: "relevancy", value: "Relevancy" },
+    //   ],
+    // },
+    {
+      Dates: [],
+    },
     {
       Sources: sources,
     },
     {
       Language: [
-        { id: "he", value: "hebrew" },
+        { id: "he", value: "Hebrew" },
         { id: "en", value: "English" },
         { id: "ru", value: "Russian" },
         { id: "es", value: "Spanish" },
       ],
-    },
-    {
-      Dates: ["2021-11-21", "2021-10-21"],
     },
   ];
 
@@ -124,6 +132,9 @@ const HomePage: React.FC = () => {
         return;
       case "Dates":
         dispatch(filterEverythingActions.updateDates(filter));
+        return;
+      case "SoryBy":
+        dispatch(filterEverythingActions.updateSortBy(""));
         return;
       case "Top Headlines":
         dispatch(endPointActions.updateEndPoint(filter));
@@ -160,7 +171,8 @@ const HomePage: React.FC = () => {
           },
           searchQ: "",
         },
-        endPoint
+        endPoint,
+        1
       );
     } else {
       res = await makeGetRequestEvery({
@@ -236,35 +248,38 @@ const HomePage: React.FC = () => {
             parentFilterUpdate={parentFilterUpdate}
             onClearStorage={onClearStorage}
           />
-          {width < breakpoints.size.sm ? (
-            <>
-              <SortByFilterRowContainer
-                onMobileTabletFilter={onMobileTabletFilter}
-              />
-              {isMobileTabletFilter ? (
-                <FilterModal
-                  onCloseFilter={onCloseFilter}
-                  toggleSearchIn={toggleSearchIn}
-                  isEverything={isEverything}
+          <InnerHomeContainer>
+            {width < breakpoints.size.sm ? (
+              <>
+                <SortByFilterRowContainer
+                  onMobileTabletFilter={onMobileTabletFilter}
                 />
-              ) : null}
-            </>
-          ) : (
-            <>
-              <FilterList
-                filterData={getFilterData()}
-                parentFilterUpdate={parentFilterUpdate}
-              />
-              <SeparetorLine />
-              <Title>{title}</Title>
-            </>
-          )}
-          <FeedDataMainContainer>
-            <FeedDataContainer>
-              <FeedCardList isMobile={width < breakpoints.size.xs} />
-              {width > breakpoints.size.sm && <DataCardList />}
-            </FeedDataContainer>
-          </FeedDataMainContainer>
+                {isMobileTabletFilter ? (
+                  <FilterModal
+                    onCloseFilter={onCloseFilter}
+                    toggleSearchIn={toggleSearchIn}
+                    isEverything={isEverything}
+                  />
+                ) : null}
+              </>
+            ) : (
+              <>
+                <FilterList
+                  filterData={getFilterData()}
+                  parentFilterUpdate={parentFilterUpdate}
+                  updateSearchInput={updateSearchInput}
+                />
+                <SeparetorLine />
+                <Title>{title}</Title>
+              </>
+            )}
+            <FeedDataMainContainer>
+              <FeedDataContainer>
+                <FeedCardList isMobile={width < breakpoints.size.xs} />
+                {width > breakpoints.size.sm && <DataCardList />}
+              </FeedDataContainer>
+            </FeedDataMainContainer>
+          </InnerHomeContainer>
         </HomePageContainer>
       )}
     </>

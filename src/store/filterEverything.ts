@@ -4,6 +4,7 @@ interface TFilters {
     Sources: string;
     Language: string;
     Dates: string[];
+    SortBy: string;
   };
   searchQ: string;
 }
@@ -12,6 +13,7 @@ const initialFiltersState: TFilters = {
     Sources: "",
     Language: "",
     Dates: [],
+    SortBy: "",
   },
   searchQ: "",
 };
@@ -31,6 +33,9 @@ const filterEverythingSlice = createSlice({
     },
     updateSearchQ(state, action) {
       state.searchQ = action.payload;
+    },
+    updateSortBy(state, action) {
+      state.filter.SortBy = action.payload;
     },
   },
 });

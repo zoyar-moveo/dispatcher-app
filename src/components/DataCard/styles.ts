@@ -5,9 +5,10 @@ export const CardHeader = styled.div`
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-style: normal;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 1.5rem;
   line-height: 2rem;
+  margin-bottom: 10px;
 `;
 
 export const Underline = styled.div`
@@ -18,7 +19,7 @@ export const Underline = styled.div`
 `;
 
 export const InnerContainer = styled.div<{ DataType: any }>`
-  padding: 1rem;
+  padding: 25px;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -41,6 +42,7 @@ export const NoDataImg = styled.img`
 export const NoDataText = styled.div`
   color: #5a5a89;
   margin-bottom: 63px;
+  font-weight: 300;
   font-size: 1.125rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;

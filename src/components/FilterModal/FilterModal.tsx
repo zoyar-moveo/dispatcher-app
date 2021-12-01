@@ -11,14 +11,14 @@ export interface FilterModalProps {
 const FilterModal: React.FC<FilterModalProps> = (props) => {
   const FilterCatagories: FilterI = {
     FilterEverything: {
-      Sources: { selected: "Ynet", options: ["Ynet", "walla", "Mako"] },
+      Sources: { selected: "All", options: ["Ynet", "walla", "Mako"] },
       Language: { selected: "All", options: ["Hebrew", "English"] },
       Dates: { selected: "All", options: ["1/1/2021", "31/1/2021"] },
     },
     FilterTop: {
       Country: { selected: "Israel", options: ["Israel", "USA"] },
       Category: {
-        selected: "Finance",
+        selected: "All",
         options: ["Health", "Politics", "Finance"],
       },
       Sources: { selected: "All", options: ["Ynet", "walla", "Mako"] },

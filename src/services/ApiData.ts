@@ -3,12 +3,17 @@ const _ = require("lodash");
 // const API_KEY = "BLA BLD";
 const API_KEY = process.env.REACT_APP_API_KEY;
 
+// to check it
+const getSourceName = (fullName: string) => {
+  return fullName.split("." || "/" || " /")[0];
+};
+
 export async function getSources() {
   const sourcesObj = await axios.get(
     `https://newsapi.org/v2/top-headlines/sources?apiKey=${API_KEY}`
   );
   const sourcesNames = sourcesObj.data.sources.map((item: any) => {
-    return { id: item.id, value: item.name };
+    return { id: item.id, value: getSourceName(item.name) };
   });
   return sourcesNames;
 }
@@ -30,8 +35,10 @@ async function makeGetRequest(
     };
     searchQ: string;
   },
-  endPoint: any
+  endPoint: any,
+  page: number
 ) {
+  console.log("makeGetRequest");
   let filtersObj: any;
   filtersObj = filters.filter;
   let filterObj = {};
@@ -40,8 +47,10 @@ async function makeGetRequest(
   }
   if (filters.searchQ) filterObj = { ...filterObj, q: filters.searchQ };
   const res = axios1.get("/top-headlines", {
-    params: { ...API_DEFAULT_PARAMS, ...filterObj },
+    params: { ...API_DEFAULT_PARAMS, ...filterObj, page: page },
   });
+  console.log(res);
+
   return res;
 }
 
@@ -55,6 +64,7 @@ export async function makeGetRequestEvery(filtersEvery: {
   };
   searchQ: string;
 }) {
+  console.log("makeGetRequestEvery");
   let filtersObj = filtersEvery.filter;
   let filterObj = {};
   for (let [key, value] of Object.entries(filtersObj!)) {
@@ -69,5 +79,6 @@ export async function makeGetRequestEvery(filtersEvery: {
   const res = axios1.get("/everything", {
     params: { ...API_DEFAULT_PARAMS, ...filterObj },
   });
+  console.log(res);
   return res;
 }

@@ -18,27 +18,34 @@ export const SearchRow = styled.div<{}>`
   background: #ffffff;
   box-shadow: 0px 32px 64px rgba(0, 0, 0, 0.05);
   height: 74px;
-  padding: 0 15px;
+  /* padding: 0 15px; */
   display: flex;
   align-items: center;
   & input {
-    width: 100%;
+    width: 90%;
     border: none;
+  }
+  & input:focus,
+  & select:focus {
+    outline: none;
   }
 `;
 
 export const SearchInput = styled.div<{}>`
   width: 100%;
-  padding: 0 10px;
+  padding: 20px 0;
+  margin-right: 20px;
 `;
 
 export const DeleteBtn = styled.img`
   height: 1.125rem;
   width: 1.125rem;
+  margin-right: 20px;
 `;
 
 export const SearchBtn = styled.img`
   height: 24px;
+  margin-right: 20px;
 `;
 
 export const SearchSubtitle = styled.div<{}>`
@@ -87,5 +94,6 @@ export const ExitImg = styled.img<{}>`
 export const BackImg = styled.img<{}>`
   height: 1.25rem;
   cursor: pointer;
-  margin-right: 10px;
+  margin-left: 18.5px;
+  margin-right: 18.5px;
 `;

@@ -4,7 +4,7 @@ export const WelcomeContainer = styled.div`
   height: 100vh;
   display: flex;
   letter-spacing: 0.25px;
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     flex-direction: column;
   }
 `;
@@ -16,7 +16,7 @@ export const LogoArea = styled.div`
   left: 0;
   display: inline-flex;
   justify-content: center;
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     width: 100%;
     height: 30vh;
   }
@@ -30,7 +30,7 @@ export const ContentArea = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 20px;
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     width: 100%;
     height: 70vh;
     display: block;
@@ -38,11 +38,17 @@ export const ContentArea = styled.div`
 `;
 
 export const TextBtnContsiner = styled.div`
-  width: 28.125rem;
-  margin-left: 60px;
+  @media (min-width: 769px) {
+    width: 28rem;
+    margin-left: 30px;
+  }
+  @media (min-width: 1920px) {
+    width: 42rem;
+    margin-left: 60px;
+  }
   display: flex;
   flex-direction: column;
-  @media (max-width: 768px) {
+  @media (max-width: 800) {
     margin: 0;
     width: 100%;
     height: 100%;
@@ -51,7 +57,7 @@ export const TextBtnContsiner = styled.div`
 `;
 
 export const TextContainer = styled.div`
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -65,27 +71,37 @@ export const TextContainer = styled.div`
 
 export const LogoImg = styled.img`
   width: 14rem;
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     width: 10rem;
   }
 `;
 
 export const Title = styled.div`
   color: #5a5a89;
-  font-weight: 300px;
-  font-size: 2rem;
+  font-weight: 300;
   margin-bottom: 24px;
-  @media (max-width: 768px) {
+  font-size: 2rem;
+
+  @media (min-width: 1920px) {
+    font-size: 3rem;
+  }
+
+  @media (max-width: 800px) {
     text-align: center;
   }
 `;
 
 export const Subtitle = styled.div`
-  font-weight: 200px;
+  font-weight: 200;
   font-size: 1.5rem;
-  color: #b3b3cb;
+  line-height: 30px;
+  color: rgba(90, 90, 137, 1);
   margin-bottom: 48px;
-  @media (max-width: 768px) {
+  @media (min-width: 1920px) {
+    font-size: 2.25rem;
+  }
+
+  @media (max-width: 800px) {
     text-align: center;
   }
 `;

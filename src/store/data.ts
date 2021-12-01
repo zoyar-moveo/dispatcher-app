@@ -6,19 +6,21 @@ const getInitialData = async () => {
   let res = await makeGetRequest(
     {
       filter: {
-        Country: "il",
+        Country: "us",
         Category: "",
         Sources: "",
       },
       searchQ: "",
     },
-    "top-headlines"
+    "top-headlines",
+    1
   );
   return res.status === 200 ? res.data.articles : [];
 };
 
 const initialDataState: any = {
-  data: getInitialData(),
+  data: [],
+  page: 1,
 };
 
 const dataSlice = createSlice({
@@ -27,6 +29,9 @@ const dataSlice = createSlice({
   reducers: {
     updateData(state, action) {
       state.data = action.payload;
+    },
+    updatePage(state, action) {
+      state.page = action.payload;
     },
   },
 });

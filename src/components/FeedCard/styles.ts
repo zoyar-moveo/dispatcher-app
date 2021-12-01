@@ -31,6 +31,10 @@ export const CardHeader = styled.div`
   font-size: 1.125rem;
   line-height: 1.3125rem;
   color: #14142b;
+  width: 65%;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
 `;
 
 export const CardSecondaryTitle = styled.div`
@@ -50,16 +54,17 @@ export const CardBody = styled.div`
   text-overflow: ellipsis;
   word-wrap: break-word;
   overflow: hidden;
-  max-height: 2.5em;
+  max-height: 2.3em;
 `;
 
 export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 1rem;
+  padding: 1rem;
+  /* margin: 1rem; */
   height: 100%;
   width: 100%;
-  justify-content: space-evenly;
+  justify-content: space-between;
 `;
 
 export const FlexRowContainer = styled.div`

@@ -5,6 +5,7 @@ import {
   DropDownItem,
   CurrFilter,
   MainFilterContainer,
+  FilterTitle,
 } from "./styles";
 import Arrow from "./assets/Forward.svg";
 import React from "react";
@@ -48,37 +49,48 @@ const Filter: React.FC<FilterProps> = ({
     let endDate = moment(Date.parse(end)).format("YYYY-MM-DD");
     parentFilterUpdate("Dates", [startDate, endDate]);
     if (end) SetIsDropDownOpen(false);
-    setCurrFilter(`${startDate} - ${endDate}`);
+    setCurrFilter(
+      `${moment(Date.parse(startDate)).format("YYYY/MM/DD")} - ${moment(
+        Date.parse(endDate)
+      ).format("YYYY/MM/DD")}`
+    );
   };
 
   return (
-    <MainFilterContainer>
-      <FilterContainer filterSort={filterSort}>
-        <CurrFilter onClick={() => SetIsDropDownOpen((state) => !state)}>
-          <div>{currFilter}</div>
-          <img alt="" src={Arrow} />
-        </CurrFilter>
-      </FilterContainer>
-      {IsDropDownOpen && filterType !== "Dates" && (
+    <>
+      <MainFilterContainer>
         <FilterContainer filterSort={filterSort}>
-          <DropDownList>
-            {filtersList.map((filterItem: { id: string; value: string }) => (
-              <DropDownItem
-                onClick={() =>
-                  updateFilter(filterType, filterItem.id, filterItem.value)
-                }
-                key={filterItem.id}
-              >
-                {filterItem.value}
-              </DropDownItem>
-            ))}
-          </DropDownList>
+          <CurrFilter
+            filterType={filterType}
+            onClick={() => SetIsDropDownOpen((state) => !state)}
+          >
+            <FilterTitle filterSort={filterSort}>{currFilter}</FilterTitle>
+            <img alt="" src={Arrow} />
+          </CurrFilter>
         </FilterContainer>
-      )}
-      {IsDropDownOpen && filterType === "Dates" && (
-        <DatePickerComp updateDateFilter={updateDateFilter} />
-      )}
-    </MainFilterContainer>
+        {IsDropDownOpen && filterType !== "Dates" && (
+          <FilterContainer filterSort={filterSort} isDropDown={true}>
+            <DropDownList filterSort={filterSort}>
+              {filtersList.map((filterItem: { id: string; value: string }) => (
+                <DropDownItem
+                  onClick={() =>
+                    updateFilter(filterType, filterItem.id, filterItem.value)
+                  }
+                  key={filterItem.id}
+                >
+                  {filterItem.value}
+                </DropDownItem>
+              ))}
+            </DropDownList>
+          </FilterContainer>
+        )}
+        {IsDropDownOpen && filterType === "Dates" && (
+          <div style={{ position: "absolute" }}>
+            <DatePickerComp updateDateFilter={updateDateFilter} />
+          </div>
+        )}
+      </MainFilterContainer>
+    </>
   );
 };
 

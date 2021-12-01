@@ -3,9 +3,14 @@ import styled from "styled-components";
 export const CardContainer = styled.div<{ isData: boolean }>`
   display: flex;
   align-items: center;
-  /* width: 100%; */
-  width: ${(props) => (props.isData ? "100%" : "412px")}; //
-  height: ${(props) => (props.isData ? "fint-contant" : "350px")}; //
+  width: 410px;
+  height: 378px;
+  @media (max-width: 1200px) {
+    width: 300px;
+    height: 330px;
+  }
+  /* width: ${(props) => (props.isData ? "100%" : "412px")}; // */
+  /* height: ${(props) => (props.isData ? "fint-contant" : "350px")}; // */
   background: #ffffff;
   border: 1px solid #d9dbe9;
   box-shadow: 0px 32px 64px rgba(0, 0, 0, 0.05);

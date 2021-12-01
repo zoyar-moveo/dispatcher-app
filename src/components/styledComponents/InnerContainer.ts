@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const InnerContainer = styled.div`
-  width: clamp(16rem, 75vw, 70rem);
+  /* width: clamp(16rem, 75vw, 70rem); */
   /*align-self: baseline;
   position: relative;
   z-index: 5;
