@@ -59,7 +59,8 @@ const Filter: React.FC<FilterProps> = ({
   return (
     <>
       <MainFilterContainer>
-        <FilterContainer filterSort={filterSort}>
+        <FilterContainer filterSort={filterSort} filterTitle={true}>
+          {/* <div>{filterSort}</div> */}
           <CurrFilter
             filterType={filterType}
             onClick={() => SetIsDropDownOpen((state) => !state)}
@@ -70,6 +71,7 @@ const Filter: React.FC<FilterProps> = ({
         </FilterContainer>
         {IsDropDownOpen && filterType !== "Dates" && (
           <FilterContainer filterSort={filterSort} isDropDown={true}>
+            {/* <div>{filterSort}</div> */}
             <DropDownList filterSort={filterSort}>
               {filtersList.map((filterItem: { id: string; value: string }) => (
                 <DropDownItem

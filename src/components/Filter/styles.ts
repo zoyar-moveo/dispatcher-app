@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const FilterContainer = styled.div<{
   filterSort: string;
+  filterTitle?: boolean;
   isFocus?: boolean;
   isDropDown?: boolean;
 }>`
@@ -24,16 +25,20 @@ export const FilterContainer = styled.div<{
   color: #5a5a89;
   /* height: 50px; // */
   /* height: fit-content; */
-  height: ${(props) =>
-    props.filterSort === "primary" ? "50px" : "fit-content"};
-  padding: ${(props) => (props.filterSort === "inner" ? "0" : "0.9375rem")};
+  /* height: ${(props) =>
+    props.filterSort === "primary" ? "50px" : "fit-content"}; */
+  /* padding: ${(props) =>
+    props.filterSort === "inner"
+      ? // props.filterSort === "inner" || props.filterSort === "secondary"
+        "0"
+      : "0.9375rem"}; */
+  padding: ${(props) => (props.filterTitle ? "12.5px 15px" : "0")};
   box-shadow: ${(props) =>
     props.isDropDown === true || props.filterSort === "resent"
       ? "0px 4px 12px rgba(0, 0, 0, 0.08)"
       : "none"};
-  /* box-shadow: none; */
-  position: ${(props) => (props.isDropDown === true ? "absolute" : "")};
-  /* position: absolute; */
+  position: relative;
+
   & img {
     margin-left: 0.5rem;
     margin-left: 16px;
@@ -42,7 +47,6 @@ export const FilterContainer = styled.div<{
   &:not(:last-child) {
     margin-bottom: 0.625rem;
   }
-  /* position: relative; */
   z-index: 3;
 `;
 
