@@ -100,7 +100,7 @@ const Header: React.FC<HeaderProps> = (props) => {
         <LoginSignOut
           onClick={() => logout({ returnTo: window.location.origin })}
         >
-          Logout
+          Sign Out
         </LoginSignOut>
       )}
     </>

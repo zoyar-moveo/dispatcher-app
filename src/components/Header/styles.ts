@@ -32,8 +32,7 @@ export const LoginSignOut = styled.div`
   width: 95px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
   border-radius: 10px;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: Mulish;
   font-size: 0.75rem;
   line-height: 1rem;
   letter-spacing: 0.00625rem;
@@ -41,7 +40,7 @@ export const LoginSignOut = styled.div`
   position: absolute;
   color: #5a5a89;
   padding: 8px;
-  text-align: center;
+  margin-top: -5px;
   &:hover {
     cursor: pointer;
   }

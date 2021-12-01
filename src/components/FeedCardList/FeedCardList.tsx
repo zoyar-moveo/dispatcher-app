@@ -116,12 +116,12 @@ const FeedCardList: React.FC<{
   );
 
   return (
-    <FeedCardListContainer isData={data.length > 0}>
-      {data.length > 0 ? (
-        <FeedCardListScroll
-          id="scrollableDiv"
-          isToShow={data.length > 0 ? true : false}
-        >
+    <FeedCardListScroll
+      id="scrollableDiv"
+      isToShow={data.length > 0 ? true : false}
+    >
+      <FeedCardListContainer isData={data.length > 0}>
+        {data.length > 0 ? (
           <InfiniteScroll
             dataLength={data.length}
             next={() => nextData()}
@@ -139,16 +139,16 @@ const FeedCardList: React.FC<{
               <FeedCard feedCardObj={val} key={idx} isMobile={props.isMobile} />
             ))}
           </InfiniteScroll>
-        </FeedCardListScroll>
-      ) : (
-        <NotFoundContainer>
-          <NotFoundImg src={NotFoundSVG} alt="" />
-          <NotFoundText>
-            We couldn’t find any matches for your query
-          </NotFoundText>
-        </NotFoundContainer>
-      )}
-    </FeedCardListContainer>
+        ) : (
+          <NotFoundContainer>
+            <NotFoundImg src={NotFoundSVG} alt="" />
+            <NotFoundText>
+              We couldn’t find any matches for your query
+            </NotFoundText>
+          </NotFoundContainer>
+        )}
+      </FeedCardListContainer>
+    </FeedCardListScroll>
   );
 };
 

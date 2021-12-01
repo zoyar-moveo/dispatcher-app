@@ -59,7 +59,7 @@ const HomePage: React.FC = () => {
         { id: "il", value: "Israel" },
         { id: "ru", value: "Russia" },
         { id: "ar", value: "Argentina" },
-        { id: "gb", value: "Great Briten" },
+        { id: "gb", value: "great Britain" },
         { id: "et", value: "Ethiopia" },
       ],
     },
