@@ -6,15 +6,19 @@ import {
   getSourcesDataArgs,
 } from "../../utiles/getGraphsArgs";
 import getSourcesMap, { getDatesMap } from "../../utiles/getSourcesMap";
+import LineLoader from "../Loaders/LineLoader";
+import SourceLoader from "../Loaders/SourceLoader";
 import DataCard from "./../DataCard/DataCard";
 import { DataCardContainer } from "./styles";
 
 const DataCardList: React.FC<{}> = (props) => {
   const data: any = useSelector<any>((state) => state.data.data);
+  const isLoading: any = useSelector<any>((state) => state.data.isLoading);
   const [sourcesMap, setSourcesMap] = useState<any>();
   const [datesMap, setDatesMap] = useState<any>();
   const [sourcesDataArgs, setSourcesArgs] = useState(sourceArgs.data);
   const [datesDataArgs, setDatesDataArgs] = useState(datesArgs.data);
+
   const [isData, setIsData] = useState(false);
 
   useEffect(() => {
@@ -34,18 +38,31 @@ const DataCardList: React.FC<{}> = (props) => {
   }, [datesMap]);
 
   return (
-    <DataCardContainer isData={isData}>
-      <DataCard
-        DataType={sourceArgs.DataType}
-        data={sourcesDataArgs}
-        options={sourceArgs.options}
-      />
-      <DataCard
-        DataType={datesArgs.DataType}
-        data={datesDataArgs}
-        options={datesArgs.options}
-      />
-    </DataCardContainer>
+    <>
+      {isLoading ? (
+        // <div style={{ display: "flex", flexDirection: "column" }}>
+        <DataCardContainer>
+          <SourceLoader />
+          <LineLoader />
+        </DataCardContainer>
+      ) : (
+        // </div>
+        <>
+          <DataCardContainer>
+            <DataCard
+              DataType={sourceArgs.DataType}
+              data={sourcesDataArgs}
+              options={sourceArgs.options}
+            />
+            <DataCard
+              DataType={datesArgs.DataType}
+              data={datesDataArgs}
+              options={datesArgs.options}
+            />
+          </DataCardContainer>
+        </>
+      )}
+    </>
   );
 };
 

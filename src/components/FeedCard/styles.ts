@@ -5,9 +5,9 @@ export const CardContainer = styled.div`
   flex-direction: row;
   align-items: center;
   padding: 0px;
-  background: #ffffff;
+  background-color: #ffffff;
   border: 1px solid #d9dbe9;
-  box-shadow: 0px 32px 64px rgba(0, 0, 0, 0.05);
+  /* box-shadow: 0px 32px 64px rgba(0, 0, 0, 0.05); */
   border-radius: 20px;
   height: 242px;
   justify-content: space-between;

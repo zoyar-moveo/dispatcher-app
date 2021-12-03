@@ -3,10 +3,11 @@ import styled from "styled-components";
 export const CardContainer = styled.div<{ isData: boolean }>`
   display: flex;
   align-items: center;
-  width: 410px;
+  /* width: 410px; */
   height: 378px;
+  width: 100%;
   @media (max-width: 1200px) {
-    width: 300px;
+    /* width: 300px; */
     height: 330px;
   }
   /* width: ${(props) => (props.isData ? "100%" : "412px")}; // */

@@ -19,6 +19,11 @@ export const InnerSearchContainer = styled.div`
   position: relative;
   z-index: 5;
   margin-top: 11px;
+  width: 80vw;
+  @media (max-width: 800px) {
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 export const RightSideContainer = styled.div<{}>`
@@ -27,7 +32,7 @@ export const RightSideContainer = styled.div<{}>`
 `;
 
 export const LoginSignOut = styled.div`
-  background: #ffffff;
+  background-color: #ffffff;
   right: 0.5rem;
   width: 95px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);

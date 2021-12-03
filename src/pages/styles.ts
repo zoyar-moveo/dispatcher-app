@@ -44,9 +44,9 @@ export const FeedDataMainContainer = styled.div`
   /* width: clamp(16rem, 80vw, 70rem); */
   margin: auto;
   justify-content: center;
+  width: 100%;
   @media (max-width: 800px) {
     padding: 0 20px;
-    width: 100%;
   }
   @media only screen and (max-width: 480px) {
     padding: 0 16px;

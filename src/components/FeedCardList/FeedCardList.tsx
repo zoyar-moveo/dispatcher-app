@@ -1,19 +1,19 @@
 import FeedCard from "../FeedCard/FeedCard";
 import {
   FeedCardListContainer,
-  FeedCardListScroll,
   NotFoundContainer,
   NotFoundImg,
   NotFoundText,
 } from "./styles";
 import feedCardData from "../../services/feedDate"; // for dummy data
 import makeGetRequest, { makeGetRequestEvery } from "../../services/ApiData";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { dataActions } from "../../store/data";
 import { endPointTypes } from "../../utiles/endPoint.types";
 import InfiniteScroll from "react-infinite-scroll-component";
 import NotFoundSVG from "./assets/not-found.svg";
+import MyLoader from "../Loaders/FeedCardLoader";
 
 export interface feedDataObj {
   author: string;
@@ -49,20 +49,27 @@ const FeedCardList: React.FC<{
     (state) => state.filterEverything
   );
   const data: any = useSelector<any>((state) => state.data.data);
-  // const data = feedCardData;
+  const totalResults: any = useSelector<any>(
+    (state) => state.data.totalResults
+  );
   const page: any = useSelector<any>((state) => state.data.page);
+  const isLoading: any = useSelector<any>((state) => state.data.isLoading);
   const endPoint: any = useSelector<any>((state) => state.endPoint.endPoint);
   const [pageNumber, setPageNumber] = useState(1);
-  const [isScroll, setIsScroll] = useState(false);
+
+  const firstUpdate = useRef(true);
+
+  // if (firstUpdate.current) {
+  //   firstUpdate.current = false;
+  //   return;
+  // }
 
   useEffect(() => {
-    if (filterEverything) getData(1);
-    setIsScroll(false);
+    if (filterEverything) getData(1); // change condition
   }, [filterEverything]);
 
   useEffect(() => {
-    if (filters) getData(1);
-    setIsScroll(false);
+    if (filters) getData(1); // change condition
   }, [filters]);
 
   useEffect(() => {
@@ -70,68 +77,72 @@ const FeedCardList: React.FC<{
   }, []);
 
   const nextData = () => {
-    console.log("nextData");
     let temp = page + 1;
-    console.log(temp);
-    setIsScroll(true);
     dispatch(dataActions.updatePage(temp));
     setPageNumber(temp);
-    // setTimeout(() => {
-    getData(temp);
-    // }, 2000);
+    getData(temp, true);
   };
   const getData = useCallback(
-    async (pageNumber: number) => {
-      // const getData = async (pageNumber: number) => {
-      console.log("getData in feedCardLIst");
+    async (pageNumber: number, isScroll?: boolean) => {
       let res;
-      console.log("endPoint", endPoint);
       if (endPoint === endPointTypes.TOP_HEADLINES) {
         try {
+          dispatch(dataActions.updateIsLoading(true));
           res = await makeGetRequest(filters, endPoint, pageNumber);
-        } catch (err) {
-          console.log(err);
+        } catch (err: any) {
+          console.log(err.response.status);
+          dispatch(dataActions.updateResStatus(err.response.status));
         }
       } else {
         try {
+          dispatch(dataActions.updateIsLoading(true));
           res = await makeGetRequestEvery(filterEverything);
-          console.log(res);
-        } catch (err) {
-          console.log(err);
+          console.log("res", res);
+        } catch (err: any) {
+          console.log(err.response.status);
+          console.log(err.response.data);
+          dispatch(dataActions.updateResStatus(err.response.status));
         }
       }
       if (res) {
+        console.log("res", res);
         let articles = res.data.articles;
-        console.log(articles);
-        // if (isScroll) {
-        //   dispatch(dataActions.updateData([...data, ...articles]));
-        // } else {
-        // dispatch(dataActions.updateData(feedCardData));
-        dispatch(dataActions.updateData(articles));
-        // }
-        // }
+        dispatch(dataActions.updateResStatus(res.data.status));
+        dispatch(dataActions.updateTotalResults(res.data.totalResults));
+        if (isScroll) {
+          console.log("is scroll after next data");
+          dispatch(dataActions.addData(articles));
+        } else {
+          dispatch(dataActions.updateData(articles));
+        }
       }
+      dispatch(dataActions.updateIsLoading(false));
     },
     [endPoint, filters, filterEverything]
   );
 
   return (
-    <FeedCardListScroll
-      id="scrollableDiv"
-      isToShow={data.length > 0 ? true : false}
-    >
-      <FeedCardListContainer isData={data.length > 0}>
-        {data.length > 0 ? (
+    <>
+      {isLoading && (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <FeedCardListContainer>
+            <MyLoader />
+            <MyLoader />
+            <MyLoader />
+          </FeedCardListContainer>
+        </div>
+      )}
+      <FeedCardListContainer id="scrollableDiv" isData={data.length > 0}>
+        {!isLoading && totalResults > 0 ? (
           <InfiniteScroll
             dataLength={data.length}
             next={() => nextData()}
-            // next={() => setTimeout(nextData, 3000)}
-            hasMore={true}
-            loader={<h4>Loading...</h4>}
+            hasMore={totalResults - data.length > 10 ? true : false}
+            loader={<MyLoader />}
             scrollableTarget="scrollableDiv"
             endMessage={
               <p style={{ textAlign: "center" }}>
-                <b>Yay! You have seen it all</b>
+                <b>End of results</b>
               </p>
             }
           >
@@ -140,15 +151,17 @@ const FeedCardList: React.FC<{
             ))}
           </InfiniteScroll>
         ) : (
-          <NotFoundContainer>
-            <NotFoundImg src={NotFoundSVG} alt="" />
-            <NotFoundText>
-              We couldn’t find any matches for your query
-            </NotFoundText>
-          </NotFoundContainer>
+          totalResults === 0 && (
+            <NotFoundContainer>
+              <NotFoundImg src={NotFoundSVG} alt="" />
+              <NotFoundText>
+                We couldn’t find any matches for your query
+              </NotFoundText>
+            </NotFoundContainer>
+          )
         )}
       </FeedCardListContainer>
-    </FeedCardListScroll>
+    </>
   );
 };
 

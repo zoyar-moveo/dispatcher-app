@@ -1,7 +1,7 @@
 import axios from "axios";
 const _ = require("lodash");
-const API_KEY = "BLA BLD";
-// const API_KEY = process.env.REACT_APP_API_KEY;
+// const API_KEY = "BLA BLD";
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 // to check it
 const getSourceName = (fullName: string) => {
@@ -38,7 +38,6 @@ async function makeGetRequest(
   endPoint: any,
   page: number
 ) {
-  console.log("makeGetRequest");
   let filtersObj: any;
   filtersObj = filters.filter;
   let filterObj = {};
@@ -49,7 +48,6 @@ async function makeGetRequest(
   const res = axios1.get("/top-headlines", {
     params: { ...API_DEFAULT_PARAMS, ...filterObj, page: page },
   });
-  console.log(res);
 
   return res;
 }
@@ -64,7 +62,6 @@ export async function makeGetRequestEvery(filtersEvery: {
   };
   searchQ: string;
 }) {
-  console.log("makeGetRequestEvery");
   let filtersObj = filtersEvery.filter;
   let filterObj = {};
   for (let [key, value] of Object.entries(filtersObj!)) {
@@ -79,6 +76,5 @@ export async function makeGetRequestEvery(filtersEvery: {
   const res = axios1.get("/everything", {
     params: { ...API_DEFAULT_PARAMS, ...filterObj },
   });
-  console.log(res);
   return res;
 }

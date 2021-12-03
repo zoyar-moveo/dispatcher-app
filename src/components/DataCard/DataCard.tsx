@@ -4,6 +4,7 @@ import SourcesChart from "./charts/sourcesChart/SourcesChart";
 import DatesChart from "./charts/datesChart/DatesChart";
 import TagsChart from "./charts/tagsChart/TagsChart";
 import NoChart from "./NoChart";
+import { useSelector } from "react-redux";
 
 export enum DataTypeList {
   sourcesChart = "Sources",
@@ -21,6 +22,9 @@ export interface DataCardProps {
 }
 
 const FeedCard: React.FC<DataCardProps> = (props) => {
+  const totalResults: any = useSelector<any>(
+    (state) => state.data.totalResults
+  );
   const isData = props.data?.datasets[0].data.length > 0;
   return (
     <CardContainer isData={isData}>
@@ -28,7 +32,7 @@ const FeedCard: React.FC<DataCardProps> = (props) => {
         <CardHeader>{props.DataType}</CardHeader>
         <Underline />
 
-        {isData ? (
+        {totalResults ? (
           <>
             {props.DataType === DataTypeList.sourcesChart && (
               <SourcesChart data={props.data} options={props.options} />

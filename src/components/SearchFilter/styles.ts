@@ -3,10 +3,10 @@ import styled from "styled-components";
 export const SearchFilterContainer = styled.div<{ isFocus: boolean }>`
   /* padding: 0 15px; */
   width: 80vw;
-  /* width: ${(props) => (props.isFocus ? "667px" : "300px")}; // not working */
+  width: ${(props) => (props.isFocus ? "667px" : "423px")}; // not working
   /* width: 667px; */
   @media (max-width: 800px) {
-    width: 100%;
+    width: 423px;
   }
   @media (max-width: 480px) {
     display: none;
@@ -16,14 +16,16 @@ export const SearchSubTitle = styled.div`
   display: flex;
   justify-content: space-between;
   text-transform: capitalize;
+  padding-top: 6.5px;
+  padding-bottom: 6.5px;
 `;
 
 export const FlexSpaceBetween = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  /* height: 50px; */
-  /* height: 100%; */
+  height: 50px;
+  background-color: #ffffff;
+  border-radius: 10px;
 `;
 
 export const InnerFilter = styled.div`
@@ -37,12 +39,15 @@ export const InnerFilter = styled.div`
 export const DropDownItem = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 0 15px;
+  /* padding: 0 15px; */
   align-items: center;
 `;
 
 export const ItemText = styled.div`
   width: 100%;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   &:hover {
     background-color: rgba(223, 224, 235, 0.41);
     cursor: pointer;
@@ -65,19 +70,37 @@ export const ExitImg = styled.img`
 `;
 
 export const ClearBtn = styled.span`
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 600;
   &:hover {
     cursor: pointer;
   }
+`;
+export const Resent = styled.span`
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 450;
 `;
 
 export const SearchPlasholder = styled.span`
   font-size: 0.875rem;
 `;
-
+export const SeparatingLine = styled.div`
+  border-right: 0.5px solid #d9dbe9;
+  opacity: 0.5;
+  height: 80%;
+  margin: auto;
+`;
 export const SearchContainer = styled.div`
   display: flex;
   align-items: center;
-  height: fit-content;
+  height: 50px;
+  /* background-color: #ffffff; */
+  width: 100%;
+  padding-left: 17.8px;
+  /* border-right: 0.5px solid #d9dbe9; */
+
   /* padding: 0 15px; */
 
   & input {

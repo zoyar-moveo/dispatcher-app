@@ -3,8 +3,10 @@ import {
   ClearBtn,
   ExitImg,
   ItemText,
+  Resent,
   SearchFilterContainer,
   SearchSubTitle,
+  SeparatingLine,
 } from "./styles";
 import { FilterContainer } from "../Filter/styles";
 import Filter from "../Filter/Filter";
@@ -96,42 +98,48 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
   };
 
   return (
-    <SearchFilterContainer ref={ref} isFocus={true}>
-      <FilterContainer filterSort="primary" isFocus={isFocus}>
-        <FlexSpaceBetween>
-          <SearchContainer>
-            <Img alt="" src={props.searchIcon} />
-            <form onSubmit={onInputUpdate}>
-              <input
-                type="text"
-                value={searchVal}
-                placeholder="Search"
-                onChange={onInputVal}
-                onFocus={onFocusInput}
-                onKeyDown={handleKeyDown}
-                autoComplete="false"
-                ref={refInput}
-              ></input>
-            </form>
-          </SearchContainer>
-          {props.isLargeScreen && (
-            <Filter
-              filterSort="inner"
-              filterType="Top Headlines"
-              filtersList={[
-                { id: endPointTypes.EVERYTHING, value: "Everything" },
-                { id: endPointTypes.TOP_HEADLINES, value: "Top Headlines" },
-              ]}
-              parentFilterUpdate={props.parentFilterUpdate}
-            ></Filter>
-          )}
-        </FlexSpaceBetween>
-      </FilterContainer>
+    <SearchFilterContainer ref={ref} isFocus={isFocus}>
+      {/* <FilterContainer filterSort="primary" isFocus={isFocus}> */}
+      <FlexSpaceBetween>
+        <SearchContainer>
+          <Img alt="" src={props.searchIcon} />
+          <form onSubmit={onInputUpdate}>
+            <input
+              type="text"
+              value={searchVal}
+              placeholder="Search"
+              onChange={onInputVal}
+              onFocus={onFocusInput}
+              onKeyDown={handleKeyDown}
+              autoComplete="false"
+              ref={refInput}
+            ></input>
+          </form>
+        </SearchContainer>
+        {props.isLargeScreen && (
+          <>
+            <SeparatingLine />
+            <div onClick={() => setIsFocus(false)}>
+              <Filter
+                filterSort="inner"
+                filterType="Top Headlines"
+                filtersList={[
+                  { id: endPointTypes.EVERYTHING, value: "Everything" },
+                  { id: endPointTypes.TOP_HEADLINES, value: "Top Headlines" },
+                ]}
+                parentFilterUpdate={props.parentFilterUpdate}
+              ></Filter>
+            </div>
+          </>
+        )}
+      </FlexSpaceBetween>
+      {/* </FilterContainer> */}
 
       {isDropDownOpen && props.SearchsList && (
-        <FilterContainer filterSort="resent" isFocus={true}>
+        // <FilterContainer filterSort="inner" isFocus={true}>
+        <FilterContainer filterSort="resent" isFocus={isFocus}>
           <SearchSubTitle>
-            <span>{"resent searches".toUpperCase()}</span>
+            <Resent>{"resent searches".toUpperCase()}</Resent>
             <ClearBtn onClick={onClearBtn}>{"clear".toUpperCase()}</ClearBtn>
           </SearchSubTitle>
           {props.SearchsList.map((searchItem: string, index: number) => {

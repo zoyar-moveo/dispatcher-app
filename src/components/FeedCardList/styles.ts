@@ -1,22 +1,17 @@
 import styled from "styled-components";
 
-export const FeedCardListContainer = styled.div<{ isData: boolean }>`
+export const FeedCardListContainer = styled.div<{ isData?: boolean }>`
   height: 100vh;
-  margin-right: 20px;
-  width: 100%; //
-  /* width: calc(100% - 410px); // */
+  overflow: scroll;
+  padding-right: 20px;
+  /* width: 300px; */
+  /* width: 100%; */
+  /* width: calc(100% - 410px); */
   display: flex;
+  flex-direction: column;
   /* width: 75%; */
   @media (max-width: 800px) {
     margin-right: 0px;
-  }
-`;
-
-export const FeedCardListScroll = styled.div<{ isToShow: boolean }>`
-  @media (min-width: 800px) {
-    height: 100vh;
-    overflow: auto;
-    width: 100%;
   }
 `;
 

@@ -11,11 +11,12 @@ export const FilterContainer = styled.div<{
       ? "175px"
       : props.filterSort === "inner"
       ? "max(fit-content,160px)"
-      : // ? "max(fit-content,160px)"
-      props.isFocus === true
+      : props.isFocus === true
       ? "667px"
+      : props.filterSort === "resent"
+      ? "100%"
       : "423px"};
-  background: #ffffff;
+  background-color: #ffffff;
   border-radius: 10px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -23,6 +24,9 @@ export const FilterContainer = styled.div<{
   line-height: 1.375rem;
   letter-spacing: 0.015625rem;
   color: #5a5a89;
+  @media (max-width: 800px) {
+    width: ${(props) => (props.filterSort === "resent" ? "423px" : "")};
+  }
   /* height: 50px; // */
   /* height: fit-content; */
   /* height: ${(props) =>
@@ -32,12 +36,14 @@ export const FilterContainer = styled.div<{
       ? // props.filterSort === "inner" || props.filterSort === "secondary"
         "0"
       : "0.9375rem"}; */
-  padding: ${(props) => (props.filterTitle ? "12.5px 15px" : "0")};
+  padding: ${(props) =>
+    props.filterTitle || props.filterSort === "resent" ? "12.5px 15px" : "0"};
   box-shadow: ${(props) =>
     props.isDropDown === true || props.filterSort === "resent"
       ? "0px 4px 12px rgba(0, 0, 0, 0.08)"
       : "none"};
   position: relative;
+  margin-top: ${(props) => (props.filterSort === "resent" ? "6px" : "")};
 
   & img {
     margin-left: 0.5rem;
@@ -68,18 +74,21 @@ export const DropDownList = styled.div<{ filterSort: string }>`
   padding-left: 10px;
   margin-top: 12px; */
   border-radius: 10px;
+  padding-top: 6px;
 `;
 
 export const DropDownItem = styled.div<{}>`
   font-family: Mulish;
   letter-spacing: 0.5px;
-  padding-bottom: 12px;
   &:hover {
     background-color: rgba(223, 224, 235, 0.41);
     cursor: pointer;
   }
   padding-right: 10px;
-  padding-left: 10px;
+  padding-left: 15px;
+  padding-top: 3.5px;
+  padding-bottom: 3.5px;
+  font-size: 12px;
 `;
 
 export const CurrFilter = styled.div<{ filterType: string }>`
@@ -88,6 +97,7 @@ export const CurrFilter = styled.div<{ filterType: string }>`
   justify-content: space-between;
   cursor: pointer;
   width: 140px;
+  /* padding-left: 22.5px; */
   & div {
     /* font-size: ${(props) =>
       props.filterType === "Dates" ? "9x" : "inherit"}; */
