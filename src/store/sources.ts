@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getSources } from "../services/ApiData";
 
 const initialSourcessState = {
   sources: [],
+  // sources: () => getSources(),
 };
 
 const sourcesSlice = createSlice({

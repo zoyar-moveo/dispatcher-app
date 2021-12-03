@@ -97,7 +97,6 @@ const FeedCardList: React.FC<{
         try {
           dispatch(dataActions.updateIsLoading(true));
           res = await makeGetRequestEvery(filterEverything);
-          console.log("res", res);
         } catch (err: any) {
           console.log(err.response.status);
           console.log(err.response.data);
@@ -105,12 +104,10 @@ const FeedCardList: React.FC<{
         }
       }
       if (res) {
-        console.log("res", res);
         let articles = res.data.articles;
         dispatch(dataActions.updateResStatus(res.data.status));
         dispatch(dataActions.updateTotalResults(res.data.totalResults));
         if (isScroll) {
-          console.log("is scroll after next data");
           dispatch(dataActions.addData(articles));
         } else {
           dispatch(dataActions.updateData(articles));

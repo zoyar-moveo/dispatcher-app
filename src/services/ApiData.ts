@@ -9,6 +9,7 @@ const getSourceName = (fullName: string) => {
 };
 
 export async function getSources() {
+  console.log("get sources");
   const sourcesObj = await axios.get(
     `https://newsapi.org/v2/top-headlines/sources?apiKey=${API_KEY}`
   );

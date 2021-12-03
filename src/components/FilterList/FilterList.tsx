@@ -16,7 +16,6 @@ export interface FilterListProps {
 
 const FilterList: React.FC<FilterListProps> = (props) => {
   if (_.isEmpty(props.filterData)) return <div>loading..</div>;
-  console.log("filterList", props.filterData);
   return (
     <FilterListContainer>
       {props.filterData.map((dataType: string, index: number) => {

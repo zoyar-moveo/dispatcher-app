@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import makeGetRequest from "../services/ApiData";
-import getSourcesMap from "../utiles/getSourcesMap";
+import makeGetRequest, { getSources } from "../services/ApiData";
 
 const getInitialData = async () => {
   let res = await makeGetRequest(

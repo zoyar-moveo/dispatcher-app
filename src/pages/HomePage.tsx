@@ -48,9 +48,9 @@ const HomePage: React.FC = () => {
   const [isMobileTabletFilter, setIsMobileTabletFilter] = useState(false);
   const [searchsList, setSearchsList] = useState<string[]>([]);
   const [searchItem, setSearchItem] = useState<string>("");
-  // const [sources, setSources] = useState([]);
+  const [sources, setSources] = useState();
   const endPoint: any = useSelector<any>((state) => state.endPoint.endPoint);
-  const sources: any = useSelector<any>((state) => state.sources.sources);
+  // const sources: any = useSelector<any>((state) => state.sources.sources);
   const data: any = useSelector<any>((state) => state.data.data);
   const [title, setTitle] = useState<string>("");
   const [currFilters, setCurrFilters] = useState<any>([]);
@@ -64,6 +64,12 @@ const HomePage: React.FC = () => {
   //   { Sources: [[], false] },
   //   { Language: [filterEveryData[2].Language, false] },
   // ]);
+  useEffect(() => {
+    getSources().then((res) => {
+      // dispatch(sourcesActions.updateSources(res));
+      setSources(res);
+    });
+  }, []);
 
   const filterTopData = [
     {
@@ -181,13 +187,6 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     console.log(currFilters);
   }, [currFilters]);
-
-  useEffect(() => {
-    getSources().then((res) => {
-      dispatch(sourcesActions.updateSources(res));
-      // setSources(res);
-    });
-  }, []);
 
   // setDatas(datas=>({
   //    ...datas,
