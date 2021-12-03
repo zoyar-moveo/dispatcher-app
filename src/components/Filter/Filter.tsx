@@ -17,6 +17,7 @@ export interface FilterProps {
   filterType: string;
   filtersList: any;
   parentFilterUpdate: (filterType: string, filter: string | string[]) => void;
+  isDisabled?: boolean;
 }
 
 const Filter: React.FC<FilterProps> = ({
@@ -24,6 +25,7 @@ const Filter: React.FC<FilterProps> = ({
   filterType,
   filtersList,
   parentFilterUpdate,
+  isDisabled,
 }) => {
   const [IsDropDownOpen, SetIsDropDownOpen] = useState(false);
 
@@ -59,7 +61,11 @@ const Filter: React.FC<FilterProps> = ({
   return (
     <>
       <MainFilterContainer>
-        <FilterContainer filterSort={filterSort} filterTitle={true}>
+        <FilterContainer
+          filterSort={filterSort}
+          filterTitle={true}
+          isDisabled={isDisabled}
+        >
           {/* <div>{filterSort}</div> */}
           <CurrFilter
             filterType={filterType}

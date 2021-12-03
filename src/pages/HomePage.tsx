@@ -40,7 +40,7 @@ const HomePage: React.FC = () => {
   const [sourcesMap, setSourcesMap] = useState<{
     labels: string[];
     dataSetData: number[];
-  }>({ labels: [], dataSetData: [] }); /// counter for sources
+  }>({ labels: [], dataSetData: [] });
   const { height, width } = useWindowDimensions();
   const [isMobileSearch, setIsMobileSearch] = useState(false);
   const [isEverything, setIsEverything] = useState(false);
@@ -51,6 +51,7 @@ const HomePage: React.FC = () => {
   const endPoint: any = useSelector<any>((state) => state.endPoint.endPoint);
   const data: any = useSelector<any>((state) => state.data.data);
   const [title, setTitle] = useState<string>("");
+  const [currFilters, setCurrFilters] = useState<any>([]);
 
   const filterTopData = [
     {
@@ -111,21 +112,29 @@ const HomePage: React.FC = () => {
     }
   };
 
+  const checkIfToDisable = () => {};
+
   const parentFilterUpdate = (
     filterType: string,
     filter: string | string[]
   ) => {
     switch (filterType) {
       case "Sources":
-        if (endPoint === "top-headlines")
+        if (endPoint === "top-headlines") {
           dispatch(filterActions.updateSource(filter));
-        else dispatch(filterEverythingActions.updateSource(filter));
+          setCurrFilters((state: any) => [...state, "Sources"]);
+        } else dispatch(filterEverythingActions.updateSource(filter));
         return;
+
       case "Country":
         dispatch(filterActions.updateCountry(filter));
+        setCurrFilters((state: any) => [...state, "Country"]);
+
         return;
       case "Category":
         dispatch(filterActions.updateCategory(filter));
+        setCurrFilters((state: any) => [...state, "Category"]);
+
         return;
       case "Language":
         dispatch(filterEverythingActions.updateLanguage(filter));
@@ -145,13 +154,17 @@ const HomePage: React.FC = () => {
   };
 
   useEffect(() => {
+    console.log(currFilters);
+  }, [currFilters]);
+
+  useEffect(() => {
     if (!sources) {
       getSources().then((res) => {
         dispatch(sourcesActions.updateSources(res));
         setSources(res);
       });
     }
-    if (data) setTitle("Top Headlines in Israel");
+    // if (data) setTitle("Top Headlines in Israel");
   }, []);
 
   useEffect(() => {
@@ -221,7 +234,6 @@ const HomePage: React.FC = () => {
   const onClearStorage = () => {
     localStorageService.clearStorage(KEY);
     setSearchsList([]);
-    // setSearchItem("");
   };
 
   return (

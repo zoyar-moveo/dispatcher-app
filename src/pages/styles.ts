@@ -15,9 +15,8 @@ export const HomePageContainer = styled.div`
 export const FeedDataContainer = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100%; //
-  /* justify-content: space-between; // */
-  /* justify-content: center; // */
+  width: 100%;
+  justify-content: space-between;
 `;
 
 export const SeparetorLine = styled.div`
@@ -42,8 +41,8 @@ export const Title = styled.div`
 export const FeedDataMainContainer = styled.div`
   display: flex;
   /* width: clamp(16rem, 80vw, 70rem); */
-  margin: auto;
-  justify-content: center;
+  /* margin: auto; */
+  /* justify-content: center; */
   width: 100%;
   @media (max-width: 800px) {
     padding: 0 20px;

@@ -11,7 +11,7 @@ export const FeedCardListContainer = styled.div<{ isData?: boolean }>`
   flex-direction: column;
   /* width: 75%; */
   @media (max-width: 800px) {
-    margin-right: 0px;
+    padding-right: 0px;
   }
 `;
 

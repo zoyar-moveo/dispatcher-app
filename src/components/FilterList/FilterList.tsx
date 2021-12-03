@@ -10,6 +10,7 @@ export interface FilterListProps {
     // filter: { Sources: string; Country: string; Category: string }
   ) => void;
   updateSearchInput: (item: string) => void;
+  // isDisables?: boolean;
 }
 
 const FilterList: React.FC<FilterListProps> = (props) => {
@@ -23,6 +24,7 @@ const FilterList: React.FC<FilterListProps> = (props) => {
             filterType={Object.keys(dataType).toString()}
             filtersList={Object.values(dataType)[0]}
             parentFilterUpdate={props.parentFilterUpdate}
+            isDisabled={false}
             key={index}
           ></Filter>
         );

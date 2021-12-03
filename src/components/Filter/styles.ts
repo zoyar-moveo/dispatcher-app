@@ -1,10 +1,11 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const FilterContainer = styled.div<{
   filterSort: string;
   filterTitle?: boolean;
   isFocus?: boolean;
   isDropDown?: boolean;
+  isDisabled?: boolean;
 }>`
   width: ${(props) =>
     props.filterSort === "secondary"
@@ -54,6 +55,14 @@ export const FilterContainer = styled.div<{
     margin-bottom: 0.625rem;
   }
   z-index: 3;
+  ${(props) =>
+    props.isDisabled &&
+    css`
+      pointer-events: none;
+      background: rgba(0, 0, 0, 0.08);
+      opacity: 0.6;
+      cursor: not-allowed;
+    `}
 `;
 
 export const MainFilterContainer = styled.div<{}>`
@@ -89,6 +98,9 @@ export const DropDownItem = styled.div<{}>`
   padding-top: 3.5px;
   padding-bottom: 3.5px;
   font-size: 12px;
+  &:last-child {
+    padding-bottom: 7px;
+  }
 `;
 
 export const CurrFilter = styled.div<{ filterType: string }>`
