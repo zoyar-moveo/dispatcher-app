@@ -16,6 +16,7 @@ export async function getSources() {
   const sourcesNames = sourcesObj.data.sources.map((item: any) => {
     return { id: item.id, value: getSourceName(item.name) };
   });
+  console.log("sourcesNames", sourcesNames);
   return sourcesNames;
 }
 const API_DEFAULT_PARAMS = {

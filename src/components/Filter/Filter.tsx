@@ -77,7 +77,7 @@ const Filter: React.FC<FilterProps> = ({
         </FilterContainer>
         {IsDropDownOpen && filterType !== "Dates" && (
           <FilterContainer filterSort={filterSort} isDropDown={true}>
-            {/* <div>{filterSort}</div> */}
+            <>{console.log(filtersList)}</>
             <DropDownList filterSort={filterSort}>
               {filtersList.map((filterItem: { id: string; value: string }) => (
                 <DropDownItem

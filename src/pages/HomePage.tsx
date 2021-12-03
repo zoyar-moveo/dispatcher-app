@@ -64,12 +64,12 @@ const HomePage: React.FC = () => {
   //   { Sources: [[], false] },
   //   { Language: [filterEveryData[2].Language, false] },
   // ]);
-  useEffect(() => {
-    getSources().then((res) => {
-      // dispatch(sourcesActions.updateSources(res));
-      setSources(res);
-    });
-  }, []);
+  // useEffect(() => {
+  //   getSources().then((res) => {
+  //     // dispatch(sourcesActions.updateSources(res));
+  //     setSources(res);
+  //   });
+  // }, []);
 
   const filterTopData = [
     {
@@ -120,6 +120,21 @@ const HomePage: React.FC = () => {
       ],
     },
   ];
+  useEffect(() => {
+    if (!sources) {
+      getSources().then((res) => {
+        // dispatch(sourcesActions.updateSources(res));
+        setSources(res);
+      });
+    }
+    if (data) setTitle("Top Headlines in Israel");
+  }, []);
+
+  // useEffect(() => {
+  //   console.log("now");
+  //   console.log(filterEveryData);
+  //   console.log(filterTopData);
+  // }, sources);
 
   const getFilterData = useCallback(() => {
     if (endPoint === endPointTypes.TOP_HEADLINES) {
@@ -148,7 +163,7 @@ const HomePage: React.FC = () => {
       case "Sources":
         if (endPoint === "top-headlines") {
           dispatch(filterActions.updateSource(filter));
-          setCurrFilters((state: any) => [...state, "Sources"]);
+          // setCurrFilters((state: any) => [...state, "Sources"]);
         } else dispatch(filterEverythingActions.updateSource(filter));
         return;
 
