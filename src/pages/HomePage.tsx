@@ -1,4 +1,5 @@
 import GlobalStyles from "../GlobalStyles";
+import { useCallback } from "react";
 import Header from "../components/Header/Header";
 import LogoIcon from "../components/Header/assets/LOGO1.svg";
 import SettingsIcon from "../components/Header/assets/settings.svg";
@@ -47,11 +48,22 @@ const HomePage: React.FC = () => {
   const [isMobileTabletFilter, setIsMobileTabletFilter] = useState(false);
   const [searchsList, setSearchsList] = useState<string[]>([]);
   const [searchItem, setSearchItem] = useState<string>("");
-  const [sources, setSources] = useState();
+  // const [sources, setSources] = useState([]);
   const endPoint: any = useSelector<any>((state) => state.endPoint.endPoint);
+  const sources: any = useSelector<any>((state) => state.sources.sources);
   const data: any = useSelector<any>((state) => state.data.data);
   const [title, setTitle] = useState<string>("");
   const [currFilters, setCurrFilters] = useState<any>([]);
+  // const [filterTopData1, setFilterTopData1] = useState<any>([
+  //   { Country: [filterTopData[0].Country, false] },
+  //   { Category: [filterTopData[1].Category, false] },
+  //   { Sources: [[], false] },
+  // ]);
+  // const [filterEveryData1, setFilterEveryData] = useState([
+  //   { Dates: [[], false] },
+  //   { Sources: [[], false] },
+  //   { Language: [filterEveryData[2].Language, false] },
+  // ]);
 
   const filterTopData = [
     {
@@ -79,7 +91,6 @@ const HomePage: React.FC = () => {
       Sources: sources,
     },
   ];
-
   const filterEveryData = [
     // {
     //   SortBy: [
@@ -104,13 +115,22 @@ const HomePage: React.FC = () => {
     },
   ];
 
-  const getFilterData = () => {
+  const getFilterData = useCallback(() => {
     if (endPoint === endPointTypes.TOP_HEADLINES) {
+      // return filterTopData1;
       return filterTopData;
     } else {
+      // return filterEveryData1;
       return filterEveryData;
     }
-  };
+  }, [endPoint]);
+  // const getFilterData = () => {
+  //   if (endPoint === endPointTypes.TOP_HEADLINES) {
+  //     return filterTopData;
+  //   } else {
+  //     return filterEveryData;
+  //   }
+  // };
 
   const checkIfToDisable = () => {};
 
@@ -153,19 +173,40 @@ const HomePage: React.FC = () => {
     }
   };
 
+  const checkIfDisable = (filterType: string) => {
+    // if (!currFilters.includes(filterType))
+    // setCurrFilters((state: any) => [...state, filterType]);
+    return false;
+  };
   useEffect(() => {
     console.log(currFilters);
   }, [currFilters]);
 
   useEffect(() => {
-    if (!sources) {
-      getSources().then((res) => {
-        dispatch(sourcesActions.updateSources(res));
-        setSources(res);
-      });
-    }
-    // if (data) setTitle("Top Headlines in Israel");
+    getSources().then((res) => {
+      dispatch(sourcesActions.updateSources(res));
+      // setSources(res);
+    });
   }, []);
+
+  // setDatas(datas=>({
+  //    ...datas,
+  //    [index]: e.target.value
+  // }))
+  // newArr[index][propertyName];
+  // setFilterTopData1((state: any) => ({ ...state, [2].Sources: "newwww" }));
+  // let filterTopData12 = [...filterTopData1, { Sources: "new" }];
+  // let filterTopData12 = [
+  //   ...filterTopData1,
+  //   (filterTopData1[2] = {
+  //     Sources: [["fd", "fd"], false],
+  //   }),
+  // ];
+
+  // console.log("filterTopData12", filterTopData12);
+  // }
+  // if (data) setTitle("Top Headlines in Israel");
+  // }, []);
 
   useEffect(() => {
     let itemsList = localStorageService.loadFromStorage(KEY);
@@ -280,6 +321,7 @@ const HomePage: React.FC = () => {
                   filterData={getFilterData()}
                   parentFilterUpdate={parentFilterUpdate}
                   updateSearchInput={updateSearchInput}
+                  checkIfDisable={checkIfDisable}
                 />
                 <SeparetorLine />
                 <Title>{title}</Title>
