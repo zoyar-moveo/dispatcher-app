@@ -6,7 +6,7 @@ const LineLoader = () => (
     width="412px"
     height="378px"
     backgroundColor="#f3f3f3"
-    foregroundColor="#c3c2c2"
+    foregroundColor="#888888dc"
   >
     {/* <rect x="20" y="5" rx="0" ry="0" width="1" height="170" /> */}
 

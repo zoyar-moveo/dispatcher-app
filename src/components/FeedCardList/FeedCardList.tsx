@@ -61,8 +61,9 @@ const FeedCardList: React.FC<{
 
   useEffect(() => {
     setPageNumber(1);
-    getData();
+    getData(1);
   }, [endPoint, filters, filterEverything]);
+  // }, [filters, filterEverything]);
 
   // useEffect(() => {
   //   getData(1);
@@ -80,11 +81,11 @@ const FeedCardList: React.FC<{
     // dispatch(dataActions.updatePage(temp));
     setPageNumber(temp);
     setGettingNextData(true); /// net sure
-    getData(true);
+    getData(temp, true);
   };
   const getData = useCallback(
-    async (isScroll?: boolean, filterts?: any) => {
-      // async (pageNumber: number, isScroll?: boolean, filterts?: any) => {
+    // async (isScroll?: boolean, filterts?: any) => {
+    async (pageNumber: number, isScroll?: boolean, filterts?: any) => {
       let res;
       console.log("pageNumber", pageNumber);
       if (endPoint === endPointTypes.TOP_HEADLINES) {
@@ -103,7 +104,7 @@ const FeedCardList: React.FC<{
       } else {
         try {
           dispatch(dataActions.updateIsLoading(true));
-          res = await makeGetRequestEvery(filterEverything);
+          res = await makeGetRequestEvery(filterEverything, pageNumber);
         } catch (err: any) {
           console.log(err.response.status);
           console.log(err.response.data);
@@ -123,7 +124,8 @@ const FeedCardList: React.FC<{
       }
       dispatch(dataActions.updateIsLoading(false));
     },
-    [endPoint, filters, filterEverything, pageNumber]
+    [endPoint, filters, filterEverything]
+    // [endPoint, filters, filterEverything, pageNumber]
   );
 
   return (

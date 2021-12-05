@@ -9,9 +9,11 @@ import {
 } from "./styles";
 const ARTICLESNUM = 10;
 
-const SourcesLegend: React.FC<{ labels: string[]; dataSetData: any }> = (
-  props
-) => {
+const SourcesLegend: React.FC<{
+  labels: string[];
+  dataSetData: any;
+  articlesNum: number;
+}> = (props) => {
   return (
     <LegendListContainer>
       {props.labels.map((label, idx) => (
@@ -21,7 +23,10 @@ const SourcesLegend: React.FC<{ labels: string[]; dataSetData: any }> = (
             <Label key={idx}>{label}</Label>
           </BulletTitle>
           <Persents>
-            {(props.dataSetData[0].data[idx] / ARTICLESNUM) * 100}%
+            {Math.round(
+              (props.dataSetData[0].data[idx] / props.articlesNum) * 100
+            )}
+            %
           </Persents>
         </Row>
       ))}

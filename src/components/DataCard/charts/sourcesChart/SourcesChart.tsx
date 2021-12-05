@@ -14,6 +14,7 @@ export interface chartProps {
     datasets: any;
   };
   options: any;
+  articlesNum: number;
 }
 
 const SourcesChart: React.FC<chartProps> = (props) => {
@@ -33,6 +34,7 @@ const SourcesChart: React.FC<chartProps> = (props) => {
       <SourcesLegend
         labels={props.data.labels}
         dataSetData={props.data.datasets}
+        articlesNum={props.articlesNum}
       />
     </div>
   );

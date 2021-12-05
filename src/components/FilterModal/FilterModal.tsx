@@ -9,7 +9,7 @@ export interface FilterModalProps {
 }
 
 const FilterModal: React.FC<FilterModalProps> = (props) => {
-  const FilterCatagories: FilterI = {
+  const FilterCatagories: any = {
     FilterEverything: {
       Sources: { selected: "All", options: ["Ynet", "walla", "Mako"] },
       Language: { selected: "All", options: ["Hebrew", "English"] },
@@ -24,6 +24,21 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
       Sources: { selected: "All", options: ["Ynet", "walla", "Mako"] },
     },
   };
+  // const FilterCatagories: FilterI = {
+  //   FilterEverything: {
+  //     Sources: { selected: "All", options: ["Ynet", "walla", "Mako"] },
+  //     Language: { selected: "All", options: ["Hebrew", "English"] },
+  //     Dates: { selected: "All", options: ["1/1/2021", "31/1/2021"] },
+  //   },
+  //   FilterTop: {
+  //     Country: { selected: "Israel", options: ["Israel", "USA"] },
+  //     Category: {
+  //       selected: "All",
+  //       options: ["Health", "Politics", "Finance"],
+  //     },
+  //     Sources: { selected: "All", options: ["Ynet", "walla", "Mako"] },
+  //   },
+  // };
 
   const onFilterBack = () => {};
 

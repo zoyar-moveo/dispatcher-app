@@ -185,34 +185,6 @@ const HomePage: React.FC = () => {
     setSearchsList(itemsList);
   }, [searchItem]);
 
-  const getData = async () => {
-    let res;
-    if (endPoint === "top-headlines") {
-      res = await makeGetRequest(
-        {
-          filter: {
-            Country: "il",
-            Category: "",
-            Sources: "",
-          },
-          searchQ: "",
-        },
-        endPoint,
-        1
-      );
-    } else {
-      res = await makeGetRequestEvery({
-        filter: {
-          Dates: [],
-          Language: "",
-          Sources: "",
-        },
-        searchQ: "",
-      });
-    }
-    if (res.status === 200) dispatch(dataActions.updateData(res.data.articles));
-  };
-
   const updateSearchInput = (item: string) => {
     setSearchItem(item);
     dispatch(filterActions.updateSearchQ(item));

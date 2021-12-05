@@ -54,14 +54,17 @@ async function makeGetRequest(
 
 export default makeGetRequest;
 
-export async function makeGetRequestEvery(filtersEvery: {
-  filter: {
-    Sources: string;
-    Language: string;
-    Dates: string[];
-  };
-  searchQ: string;
-}) {
+export async function makeGetRequestEvery(
+  filtersEvery: {
+    filter: {
+      Sources: string;
+      Language: string;
+      Dates: string[];
+    };
+    searchQ: string;
+  },
+  page: number
+) {
   let filtersObj = filtersEvery.filter;
   let filterObj = {};
   for (let [key, value] of Object.entries(filtersObj!)) {
@@ -75,7 +78,7 @@ export async function makeGetRequestEvery(filtersEvery: {
     filterObj = { ...filterObj, q: filtersEvery.searchQ };
   console.log(filterObj);
   const res = axios1.get("/everything", {
-    params: { ...API_DEFAULT_PARAMS, ...filterObj },
+    params: { ...API_DEFAULT_PARAMS, ...filterObj, page: page },
   });
   return res;
 }
