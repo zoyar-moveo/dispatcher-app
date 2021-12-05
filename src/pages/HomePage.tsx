@@ -1,5 +1,5 @@
 import GlobalStyles from "../GlobalStyles";
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import Header from "../components/Header/Header";
 import LogoIcon from "../components/Header/assets/LOGO1.svg";
 import SettingsIcon from "../components/Header/assets/settings.svg";
@@ -51,32 +51,19 @@ const HomePage: React.FC = () => {
   const [sources, setSources] = useState();
   const endPoint: any = useSelector<any>((state) => state.endPoint.endPoint);
   const data: any = useSelector<any>((state) => state.data.data);
-  const [title, setTitle] = useState<string>("");
+  const title: any = useSelector<any>((state) => state.data.title);
+  const totalResults: any = useSelector<any>(
+    (state) => state.data.totalResults
+  );
+  const resStatus: any = useSelector<any>((state) => state.data.resStatus);
   const [currFilters, setCurrFilters] = useState<any>(["Country"]);
-  // const [filterTopData1, setFilterTopData1] = useState<any>([
-  //   { Country: [filterTopData[0].Country, false] },
-  //   { Category: [filterTopData[1].Category, false] },
-  //   { Sources: [[], false] },
-  // ]);
-  // const [filterEveryData1, setFilterEveryData] = useState([
-  //   { Dates: [[], false] },
-  //   { Sources: [[], false] },
-  //   { Language: [filterEveryData[2].Language, false] },
-  // ]);
-  // useEffect(() => {
-  //   getSources().then((res) => {
-  //     // dispatch(sourcesActions.updateSources(res));
-  //     setSources(res);
-  //   });
-  // }, []);
+
   useEffect(() => {
     if (!sources) {
       getSources().then((res) => {
-        // dispatch(sourcesActions.updateSources(res));
         setSources(res);
       });
     }
-    // if (data) setTitle("Top Headlines in Israel");
   }, []);
 
   const filterTopData = [
@@ -106,13 +93,13 @@ const HomePage: React.FC = () => {
     },
   ];
   const filterEveryData = [
-    // {
-    //   SortBy: [
-    //     { id: "popularity", value: "Popularity" },
-    //     { id: "publishedAt", value: "Resent" },
-    //     { id: "relevancy", value: "Relevancy" },
-    //   ],
-    // },
+    {
+      "Sort By": [
+        { id: "popularity", value: "Popularity" },
+        { id: "publishedAt", value: "Resent" },
+        { id: "relevancy", value: "Relevancy" },
+      ],
+    },
     {
       Dates: [],
     },
@@ -139,34 +126,27 @@ const HomePage: React.FC = () => {
     }
   };
 
-  // const cleanCurrFiltersUpdate = (filterType)
-
   const parentFilterUpdate = (
     filterType: string,
     filter: string | string[]
   ) => {
+    console.log(filterType, filter);
     if (filter === "" && filterType !== "Top Headlines") {
       setCurrFilters(currFilters.filter((item: string) => item !== filterType));
     } else {
       setCurrFilters((state: any) => [...state, filterType]);
     }
-    // } else {
     switch (filterType) {
       case "Sources":
         if (endPoint === "top-headlines") {
           dispatch(filterActions.updateSource(filter));
-          // setCurrFilters((state: any) => [...state, "Sources"]);
         } else dispatch(filterEverythingActions.updateSource(filter));
         return;
-
       case "Country":
         dispatch(filterActions.updateCountry(filter));
-        // setCurrFilters((state: any) => [...state, "Country"]);
-
         return;
       case "Category":
         dispatch(filterActions.updateCategory(filter));
-        // setCurrFilters((state: any) => [...state, "Category"]);
 
         return;
       case "Language":
@@ -175,8 +155,9 @@ const HomePage: React.FC = () => {
       case "Dates":
         dispatch(filterEverythingActions.updateDates(filter));
         return;
-      case "SoryBy":
-        dispatch(filterEverythingActions.updateSortBy(""));
+      case "Sort By":
+        console.log("sort by case");
+        dispatch(filterEverythingActions.updateSortBy(filter));
         return;
       case "Top Headlines":
         dispatch(endPointActions.updateEndPoint(filter));
@@ -184,7 +165,6 @@ const HomePage: React.FC = () => {
       default:
         return;
     }
-    // }
   };
 
   const checkIfDisable = (filterType: string) => {
@@ -199,25 +179,6 @@ const HomePage: React.FC = () => {
   };
 
   useEffect(() => {}, [currFilters]);
-
-  // setDatas(datas=>({
-  //    ...datas,
-  //    [index]: e.target.value
-  // }))
-  // newArr[index][propertyName];
-  // setFilterTopData1((state: any) => ({ ...state, [2].Sources: "newwww" }));
-  // let filterTopData12 = [...filterTopData1, { Sources: "new" }];
-  // let filterTopData12 = [
-  //   ...filterTopData1,
-  //   (filterTopData1[2] = {
-  //     Sources: [["fd", "fd"], false],
-  //   }),
-  // ];
-
-  // console.log("filterTopData12", filterTopData12);
-  // }
-  // if (data) setTitle("Top Headlines in Israel");
-  // }, []);
 
   useEffect(() => {
     let itemsList = localStorageService.loadFromStorage(KEY);
@@ -335,7 +296,7 @@ const HomePage: React.FC = () => {
                   checkIfDisable={checkIfDisable}
                 />
                 <SeparetorLine />
-                <Title>{title}</Title>
+                {resStatus === 200 && <Title title={title}>{title}</Title>}
               </>
             )}
             <FeedDataMainContainer>

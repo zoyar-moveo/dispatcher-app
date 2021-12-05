@@ -8,8 +8,8 @@ const MyLoader: FC = () => (
       width="100%"
       height="100%"
       viewBox="0 0 476 124"
-      backgroundColor="#a71818"
-      foregroundColor="#9c3030"
+      backgroundColor="#f3f3f3"
+      foregroundColor="#c3c2c2"
     >
       <rect x="180" y="15" rx="3" ry="3" width="103" height="7" />
       <rect x="180" y="39" rx="3" ry="3" width="61" height="7" />

@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 export const FeedCardListContainer = styled.div<{ isData?: boolean }>`
   height: 100vh;
-  overflow: scroll;
+  overflow: auto;
+  /* overflow: scroll; */
   padding-right: 20px;
   /* width: 300px; */
-  /* width: 100%; */
+  width: 100%;
   /* width: calc(100% - 410px); */
   display: flex;
   flex-direction: column;

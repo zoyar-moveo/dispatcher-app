@@ -4,13 +4,13 @@ import ContentLoader from "react-content-loader";
 const SourceLoader = () => (
   <ContentLoader
     speed={2}
-    width="100%"
+    width="412px"
     height="378px"
     // height="100%"
     viewBox="0 0 200 150"
     // viewBox="0 0 200 200"
-    backgroundColor="red"
-    foregroundColor="red"
+    backgroundColor="#f3f3f3"
+    foregroundColor="#c3c2c2"
   >
     <circle cx="98" cy="36" r="25" />
     <circle cx="43" cy="86" r="2" />

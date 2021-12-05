@@ -1,28 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import makeGetRequest, { getSources } from "../services/ApiData";
 
-const getInitialData = async () => {
-  let res = await makeGetRequest(
-    {
-      filter: {
-        Country: "us",
-        Category: "",
-        Sources: "",
-      },
-      searchQ: "",
-    },
-    "top-headlines",
-    1
-  );
-  return res.status === 200 ? res.data.articles : [];
-};
-
 const initialDataState: any = {
   data: [],
   totalResults: null,
   isLoading: true,
   page: 1,
   resStatus: null,
+  title: null,
 };
 
 const dataSlice = createSlice({
@@ -46,6 +31,9 @@ const dataSlice = createSlice({
     },
     updateResStatus(state, action) {
       state.resStatus = action.payload;
+    },
+    updateTitle(state, action) {
+      state.title = action.payload;
     },
   },
 });

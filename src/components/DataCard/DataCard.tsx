@@ -25,6 +25,7 @@ const FeedCard: React.FC<DataCardProps> = (props) => {
   const totalResults: any = useSelector<any>(
     (state) => state.data.totalResults
   );
+  const resStatus: any = useSelector<any>((state) => state.data.resStatus);
   const isData = props.data?.datasets[0].data.length > 0;
   return (
     <CardContainer isData={isData}>
@@ -32,7 +33,7 @@ const FeedCard: React.FC<DataCardProps> = (props) => {
         <CardHeader>{props.DataType}</CardHeader>
         <Underline />
 
-        {totalResults ? (
+        {totalResults > 0 && resStatus !== 400 ? (
           <>
             {props.DataType === DataTypeList.sourcesChart && (
               <SourcesChart data={props.data} options={props.options} />

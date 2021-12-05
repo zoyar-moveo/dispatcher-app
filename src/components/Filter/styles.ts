@@ -76,14 +76,16 @@ export const FilterTitle = styled.div<{ filterSort: string }>`
 `;
 
 export const DropDownList = styled.div<{ filterSort: string }>`
-  height: ${(props) =>
-    props.filterSort === "inner" ? "fit-contect" : "126px"};
+  /* height: ${(props) =>
+    props.filterSort === "inner" ? "fit-contect" : "126px"}; */
+  max-height: 126px;
+
   overflow: scroll;
   /* padding-right: 10px;
   padding-left: 10px;
   margin-top: 12px; */
   border-radius: 10px;
-  margin-top: 6px;
+  margin-top: 9px;
 `;
 
 export const DropDownItem = styled.div<{ isChosenFilter?: boolean }>`
@@ -99,7 +101,10 @@ export const DropDownItem = styled.div<{ isChosenFilter?: boolean }>`
   padding-bottom: 3.5px;
   font-size: 12px;
   &:last-child {
-    padding-bottom: 7px;
+    margin-bottom: 7px;
+  }
+  &:first-child {
+    margin-top: 6px;
   }
   background-color: ${(props) =>
     props.isChosenFilter ? "rgba(223, 224, 235, 0.41)" : ""};

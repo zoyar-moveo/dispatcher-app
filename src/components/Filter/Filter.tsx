@@ -52,6 +52,11 @@ const Filter: React.FC<FilterProps> = ({
     } else {
       setCurrFilter(currFilterValue);
       parentFilterUpdate(filterType, currFilterId);
+      console.log(
+        "parentFilterUpdate(filterType, currFilterId);",
+        filterType,
+        currFilterId
+      );
     }
 
     SetIsDropDownOpen(false);
@@ -64,9 +69,9 @@ const Filter: React.FC<FilterProps> = ({
     parentFilterUpdate("Dates", [startDate, endDate]);
     if (end) SetIsDropDownOpen(false);
     setCurrFilter(
-      `${moment(Date.parse(startDate)).format("YYYY/MM/DD")} - ${moment(
+      `${moment(Date.parse(startDate)).format("DD/MM/YY")} - ${moment(
         Date.parse(endDate)
-      ).format("YYYY/MM/DD")}`
+      ).format("DD/MM/YY")}`
     );
   };
 

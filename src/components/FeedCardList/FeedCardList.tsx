@@ -53,42 +53,49 @@ const FeedCardList: React.FC<{
     (state) => state.data.totalResults
   );
   const page: any = useSelector<any>((state) => state.data.page);
+  const resStatus: any = useSelector<any>((state) => state.data.resStatus);
   const isLoading: any = useSelector<any>((state) => state.data.isLoading);
   const endPoint: any = useSelector<any>((state) => state.endPoint.endPoint);
-  const [pageNumber, setPageNumber] = useState(1);
-
-  const firstUpdate = useRef(true);
-
-  // if (firstUpdate.current) {
-  //   firstUpdate.current = false;
-  //   return;
-  // }
+  const [pageNumber, setPageNumber] = useState(0);
+  const [gettingNextData, setGettingNextData] = useState(false);
 
   useEffect(() => {
-    if (filterEverything) getData(1); // change condition
-  }, [filterEverything]);
+    setPageNumber(1);
+    getData();
+  }, [endPoint, filters, filterEverything]);
 
-  useEffect(() => {
-    if (filters) getData(1); // change condition
-  }, [filters]);
-
-  useEffect(() => {
-    getData(1);
-  }, []);
+  // useEffect(() => {
+  //   getData(1);
+  // }, []);
+  const isTopIsraerl = (filters: any) => {
+    return (
+      filters.filter.Category === "" &&
+      filters.filter.Sources === "" &&
+      filters.filter.Country === "il"
+    );
+  };
 
   const nextData = () => {
-    let temp = page + 1;
-    dispatch(dataActions.updatePage(temp));
+    let temp = pageNumber + 1;
+    // dispatch(dataActions.updatePage(temp));
     setPageNumber(temp);
-    getData(temp, true);
+    setGettingNextData(true); /// net sure
+    getData(true);
   };
   const getData = useCallback(
-    async (pageNumber: number, isScroll?: boolean) => {
+    async (isScroll?: boolean, filterts?: any) => {
+      // async (pageNumber: number, isScroll?: boolean, filterts?: any) => {
       let res;
+      console.log("pageNumber", pageNumber);
       if (endPoint === endPointTypes.TOP_HEADLINES) {
         try {
           dispatch(dataActions.updateIsLoading(true));
           res = await makeGetRequest(filters, endPoint, pageNumber);
+          isTopIsraerl(filters)
+            ? dispatch(dataActions.updateTitle("Top Headlines in Israel"))
+            : dispatch(
+                dataActions.updateTitle(totalResults + " Total Results")
+              );
         } catch (err: any) {
           console.log(err.response.status);
           dispatch(dataActions.updateResStatus(err.response.status));
@@ -104,8 +111,9 @@ const FeedCardList: React.FC<{
         }
       }
       if (res) {
+        console.log(res);
         let articles = res.data.articles;
-        dispatch(dataActions.updateResStatus(res.data.status));
+        dispatch(dataActions.updateResStatus(res.status));
         dispatch(dataActions.updateTotalResults(res.data.totalResults));
         if (isScroll) {
           dispatch(dataActions.addData(articles));
@@ -115,12 +123,12 @@ const FeedCardList: React.FC<{
       }
       dispatch(dataActions.updateIsLoading(false));
     },
-    [endPoint, filters, filterEverything]
+    [endPoint, filters, filterEverything, pageNumber]
   );
 
   return (
     <>
-      {isLoading && (
+      {isLoading && !gettingNextData && (
         <div style={{ display: "flex", flexDirection: "column" }}>
           <FeedCardListContainer>
             <MyLoader />
@@ -130,11 +138,12 @@ const FeedCardList: React.FC<{
         </div>
       )}
       <FeedCardListContainer id="scrollableDiv" isData={data.length > 0}>
-        {!isLoading && totalResults > 0 ? (
+        {totalResults > 0 && resStatus !== 400 ? (
+          // {!isLoading && totalResults > 0 ? (
           <InfiniteScroll
             dataLength={data.length}
             next={() => nextData()}
-            hasMore={totalResults - data.length > 10 ? true : false}
+            hasMore={totalResults - data.length > 0 ? true : false}
             loader={<MyLoader />}
             scrollableTarget="scrollableDiv"
             endMessage={
@@ -148,11 +157,15 @@ const FeedCardList: React.FC<{
             ))}
           </InfiniteScroll>
         ) : (
-          totalResults === 0 && (
+          (totalResults === 0 || resStatus === 400 || resStatus === 429) && (
             <NotFoundContainer>
               <NotFoundImg src={NotFoundSVG} alt="" />
               <NotFoundText>
-                We couldn’t find any matches for your query
+                {resStatus === 400
+                  ? "Ooops.. "
+                  : resStatus === 429
+                  ? "Too many requests are made in a given amount of time "
+                  : "We couldn’t find any matches for your query"}
               </NotFoundText>
             </NotFoundContainer>
           )

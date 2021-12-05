@@ -30,18 +30,12 @@ export default getSourcesMap;
 
 export const getDatesMap = (articles: any) => {
   let allDates = articles.map((article: any) => article.publishedAt);
-  // console.log(allDates);
-  let allDatesSorted = allDates.slice().sort((first: any, second: any) => {
-    return (
-      new Date(first.publishedAt).getTime() -
-      new Date(second.publishedAt).getTime()
-    );
+  let allDatesSorted = allDates.sort((first: any, second: any) => {
+    return new Date(first).getTime() - new Date(second).getTime();
   });
-  // console.log(allDatesSorted);
 
   const occurrences = allDatesSorted.reduce(function (acc: any, curr: any) {
-    let date = moment(curr).format("DD/MM/YYYY");
-    console.log(date);
+    let date = moment(curr).format("DD/MM/YY");
     return acc[date] ? ++acc[date] : (acc[date] = 1), acc;
   }, {});
   return {

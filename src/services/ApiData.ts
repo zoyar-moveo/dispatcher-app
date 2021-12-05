@@ -73,6 +73,7 @@ export async function makeGetRequestEvery(filtersEvery: {
   }
   if (filtersEvery.searchQ)
     filterObj = { ...filterObj, q: filtersEvery.searchQ };
+  console.log(filterObj);
   const res = axios1.get("/everything", {
     params: { ...API_DEFAULT_PARAMS, ...filterObj },
   });
