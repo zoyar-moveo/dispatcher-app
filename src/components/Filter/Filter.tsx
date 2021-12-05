@@ -11,6 +11,7 @@ import Arrow from "./assets/Forward.svg";
 import React from "react";
 import DatePickerComp from "../dapePickerCmp/datePickerCmp";
 import moment from "moment";
+import ReactTooltip from "react-tooltip";
 
 export interface FilterProps {
   filterSort: string;
@@ -35,14 +36,25 @@ const Filter: React.FC<FilterProps> = ({
     setCurrFilter(filterType);
   }, [filterType]);
 
+  useEffect(() => {
+    if (filterType === "Country") setCurrFilter("Israel");
+  }, []);
+
   const updateFilter = (
     filterType: string,
     currFilterId: string,
-    currFilterValue: string
+    currFilterValue: string,
+    isChoosenFilter?: boolean
   ) => {
-    setCurrFilter(currFilterValue);
+    if (isChoosenFilter && filterType !== "Top Headlines") {
+      setCurrFilter(filterType);
+      parentFilterUpdate(filterType, "");
+    } else {
+      setCurrFilter(currFilterValue);
+      parentFilterUpdate(filterType, currFilterId);
+    }
+
     SetIsDropDownOpen(false);
-    parentFilterUpdate(filterType, currFilterId);
     return;
   };
 
@@ -61,28 +73,45 @@ const Filter: React.FC<FilterProps> = ({
   return (
     <>
       <MainFilterContainer>
-        <FilterContainer
-          filterSort={filterSort}
-          filterTitle={true}
-          isDisabled={isDisabled}
-        >
-          {/* <div>{filterSort}</div> */}
-          <CurrFilter
-            filterType={filterType}
-            onClick={() => SetIsDropDownOpen((state) => !state)}
+        <span data-tip data-for={isDisabled ? "disabledBtnTip" : ""}>
+          <FilterContainer
+            filterSort={filterSort}
+            filterTitle={true}
+            isDisabled={isDisabled}
           >
-            <FilterTitle filterSort={filterSort}>{currFilter}</FilterTitle>
-            <img alt="" src={Arrow} />
-          </CurrFilter>
-        </FilterContainer>
+            {/* <div>{filterSort}</div> */}
+            <CurrFilter
+              filterType={filterType}
+              onClick={() => SetIsDropDownOpen((state) => !state)}
+            >
+              <FilterTitle filterSort={filterSort}>{currFilter}</FilterTitle>
+              <img alt="" src={Arrow} />
+            </CurrFilter>
+          </FilterContainer>
+        </span>
+        {isDisabled && (
+          <ReactTooltip
+            id="disabledBtnTip"
+            place="top"
+            effect="solid"
+            type="info"
+          >
+            Tooltip for the disabled filter
+          </ReactTooltip>
+        )}
         {IsDropDownOpen && filterType !== "Dates" && (
           <FilterContainer filterSort={filterSort} isDropDown={true}>
-            <>{console.log(filtersList)}</>
             <DropDownList filterSort={filterSort}>
               {filtersList.map((filterItem: { id: string; value: string }) => (
                 <DropDownItem
+                  isChosenFilter={currFilter === filterItem.value}
                   onClick={() =>
-                    updateFilter(filterType, filterItem.id, filterItem.value)
+                    updateFilter(
+                      filterType,
+                      filterItem.id,
+                      filterItem.value,
+                      currFilter === filterItem.value
+                    )
                   }
                   key={filterItem.id}
                 >

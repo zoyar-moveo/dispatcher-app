@@ -9,14 +9,12 @@ const getSourceName = (fullName: string) => {
 };
 
 export async function getSources() {
-  console.log("get sources");
   const sourcesObj = await axios.get(
     `https://newsapi.org/v2/top-headlines/sources?apiKey=${API_KEY}`
   );
   const sourcesNames = sourcesObj.data.sources.map((item: any) => {
     return { id: item.id, value: getSourceName(item.name) };
   });
-  console.log("sourcesNames", sourcesNames);
   return sourcesNames;
 }
 const API_DEFAULT_PARAMS = {

@@ -20,16 +20,19 @@ const FilterList: React.FC<FilterListProps> = (props) => {
     <FilterListContainer>
       {props.filterData.map((dataType: string, index: number) => {
         return (
-          <Filter
-            filterSort="secondary"
-            filterType={Object.keys(dataType)[0].toString()}
-            filtersList={Object.values(dataType)[0]}
-            parentFilterUpdate={props.parentFilterUpdate}
-            isDisabled={props.checkIfDisable(
-              Object.keys(dataType)[0].toString()
-            )}
-            key={index}
-          ></Filter>
+          <>
+            {/* <div>{Object.keys(dataType)[0].toString()}</div> */}
+            <Filter
+              key={index}
+              filterSort="secondary"
+              filterType={Object.keys(dataType)[0].toString()}
+              filtersList={Object.values(dataType)[0]}
+              parentFilterUpdate={props.parentFilterUpdate}
+              isDisabled={props.checkIfDisable(
+                Object.keys(dataType)[0].toString()
+              )}
+            ></Filter>
+          </>
         );
       })}
     </FilterListContainer>

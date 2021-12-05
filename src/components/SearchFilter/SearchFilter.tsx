@@ -119,7 +119,7 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
         {props.isLargeScreen && (
           <>
             <SeparatingLine />
-            <div onClick={() => setIsFocus(false)}>
+            <div onClick={() => setIsDropDownOpen(false)}>
               <Filter
                 filterSort="inner"
                 filterType="Top Headlines"

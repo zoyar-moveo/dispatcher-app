@@ -83,10 +83,10 @@ export const DropDownList = styled.div<{ filterSort: string }>`
   padding-left: 10px;
   margin-top: 12px; */
   border-radius: 10px;
-  padding-top: 6px;
+  margin-top: 6px;
 `;
 
-export const DropDownItem = styled.div<{}>`
+export const DropDownItem = styled.div<{ isChosenFilter?: boolean }>`
   font-family: Mulish;
   letter-spacing: 0.5px;
   &:hover {
@@ -101,9 +101,13 @@ export const DropDownItem = styled.div<{}>`
   &:last-child {
     padding-bottom: 7px;
   }
+  background-color: ${(props) =>
+    props.isChosenFilter ? "rgba(223, 224, 235, 0.41)" : ""};
 `;
 
-export const CurrFilter = styled.div<{ filterType: string }>`
+export const CurrFilter = styled.div<{
+  filterType: string;
+}>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;

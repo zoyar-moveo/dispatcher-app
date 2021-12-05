@@ -50,6 +50,10 @@ const FeedCard: React.FC<FeedCardProps> = ({ feedCardObj, isMobile }) => {
     window.open(url, "_blank");
   };
 
+  const handleImgError = (ev: any) => {
+    ev.target.src = DefaultImage;
+  };
+
   return (
     <CardContainer>
       <Img
@@ -61,6 +65,7 @@ const FeedCard: React.FC<FeedCardProps> = ({ feedCardObj, isMobile }) => {
             ? DefaultImage
             : feedCardObj.urlToImage
         }
+        onError={handleImgError}
       />
       <ContentContainer>
         <FlexRowContainer>
