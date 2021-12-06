@@ -52,7 +52,8 @@ export const CategoryItem = styled.div`
   height: 45px;
   border-bottom: 1px solid #d9dbe9;
   font-size: 0.875rem;
-  padding: 0 10px;
+  padding: 0 16px;
+  font-weight: 300;
   &:hover {
     background-color: rgba(223, 224, 235, 0.41);
     cursor: pointer;

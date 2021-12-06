@@ -80,12 +80,12 @@ const MobileFilter: React.FC<MobileFilterProps> = (props) => {
               <>
                 {title
                   ? getOptions(title)!.options.map(
-                      (option: string, idx: number) => (
+                      (option: any, idx: number) => (
                         <CategoryItem
                           key={idx}
                           onClick={() => updateFilter(option)}
                         >
-                          {option}
+                          {option.value}
                         </CategoryItem>
                       )
                     )

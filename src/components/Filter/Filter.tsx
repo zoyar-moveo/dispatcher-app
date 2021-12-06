@@ -52,11 +52,6 @@ const Filter: React.FC<FilterProps> = ({
     } else {
       setCurrFilter(currFilterValue);
       parentFilterUpdate(filterType, currFilterId);
-      console.log(
-        "parentFilterUpdate(filterType, currFilterId);",
-        filterType,
-        currFilterId
-      );
     }
 
     SetIsDropDownOpen(false);
@@ -101,7 +96,7 @@ const Filter: React.FC<FilterProps> = ({
             effect="solid"
             type="info"
           >
-            Tooltip for the disabled filter
+            Filter disabled for this combination
           </ReactTooltip>
         )}
         {IsDropDownOpen && filterType !== "Dates" && (

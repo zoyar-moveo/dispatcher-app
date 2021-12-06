@@ -49,8 +49,10 @@ const SearchFllter: React.FC<SearchFilterProps> = (props) => {
 
   const onInputUpdate = (ev: any) => {
     ev.preventDefault();
-    setSearchInput(searchVal);
-    localStorageService.saveToStorage(KEY, searchVal);
+    if (searchVal !== "") {
+      setSearchInput(searchVal);
+      localStorageService.saveToStorage(KEY, searchVal);
+    }
     setIsFocus(false);
   };
 

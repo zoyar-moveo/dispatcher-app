@@ -94,6 +94,6 @@ export const ExitImg = styled.img<{}>`
 export const BackImg = styled.img<{}>`
   height: 1.25rem;
   cursor: pointer;
-  margin-left: 18.5px;
-  margin-right: 18.5px;
+  margin-left: 9px;
+  margin-right: 16px;
 `;

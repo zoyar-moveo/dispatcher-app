@@ -1,6 +1,7 @@
 import MobileFilter from "../MobileFilter/MobileFilter";
 import ReactDOM from "react-dom";
 import { FilterI } from "../MobileFilter/MobileFilter.types";
+import { useSelector } from "react-redux";
 
 export interface FilterModalProps {
   isEverything: boolean;
@@ -9,36 +10,48 @@ export interface FilterModalProps {
 }
 
 const FilterModal: React.FC<FilterModalProps> = (props) => {
+  const sources: any = useSelector<any>((state) => state.sources.sources);
   const FilterCatagories: any = {
     FilterEverything: {
-      Sources: { selected: "All", options: ["Ynet", "walla", "Mako"] },
-      Language: { selected: "All", options: ["Hebrew", "English"] },
-      Dates: { selected: "All", options: ["1/1/2021", "31/1/2021"] },
+      Sources: { selected: "All", options: sources },
+      Language: {
+        selected: "All",
+        options: [
+          { id: "he", value: "Hebrew" },
+          { id: "en", value: "English" },
+          { id: "ru", value: "Russian" },
+          { id: "es", value: "Spanish" },
+        ],
+      },
+      Dates: { selected: "All", options: [] },
     },
     FilterTop: {
-      Country: { selected: "Israel", options: ["Israel", "USA"] },
+      Country: {
+        selected: "Israel",
+        options: [
+          { id: "us", value: "United State" },
+          { id: "il", value: "Israel" },
+          { id: "ru", value: "Russia" },
+          { id: "ar", value: "Argentina" },
+          { id: "gb", value: "great Britain" },
+          { id: "et", value: "Ethiopia" },
+        ],
+      },
       Category: {
         selected: "All",
-        options: ["Health", "Politics", "Finance"],
+        options: [
+          { id: "general", value: "General" },
+          { id: "business", value: "Business" },
+          { id: "health", value: "Health" },
+          { id: "entertainment", value: "Entertainment" },
+          { id: "science", value: "Science" },
+          { id: "sports", value: "Sports" },
+          { id: "technology", value: "Technology" },
+        ],
       },
-      Sources: { selected: "All", options: ["Ynet", "walla", "Mako"] },
+      Sources: { selected: "All", options: sources },
     },
   };
-  // const FilterCatagories: FilterI = {
-  //   FilterEverything: {
-  //     Sources: { selected: "All", options: ["Ynet", "walla", "Mako"] },
-  //     Language: { selected: "All", options: ["Hebrew", "English"] },
-  //     Dates: { selected: "All", options: ["1/1/2021", "31/1/2021"] },
-  //   },
-  //   FilterTop: {
-  //     Country: { selected: "Israel", options: ["Israel", "USA"] },
-  //     Category: {
-  //       selected: "All",
-  //       options: ["Health", "Politics", "Finance"],
-  //     },
-  //     Sources: { selected: "All", options: ["Ynet", "walla", "Mako"] },
-  //   },
-  // };
 
   const onFilterBack = () => {};
 

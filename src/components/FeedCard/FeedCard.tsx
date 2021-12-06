@@ -66,6 +66,7 @@ const FeedCard: React.FC<FeedCardProps> = ({ feedCardObj, isMobile }) => {
             : feedCardObj.urlToImage
         }
         onError={handleImgError}
+        // onLoad={() => console.log("good")} // setState
       />
       <ContentContainer>
         <FlexRowContainer>

@@ -84,13 +84,13 @@ const FeedCardList: React.FC<{
     getData(temp, true);
   };
   const getData = useCallback(
-    // async (isScroll?: boolean, filterts?: any) => {
     async (pageNumber: number, isScroll?: boolean, filterts?: any) => {
       let res;
-      console.log("pageNumber", pageNumber);
       if (endPoint === endPointTypes.TOP_HEADLINES) {
         try {
-          dispatch(dataActions.updateIsLoading(true));
+          if (isScroll === undefined || isScroll === false) {
+            dispatch(dataActions.updateIsLoading(true));
+          }
           res = await makeGetRequest(filters, endPoint, pageNumber);
           isTopIsraerl(filters)
             ? dispatch(dataActions.updateTitle("Top Headlines in Israel"))
@@ -103,7 +103,7 @@ const FeedCardList: React.FC<{
         }
       } else {
         try {
-          dispatch(dataActions.updateIsLoading(true));
+          if (!isScroll) dispatch(dataActions.updateIsLoading(true));
           res = await makeGetRequestEvery(filterEverything, pageNumber);
         } catch (err: any) {
           console.log(err.response.status);
@@ -112,12 +112,12 @@ const FeedCardList: React.FC<{
         }
       }
       if (res) {
-        console.log(res);
         let articles = res.data.articles;
         dispatch(dataActions.updateResStatus(res.status));
         dispatch(dataActions.updateTotalResults(res.data.totalResults));
         if (isScroll) {
           dispatch(dataActions.addData(articles));
+          dispatch(dataActions.updateIsLoading(false));
         } else {
           dispatch(dataActions.updateData(articles));
         }
@@ -125,23 +125,23 @@ const FeedCardList: React.FC<{
       dispatch(dataActions.updateIsLoading(false));
     },
     [endPoint, filters, filterEverything]
-    // [endPoint, filters, filterEverything, pageNumber]
   );
 
+  if (isLoading) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <FeedCardListContainer>
+          <MyLoader />
+          <MyLoader />
+          <MyLoader />
+        </FeedCardListContainer>
+      </div>
+    );
+  }
   return (
     <>
-      {isLoading && !gettingNextData && (
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <FeedCardListContainer>
-            <MyLoader />
-            <MyLoader />
-            <MyLoader />
-          </FeedCardListContainer>
-        </div>
-      )}
       <FeedCardListContainer id="scrollableDiv" isData={data.length > 0}>
-        {totalResults > 0 && resStatus !== 400 ? (
-          // {!isLoading && totalResults > 0 ? (
+        {totalResults > 0 && resStatus === 200 ? (
           <InfiniteScroll
             dataLength={data.length}
             next={() => nextData()}
@@ -159,12 +159,14 @@ const FeedCardList: React.FC<{
             ))}
           </InfiniteScroll>
         ) : (
-          (totalResults === 0 || resStatus === 400 || resStatus === 429) && (
+          ((resStatus === 200 && totalResults === 0) ||
+            resStatus === 400 ||
+            resStatus === 429) && (
             <NotFoundContainer>
               <NotFoundImg src={NotFoundSVG} alt="" />
               <NotFoundText>
                 {resStatus === 400
-                  ? "Ooops.. "
+                  ? "Ooops.. You Should choose parametrs to get relevant articles"
                   : resStatus === 429
                   ? "Too many requests are made in a given amount of time "
                   : "We couldn’t find any matches for your query"}

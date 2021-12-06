@@ -62,6 +62,7 @@ const HomePage: React.FC = () => {
     if (!sources) {
       getSources().then((res) => {
         setSources(res);
+        dispatch(sourcesActions.updateSources(res));
       });
     }
   }, []);
@@ -130,7 +131,6 @@ const HomePage: React.FC = () => {
     filterType: string,
     filter: string | string[]
   ) => {
-    console.log(filterType, filter);
     if (filter === "" && filterType !== "Top Headlines") {
       setCurrFilters(currFilters.filter((item: string) => item !== filterType));
     } else {
@@ -156,7 +156,6 @@ const HomePage: React.FC = () => {
         dispatch(filterEverythingActions.updateDates(filter));
         return;
       case "Sort By":
-        console.log("sort by case");
         dispatch(filterEverythingActions.updateSortBy(filter));
         return;
       case "Top Headlines":
