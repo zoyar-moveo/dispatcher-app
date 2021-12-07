@@ -21,11 +21,10 @@ export const FilterContainer = styled.div<{
   border-radius: 10px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 0.875rem;
   line-height: 1.375rem;
   letter-spacing: 0.015625rem;
   color: #5a5a89;
-  @media (max-width: 800px) {
+  @media (max-width: 950px) {
     width: ${(props) => (props.filterSort === "resent" ? "423px" : "")};
   }
   /* height: 50px; // */
@@ -65,14 +64,20 @@ export const FilterContainer = styled.div<{
     `}
 `;
 
-export const MainFilterContainer = styled.div<{}>`
+export const MainFilterContainer = styled.div<{ isSortByMobile?: boolean }>`
   &:not(:last-child) {
     margin-right: 20px;
   }
+  ${(props) =>
+    props.isSortByMobile &&
+    css`
+      height: 50px;
+    `}
 `;
 
 export const FilterTitle = styled.div<{ filterSort: string }>`
   font-weight: ${(props) => (props.filterSort === "inner" ? 500 : 350)};
+  font-size: 14px;
 `;
 
 export const DropDownList = styled.div<{ filterSort: string }>`
@@ -112,12 +117,14 @@ export const DropDownItem = styled.div<{ isChosenFilter?: boolean }>`
 
 export const CurrFilter = styled.div<{
   filterType: string;
+  isSortByMobile?: boolean;
 }>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   cursor: pointer;
-  width: 140px;
+  /* width: 100px; */
+  width: ${(props) => (props.isSortByMobile ? "100px" : "140px")};
   /* padding-left: 22.5px; */
   & div {
     /* font-size: ${(props) =>

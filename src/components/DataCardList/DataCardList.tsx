@@ -11,7 +11,7 @@ import SourceLoader from "../Loaders/SourceLoader";
 import DataCard from "./../DataCard/DataCard";
 import { DataCardContainer } from "./styles";
 
-const DataCardList: React.FC<{}> = (props) => {
+const DataCardList: React.FC<{ width: number }> = (props) => {
   const data: any = useSelector<any>((state) => state.data.data);
   const isLoading: any = useSelector<any>((state) => state.data.isLoading);
   const [sourcesMap, setSourcesMap] = useState<any>();
@@ -40,13 +40,11 @@ const DataCardList: React.FC<{}> = (props) => {
   return (
     <>
       {isLoading ? (
-        // <div style={{ display: "flex", flexDirection: "column" }}>
         <DataCardContainer>
           <SourceLoader />
           <LineLoader />
         </DataCardContainer>
       ) : (
-        // </div>
         <>
           <DataCardContainer>
             <DataCard

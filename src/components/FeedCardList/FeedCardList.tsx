@@ -14,6 +14,7 @@ import { endPointTypes } from "../../utiles/endPoint.types";
 import InfiniteScroll from "react-infinite-scroll-component";
 import NotFoundSVG from "./assets/not-found.svg";
 import MyLoader from "../Loaders/FeedCardLoader";
+import { update } from "lodash";
 
 export interface feedDataObj {
   author: string;
@@ -28,6 +29,7 @@ export interface feedDataObj {
 
 const FeedCardList: React.FC<{
   isMobile: boolean;
+  updateTitle?: (title: string) => void;
   // getData: () => void;
 }> = (props) => {
   type TFilters = {
@@ -86,17 +88,26 @@ const FeedCardList: React.FC<{
   const getData = useCallback(
     async (pageNumber: number, isScroll?: boolean, filterts?: any) => {
       let res;
+      // console.log("get data, endPoint:", endPoint);
       if (endPoint === endPointTypes.TOP_HEADLINES) {
         try {
           if (isScroll === undefined || isScroll === false) {
             dispatch(dataActions.updateIsLoading(true));
           }
           res = await makeGetRequest(filters, endPoint, pageNumber);
-          isTopIsraerl(filters)
-            ? dispatch(dataActions.updateTitle("Top Headlines in Israel"))
-            : dispatch(
-                dataActions.updateTitle(totalResults + " Total Results")
-              );
+          if (res.status === 200) {
+            // isTopIsraerl(filters)
+            //   ? dispatch(dataActions.updateTitle("Top Headlines in Israel"))
+            //   : dispatch(
+            //       dataActions.updateTitle(
+            //         res.data.totalResults + " Total Results"
+            //       )
+            //     );
+            if (isTopIsraerl(filters)) {
+              props.updateTitle!("Top Headlines in Israel");
+            } else props.updateTitle!(res.data.totalResults + " Total Results");
+          }
+          // / try catch
         } catch (err: any) {
           console.log(err.response.status);
           dispatch(dataActions.updateResStatus(err.response.status));
@@ -105,6 +116,9 @@ const FeedCardList: React.FC<{
         try {
           if (!isScroll) dispatch(dataActions.updateIsLoading(true));
           res = await makeGetRequestEvery(filterEverything, pageNumber);
+          if (res.status === 200) {
+            props.updateTitle!(res.data.totalResults + " Total Results");
+          }
         } catch (err: any) {
           console.log(err.response.status);
           console.log(err.response.data);
@@ -129,13 +143,11 @@ const FeedCardList: React.FC<{
 
   if (isLoading) {
     return (
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <FeedCardListContainer>
-          <MyLoader />
-          <MyLoader />
-          <MyLoader />
-        </FeedCardListContainer>
-      </div>
+      <FeedCardListContainer>
+        <MyLoader />
+        <MyLoader />
+        <MyLoader />
+      </FeedCardListContainer>
     );
   }
   return (
@@ -161,7 +173,8 @@ const FeedCardList: React.FC<{
         ) : (
           ((resStatus === 200 && totalResults === 0) ||
             resStatus === 400 ||
-            resStatus === 429) && (
+            resStatus === 429 ||
+            resStatus === 401) && (
             <NotFoundContainer>
               <NotFoundImg src={NotFoundSVG} alt="" />
               <NotFoundText>
@@ -169,6 +182,8 @@ const FeedCardList: React.FC<{
                   ? "Ooops.. You Should choose parametrs to get relevant articles"
                   : resStatus === 429
                   ? "Too many requests are made in a given amount of time "
+                  : resStatus === 401
+                  ? "Api Key not valid"
                   : "We couldn’t find any matches for your query"}
               </NotFoundText>
             </NotFoundContainer>

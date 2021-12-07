@@ -4,7 +4,7 @@ export const WelcomeContainer = styled.div`
   height: 100vh;
   display: flex;
   letter-spacing: 0.25px;
-  @media (max-width: 800px) {
+  @media (max-width: 950px) {
     flex-direction: column;
   }
 `;
@@ -16,7 +16,7 @@ export const LogoArea = styled.div`
   left: 0;
   display: inline-flex;
   justify-content: center;
-  @media (max-width: 800px) {
+  @media (max-width: 950px) {
     width: 100%;
     height: 30vh;
   }
@@ -30,7 +30,7 @@ export const ContentArea = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 20px;
-  @media (max-width: 800px) {
+  @media (max-width: 950px) {
     width: 100%;
     height: 70vh;
     display: block;
@@ -48,7 +48,8 @@ export const TextBtnContsiner = styled.div`
   }
   display: flex;
   flex-direction: column;
-  @media (max-width: 800) {
+  @media (max-width: 900) {
+    // px?
     margin: 0;
     width: 100%;
     height: 100%;
@@ -57,7 +58,7 @@ export const TextBtnContsiner = styled.div`
 `;
 
 export const TextContainer = styled.div`
-  @media (max-width: 800px) {
+  @media (max-width: 950px) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -71,7 +72,7 @@ export const TextContainer = styled.div`
 
 export const LogoImg = styled.img`
   width: 14rem;
-  @media (max-width: 800px) {
+  @media (max-width: 950px) {
     width: 10rem;
   }
 `;
@@ -86,7 +87,7 @@ export const Title = styled.div`
     font-size: 3rem;
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 950px) {
     text-align: center;
   }
 `;
@@ -101,7 +102,7 @@ export const Subtitle = styled.div`
     font-size: 2.25rem;
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 950px) {
     text-align: center;
   }
 `;

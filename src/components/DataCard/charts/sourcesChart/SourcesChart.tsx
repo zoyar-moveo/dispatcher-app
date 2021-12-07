@@ -17,6 +17,13 @@ export interface chartProps {
   articlesNum: number;
 }
 
+const styleSum: any = {
+  width: "100%",
+  display: "flex",
+  position: "relative",
+  alignItems: "center",
+  justifyContent: "center",
+};
 const SourcesChart: React.FC<chartProps> = (props) => {
   return (
     <div
@@ -28,8 +35,13 @@ const SourcesChart: React.FC<chartProps> = (props) => {
         alignItems: "center",
       }}
     >
-      <div style={{ width: "35%", paddingTop: "10px", paddingBottom: "15px" }}>
-        <Doughnut data={props.data} options={props.options} />
+      <div style={styleSum}>
+        <div style={{ position: "absolute" }}>{props.data.labels.length}</div>
+        <div
+          style={{ width: "35%", paddingTop: "10px", paddingBottom: "15px" }}
+        >
+          <Doughnut data={props.data} options={props.options} />
+        </div>
       </div>
       <SourcesLegend
         labels={props.data.labels}

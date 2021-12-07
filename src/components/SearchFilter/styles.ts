@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const SearchFilterContainer = styled.div<{ isFocus: boolean }>`
   width: ${(props) => (props.isFocus ? "667px" : "423px")};
   transition: width 0.5s ease;
-  @media (max-width: 800px) {
+  @media (max-width: 950px) {
     width: 423px;
   }
   @media (max-width: 480px) {

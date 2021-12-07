@@ -3,7 +3,8 @@ import ContentLoader from "react-content-loader";
 const LineLoader = () => (
   <ContentLoader
     viewBox="0 0 400 100"
-    width="412px"
+    width="100%"
+    // width="410px"
     height="378px"
     backgroundColor="#f3f3f3"
     foregroundColor="#888888dc"

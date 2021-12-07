@@ -20,7 +20,7 @@ export const InnerSearchContainer = styled.div`
   z-index: 5;
   margin-top: 11px;
   width: 80vw;
-  @media (max-width: 800px) {
+  @media (max-width: 950px) {
     display: flex;
     justify-content: center;
   }

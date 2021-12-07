@@ -1,6 +1,5 @@
 import axios from "axios";
 const _ = require("lodash");
-// const API_KEY = "BLA BLD";
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 // to check it
@@ -44,7 +43,8 @@ async function makeGetRequest(
   for (let [key, value] of Object.entries(filtersObj!)) {
     if (value !== "") filterObj = { ...filterObj, [key.toLowerCase()]: value };
   }
-  if (filters.searchQ) filterObj = { ...filterObj, q: filters.searchQ };
+  if (filters.searchQ)
+    filterObj = { ...filterObj, q: filters.searchQ.toLowerCase() };
   const res = axios1.get("/top-headlines", {
     params: { ...API_DEFAULT_PARAMS, ...filterObj, page: page },
   });
@@ -75,7 +75,7 @@ export async function makeGetRequestEvery(
     }
   }
   if (filtersEvery.searchQ)
-    filterObj = { ...filterObj, q: filtersEvery.searchQ };
+    filterObj = { ...filterObj, q: filtersEvery.searchQ.toLowerCase() };
   const res = axios1.get("/everything", {
     params: { ...API_DEFAULT_PARAMS, ...filterObj, page: page },
   });

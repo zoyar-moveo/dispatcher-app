@@ -6,7 +6,7 @@ export const CardContainer = styled.div<{ isData: boolean }>`
   width: 410px;
   height: 378px;
   /* width: 100%; */
-  @media (max-width: 1200px) {
+  @media (max-width: 1300px) {
     width: 300px;
     height: 330px;
   }

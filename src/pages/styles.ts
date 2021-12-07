@@ -2,7 +2,14 @@ import styled from "styled-components";
 
 export const InnerHomeContainer = styled.div`
   margin: auto;
-  @media (min-width: 800px) {
+
+  @media (min-width: 950px) {
+    width: 90vw;
+  }
+  @media (min-width: 1150px) {
+    width: 85vw;
+  }
+  @media (min-width: 1250px) {
     width: 80vw;
   }
 `;
@@ -53,7 +60,7 @@ export const FeedDataMainContainer = styled.div`
   /* margin: auto; */
   /* justify-content: center; */
   width: 100%;
-  @media (max-width: 800px) {
+  @media (max-width: 950px) {
     padding: 0 20px;
   }
   @media only screen and (max-width: 480px) {

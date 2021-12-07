@@ -16,7 +16,7 @@ export default createGlobalStyle`
 body{
     /* overflow: hidden; */
 }
-@media only screen and (max-width: 800px){
+@media only screen and (max-width: 950px){
 body{
     overflow: scroll;
     max-width: 100%;

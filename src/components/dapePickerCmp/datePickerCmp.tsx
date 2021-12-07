@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { DataPickerContainer } from "./style";
 
 const DatePickerCmp: React.FC<{
   updateDateFilter: (start: string, end: string) => void;
@@ -15,14 +16,16 @@ const DatePickerCmp: React.FC<{
     props.updateDateFilter(start, end);
   };
   return (
-    <DatePicker
-      selected={startDate}
-      onChange={onChange}
-      startDate={startDate}
-      endDate={endDate}
-      selectsRange
-      inline
-    />
+    <DataPickerContainer>
+      <DatePicker
+        selected={startDate}
+        onChange={onChange}
+        startDate={startDate}
+        endDate={endDate}
+        selectsRange
+        inline
+      />
+    </DataPickerContainer>
   );
 };
 

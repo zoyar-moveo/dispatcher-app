@@ -13,10 +13,17 @@ import { Overlay } from "../MobileFilter/styles";
 import { EveryKey, MobileFilterProps, TopKey } from "./MobileFilter.types";
 import Button from "../Button/Button";
 import { btnTypeList } from "../Button/Button";
+import filtersTopOptions from "../../store/filtersTopOptions";
+import { useSelector } from "react-redux";
+import DatePickerCmp from "../dapePickerCmp/datePickerCmp";
+import moment from "moment";
 
 const MobileFilter: React.FC<MobileFilterProps> = (props) => {
   const [isInnerFilter, setIsInnerFilter] = useState(false);
+  const [isDatePicker, setIsDatePicker] = useState(false);
   const [title, setTitle] = useState<EveryKey | TopKey | null>(null);
+  const [clickedOption, setClickedOption] = useState<any>();
+  const endPoint: any = useSelector<any>((state) => state.endPoint.endPoint);
 
   const getFilterType = () => {
     return props.isEverything
@@ -27,10 +34,12 @@ const MobileFilter: React.FC<MobileFilterProps> = (props) => {
   const OpenCurrFilter = (key: EveryKey | TopKey) => {
     setIsInnerFilter(true);
     setTitle(key);
+    if (key === "Dates") setIsDatePicker(true);
   };
 
   const onFilterBack = () => {
     setIsInnerFilter(false);
+    setIsDatePicker(false);
   };
 
   const getEverythingKey = (): EveryKey => {
@@ -56,10 +65,30 @@ const MobileFilter: React.FC<MobileFilterProps> = (props) => {
       : props.FilterCatagories.FilterTop[getTopKey()];
   };
 
-  const updateFilter = (option: string) => {
-    // update options
+  const updateFilter = (option: any) => {
+    if (clickedOption === option.value) {
+      setClickedOption("");
+      props.updateSelceted("All", "All", option.type);
+    } else {
+      setClickedOption(option.value);
+      props.updateSelceted(option.id, option.value, option.type);
+    }
   };
 
+  const updateReduxFilters = () => {
+    for (const key in props.filterTopSelected) {
+      if (props.filterTopSelected[key][0] === "All") {
+        props.parentFilterUpdate(key, "");
+      } else props.parentFilterUpdate(key, props.filterTopSelected[key][0]);
+    }
+    props.onCloseFilter();
+  };
+
+  const updateDateFilter = (start: string, end: string) => {
+    let startDate = moment(Date.parse(start)).format("YYYY-MM-DD");
+    let endDate = moment(Date.parse(end)).format("YYYY-MM-DD");
+    props.parentFilterUpdate("Dates", [startDate, endDate]);
+  };
   return (
     <div>
       <Overlay onClick={props.onCloseFilter} />
@@ -84,6 +113,7 @@ const MobileFilter: React.FC<MobileFilterProps> = (props) => {
                         <CategoryItem
                           key={idx}
                           onClick={() => updateFilter(option)}
+                          isOptionClicked={option.value === clickedOption}
                         >
                           {option.value}
                         </CategoryItem>
@@ -97,31 +127,32 @@ const MobileFilter: React.FC<MobileFilterProps> = (props) => {
                   <span>Search In</span>
                   <span>
                     {props.isEverything ? "Everything" : "Top Headlines"}
+                    {/* {props.isEverything ? "Everything" : "Top Headlines"} */}
                   </span>
                 </CategoryItem>
-                {Object.entries(getFilterType()).map(
-                  ([key, value]: any, idx) => (
-                    <>
-                      <CategoryItem
-                        onClick={() => OpenCurrFilter(key)}
-                        key={idx}
-                      >
-                        <span>{key}</span>
-                        <span>{value.selected}</span>
-                      </CategoryItem>
-                    </>
-                  )
-                )}
+                {Object.entries(
+                  props.isEverything
+                    ? props.filterEverySelected
+                    : props.filterTopSelected
+                ).map(([key, value]: any, idx) => (
+                  <>
+                    <CategoryItem onClick={() => OpenCurrFilter(key)} key={idx}>
+                      <span>{key}</span>
+                      <span>{value[1]}</span>
+                    </CategoryItem>
+                  </>
+                ))}
               </>
             )}
           </ListArea>
         </TitleListContainer>
+        {isDatePicker && <DatePickerCmp updateDateFilter={updateDateFilter} />}
         <BtnContiner>
           <Button
             text={"VIEW RESULTS"}
             isArrow={false}
             btnType={btnTypeList.primary}
-            onClickFunc={() => {}}
+            onClickFunc={updateReduxFilters}
           />
         </BtnContiner>
       </MobileFilterContainer>

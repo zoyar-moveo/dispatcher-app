@@ -51,9 +51,7 @@ const FeedCard: React.FC<DataCardProps> = (props) => {
             )}
           </>
         ) : (
-          <>
-            <NoChart />
-          </>
+          <NoChart />
         )}
       </InnerContainer>
     </CardContainer>

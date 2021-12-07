@@ -1,3 +1,5 @@
+import { AnyAsyncThunk } from "@reduxjs/toolkit/dist/matchers";
+
 type FilterEverythingT = {
   Sources: { selected: string; options: string[] };
   Language: { selected: string; options: string[] };
@@ -20,6 +22,10 @@ export interface MobileFilterProps {
   toggleSearchIn: () => void;
   onFilterBack: () => void;
   onCloseFilter: () => void;
+  updateSelceted: (id: any, option: any, type: any) => void;
+  filterTopSelected: any;
+  filterEverySelected: any;
+  parentFilterUpdate: (filterType: string, filter: string | string[]) => void;
 }
 
 export enum EveryKey {

@@ -4,9 +4,9 @@ import ContentLoader from "react-content-loader";
 const SourceLoader = () => (
   <ContentLoader
     speed={2}
-    width="412px"
+    // width="410px"
+    width="100%"
     height="378px"
-    // height="100%"
     viewBox="0 0 200 150"
     // viewBox="0 0 200 200"
     backgroundColor="#f3f3f3"

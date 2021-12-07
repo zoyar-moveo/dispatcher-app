@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export const MobileSearchContainer = styled.div<{}>`
-  height: 100vh;
+export const MobileSearchContainer = styled.div<{ isHeaderActive?: boolean }>`
+  height: ${(props) => (props.isHeaderActive ? "fit-content" : "100vh")};
 `;
 
 export const RecentSearchesArea = styled.div<{}>`

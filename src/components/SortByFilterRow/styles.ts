@@ -1,14 +1,17 @@
 import styled from "styled-components";
 
-export const SortByFilterRowContainer = styled.div`
+export const SortByFilterRowContainer = styled.div<{ isEverything: boolean }>`
   display: flex;
-  justify-content: space-between;
-  padding: 12px 20px;
+  justify-content: ${(props) =>
+    props.isEverything ? "space-between" : "flex-end"};
+  padding: 0px 20px; //
+  /* padding: 12px 20px;  */
   width: 100%;
   align-items: center;
   border-bottom: 1px solid #d9dbe9;
   background: #ffffff;
   margin-bottom: 12px;
+  height: 51px; //
 `;
 
 export const IconBtn = styled.img<{ IconType: string }>`

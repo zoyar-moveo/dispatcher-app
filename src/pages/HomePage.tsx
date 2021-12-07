@@ -57,6 +57,8 @@ const HomePage: React.FC = () => {
   );
   const resStatus: any = useSelector<any>((state) => state.data.resStatus);
   const [currFilters, setCurrFilters] = useState<any>(["Country"]);
+  const [isMobSearchActive, setIsMobSearchActive] = useState(false);
+  const [dinamicTitle, setDinamicTitle] = useState("");
 
   useEffect(() => {
     if (!sources) {
@@ -119,10 +121,8 @@ const HomePage: React.FC = () => {
 
   const getFilterData = () => {
     if (endPoint === endPointTypes.TOP_HEADLINES) {
-      // return filterTopData1;
       return filterTopData;
     } else {
-      // return filterEveryData1;
       return filterEveryData;
     }
   };
@@ -132,6 +132,8 @@ const HomePage: React.FC = () => {
     filter: string | string[]
   ) => {
     if (filter === "" && filterType !== "Top Headlines") {
+      setCurrFilters(currFilters.filter((item: string) => item !== filterType));
+    } else if (filter === "All") {
       setCurrFilters(currFilters.filter((item: string) => item !== filterType));
     } else {
       setCurrFilters((state: any) => [...state, filterType]);
@@ -158,14 +160,23 @@ const HomePage: React.FC = () => {
       case "Sort By":
         dispatch(filterEverythingActions.updateSortBy(filter));
         return;
+      case "sortBy":
+        dispatch(filterEverythingActions.updateSortBy(filter));
+        return;
       case "Top Headlines":
         dispatch(endPointActions.updateEndPoint(filter));
+        if (filter === "everything") setIsEverything(true);
+        else setIsEverything(false);
         return;
       default:
         return;
     }
   };
 
+  const updateMobSearchActive = (bool: boolean) => {
+    setIsMobSearchActive(bool);
+    setIsMobileSearch(false);
+  };
   const checkIfDisable = (filterType: string) => {
     // if (!currFilters.includes(filterType))
     // setCurrFilters((state: any) => [...state, filterType]);
@@ -184,6 +195,9 @@ const HomePage: React.FC = () => {
     setSearchsList(itemsList);
   }, [searchItem]);
 
+  const updateTitle = (title: string) => {
+    setDinamicTitle(title);
+  };
   const updateSearchInput = (item: string) => {
     setSearchItem(item);
     dispatch(filterActions.updateSearchQ(item));
@@ -196,6 +210,7 @@ const HomePage: React.FC = () => {
 
   const onBack = () => {
     setIsMobileSearch(false);
+    setIsMobSearchActive(false);
   };
 
   const onMobileTabletFilter = () => {
@@ -203,7 +218,14 @@ const HomePage: React.FC = () => {
   };
 
   const toggleSearchIn = () => {
-    setIsEverything((state) => !state);
+    if (endPoint === "everything") {
+      setIsEverything(false);
+      dispatch(endPointActions.updateEndPoint("top-headlines"));
+    } else {
+      dispatch(endPointActions.updateEndPoint("everything"));
+
+      setIsEverything(true);
+    }
   };
 
   const onCloseFilter = () => {
@@ -223,11 +245,20 @@ const HomePage: React.FC = () => {
   return (
     <>
       <GlobalStyles />
-      {isMobileSearch && (
-        <MobileSearch searchsList={searchsList} onBack={onBack} />
+      {(isMobileSearch || isMobSearchActive) && (
+        <MobileSearch
+          searchsList={searchsList}
+          onBack={onBack}
+          onClearStorage={onClearStorage}
+          removeItem={removeItem}
+          updateSearchInput={updateSearchInput}
+          updateMobSearchActive={updateMobSearchActive}
+          onMobileSearch={onMobileSearch}
+        />
       )}
-      {!isMobileSearch && (
-        <HomePageContainer>
+      {/* {!isMobileSearch && ( */}
+      <HomePageContainer>
+        {!isMobSearchActive && (
           <Header
             text="text"
             logo={LogoIcon}
@@ -244,41 +275,63 @@ const HomePage: React.FC = () => {
             parentFilterUpdate={parentFilterUpdate}
             onClearStorage={onClearStorage}
           />
-          <InnerHomeContainer>
-            {width < breakpoints.size.sm ? (
-              <>
-                <SortByFilterRowContainer
-                  onMobileTabletFilter={onMobileTabletFilter}
-                />
-                {isMobileTabletFilter ? (
-                  <FilterModal
-                    onCloseFilter={onCloseFilter}
-                    toggleSearchIn={toggleSearchIn}
-                    isEverything={isEverything}
-                  />
-                ) : null}
-              </>
-            ) : (
-              <>
-                <FilterList
-                  filterData={getFilterData()}
+        )}
+        {/* {isMobSearchActive && (
+            <MobileSearch
+              searchsList={searchsList}
+              onBack={onBack}
+              onClearStorage={onClearStorage}
+              removeItem={removeItem}
+              updateSearchInput={updateSearchInput}
+              updateMobSearchActive={updateMobSearchActive}
+              isHeaderActive={true}
+              onMobileSearch={onMobileSearch}
+            />
+          )} */}
+        <InnerHomeContainer>
+          {width < breakpoints.size.sm ? (
+            <>
+              <SortByFilterRowContainer
+                onMobileTabletFilter={onMobileTabletFilter}
+                isEverything={endPoint === "everything"}
+                parentFilterUpdate={parentFilterUpdate}
+              />
+
+              {isMobileTabletFilter ? (
+                <FilterModal
+                  onCloseFilter={onCloseFilter}
+                  toggleSearchIn={toggleSearchIn}
+                  isEverything={isEverything}
                   parentFilterUpdate={parentFilterUpdate}
-                  updateSearchInput={updateSearchInput}
-                  checkIfDisable={checkIfDisable}
                 />
-                <SeparetorLine />
-                {resStatus === 200 && <Title title={title}>{title}</Title>}
-              </>
-            )}
-            <FeedDataMainContainer>
-              <FeedDataContainer>
-                <FeedCardList isMobile={width < breakpoints.size.xs} />
-                {width > breakpoints.size.sm && <DataCardList />}
-              </FeedDataContainer>
-            </FeedDataMainContainer>
-          </InnerHomeContainer>
-        </HomePageContainer>
-      )}
+              ) : null}
+            </>
+          ) : (
+            <>
+              <FilterList
+                filterData={getFilterData()}
+                parentFilterUpdate={parentFilterUpdate}
+                updateSearchInput={updateSearchInput}
+                checkIfDisable={checkIfDisable}
+              />
+              <SeparetorLine />
+              {resStatus === 200 && (
+                <Title title={dinamicTitle}>{dinamicTitle}</Title>
+              )}
+            </>
+          )}
+          <FeedDataMainContainer>
+            <FeedDataContainer>
+              <FeedCardList
+                isMobile={width < breakpoints.size.xs}
+                updateTitle={updateTitle}
+              />
+              {width > 950 && <DataCardList width={width} />}
+            </FeedDataContainer>
+          </FeedDataMainContainer>
+        </InnerHomeContainer>
+      </HomePageContainer>
+      {/* )} */}
     </>
   );
 };

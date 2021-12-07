@@ -11,16 +11,23 @@ export const FeedCardListContainer = styled.div<{ isData?: boolean }>`
   display: flex;
   flex-direction: column;
   /* width: 75%; */
-  @media (max-width: 1200px) {
+  @media (max-width: 1300px) {
     width: calc(80vw - 300px);
   }
-  @media (max-width: 800px) {
+  @media (min-width: 950px) {
+    width: calc(90vw - 300px);
+  }
+  @media (max-width: 950px) {
     padding-right: 0px;
   }
-  @media (max-width: 800px) {
+  @media (max-width: 950px) {
     width: 100%;
   }
 `;
+
+// @media (min-width: 1150px) {
+//   width: 80vw;
+// }
 
 export const NotFoundContainer = styled.div`
   height: calc(100vh - 150px);

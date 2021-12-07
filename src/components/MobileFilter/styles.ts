@@ -1,7 +1,13 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const MobileFilterContainer = styled.div<{}>`
-  width: 70vw;
+  /* width: 70vw; */
+  @media (max-width: 950px) {
+    width: 43vw;
+  }
+  @media (max-width: 600px) {
+    width: 84vw;
+  }
   background-color: #ffffff;
   margin: 0;
   position: fixed;
@@ -37,7 +43,7 @@ export const ListArea = styled.div<{}>``;
 
 export const Overlay = styled.div`
   background-color: #000000a8;
-  width: 30vw;
+  width: 65vw;
   margin: 0;
   display: inline-block;
   position: fixed;
@@ -45,7 +51,7 @@ export const Overlay = styled.div`
   z-index: 6;
 `;
 
-export const CategoryItem = styled.div`
+export const CategoryItem = styled.div<{ isOptionClicked?: Boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -58,6 +64,8 @@ export const CategoryItem = styled.div`
     background-color: rgba(223, 224, 235, 0.41);
     cursor: pointer;
   }
+  background-color: ${(props) =>
+    props.isOptionClicked ? "rgba(223, 224, 235, 0.41)" : ""};
 `;
 
 export const BtnContiner = styled.div`
