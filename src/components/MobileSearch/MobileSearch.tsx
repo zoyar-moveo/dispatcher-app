@@ -76,6 +76,7 @@ const MobileSearch: React.FC<MobileSearchProps> = (props) => {
     setIsDeleteIcon(true);
     setSearchInput((state) => state.replaceAll('"', ""));
     props.onMobileSearch!();
+    setIsMobSearchHeader(false);
     // props.updateMobSearchActive(false);
   };
 
@@ -114,12 +115,13 @@ const MobileSearch: React.FC<MobileSearchProps> = (props) => {
             {props.searchsList
               ? props.searchsList.map((searchItem: string, index: number) => {
                   return (
-                    <ResentSearchItem
-                      key={index}
-                      onClick={() => props.removeItem(searchItem)}
-                    >
+                    <ResentSearchItem key={index}>
                       <SearchKey>{searchItem}</SearchKey>
-                      <ExitImg alt="" src={ExitIcon} />
+                      <ExitImg
+                        alt=""
+                        src={ExitIcon}
+                        onClick={() => props.removeItem(searchItem)}
+                      />
                     </ResentSearchItem>
                   );
                 })

@@ -58,6 +58,7 @@ const FeedCard: React.FC<FeedCardProps> = ({ feedCardObj, isMobile }) => {
     <CardContainer>
       <Img
         alt=""
+        onError={handleImgError}
         src={
           feedCardObj.urlToImage === "" ||
           feedCardObj.urlToImage === "null" ||
@@ -65,9 +66,8 @@ const FeedCard: React.FC<FeedCardProps> = ({ feedCardObj, isMobile }) => {
             ? DefaultImage
             : feedCardObj.urlToImage
         }
-        onError={handleImgError}
         // onLoad={() => console.log("good")} // setState
-      />
+      />{" "}
       <ContentContainer>
         <FlexRowContainer>
           <CardSecondaryTitle>

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { btnTypeList } from "./Button";
 
 export const ButtonContainer = styled.button<{
@@ -7,6 +7,7 @@ export const ButtonContainer = styled.button<{
     | btnTypeList.secondary
     | btnTypeList.textBtn
     | btnTypeList.welcomeBtn;
+  text?: string;
 }>`
   cursor: pointer;
   padding: 0px 10px;
@@ -49,5 +50,12 @@ export const ButtonContainer = styled.button<{
     opacity: ${(props) => {
       if (props.btnType !== btnTypeList.textBtn) return 0.8;
     }};
+  }
+  @media (max-width: 480px) {
+    ${(props) =>
+      props.text === "Navigate to dispatch" &&
+      css`
+        width: 100%;
+      `}
   }
 `;

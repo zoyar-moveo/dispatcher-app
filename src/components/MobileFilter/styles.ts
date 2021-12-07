@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const MobileFilterContainer = styled.div<{}>`
   /* width: 70vw; */
   @media (max-width: 950px) {
-    width: 43vw;
+    width: 84vw;
   }
   @media (max-width: 600px) {
     width: 84vw;

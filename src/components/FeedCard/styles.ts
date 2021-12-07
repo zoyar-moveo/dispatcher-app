@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import DefaultImage from "./assets/DefaultImage.png";
 
 export const CardContainer = styled.div`
   display: flex;
@@ -7,6 +8,7 @@ export const CardContainer = styled.div`
   padding: 0px;
   background-color: #ffffff;
   border: 1px solid #d9dbe9;
+  width: 100%; //
   /* box-shadow: 0px 32px 64px rgba(0, 0, 0, 0.05); */
   border-radius: 20px;
   height: 242px;
@@ -64,6 +66,9 @@ export const ContentContainer = styled.div`
   /* margin: 1rem; */
   height: 100%;
   width: 100%;
+  @media (min-width: 480px) {
+    width: calc(100% - clamp(100px, 40%, 244px));
+  }
   justify-content: space-between;
 `;
 
@@ -79,11 +84,13 @@ export const FlexButton = styled.div`
 
 export const Img = styled.img`
   border-radius: 20px 0px 0px 20px;
+  background-image: url(${DefaultImage});
   width: clamp(100px, 40%, 244px);
   height: 100%;
   object-fit: cover;
   @media (max-width: 480px) {
     width: 100%;
     border-radius: 20px 20px 0px 0px;
+    height: 150px;
   }
 `;
