@@ -13,6 +13,7 @@ import Button, { btnTypeList } from "../../components/Button/Button";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const WelcomePage: React.FC = () => {
+  // test
   const { loginWithRedirect } = useAuth0();
   return (
     <WelcomeContainer>
